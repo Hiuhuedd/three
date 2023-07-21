@@ -20,7 +20,7 @@ export const COLORS =
     amber:"#d97706",
     chocolate:"#78350f",
     fuschia:"#c026d3",
-    pink:"#be185d"
+    pink:"#e75480"
 
 };
 export const WEIGHT = {
@@ -49,6 +49,7 @@ export const SIZES = {
   h3: 16,
   h4: 14,
   h5: 13,
+  h6: 10,
   body1: 30,
   body2: 20,
   body3: 16,

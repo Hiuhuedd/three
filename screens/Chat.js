@@ -13,10 +13,13 @@ import BottomTabs from '../components/Molecules/BottomTabs';
 import { text } from '../constants/content/textPrompts';
 import Slider from '@react-native-community/slider';
 import moment from 'moment';
+import { Audio } from 'expo-av';
 const Chat = ({navigation}) => {
     const user=useSelector(state => state.userReducer.user);
     const theme=useSelector(state => state.userReducer.theme);
    const [checking,setchecking]=useState(true)
+   const [isPlaying, setIsPlaying] = useState(false);
+
    useEffect(() => {
   setTimeout(() => {
     setchecking(false)
@@ -140,6 +143,100 @@ const Chat = ({navigation}) => {
     },
 
   });
+  //============================Slider==========================
+  const [audioStatus, setAudioStatus] = useState(null);
+  const [sliderValue, setSliderValue] = useState(0);
+  const [audioObject, setAudioObject] = useState(null);
+
+  useEffect(() => {
+    // Load the audio file
+    async function loadAudio() {
+      try {
+        const { sound } = await Audio.Sound.createAsync(
+          require('../assets/audio.mp3')
+        );
+        setAudioObject(sound);
+      } catch (error) {
+        console.error('Error loading audio:', error);
+      }
+    }
+    loadAudio();
+  }, []);
+
+  useEffect(() => {
+    // Update the slider value based on the audio playback position
+    const updateSlider = () => {
+      if (audioStatus && audioObject) {
+        const positionInSeconds = audioStatus.positionMillis / 1000;
+        setSliderValue(positionInSeconds);
+      }
+    };
+
+    const playbackStatusSubscription = audioObject?.setOnPlaybackStatusUpdate(
+      (status) => {
+        setAudioStatus(status);
+        updateSlider();
+      }
+    );
+
+    return () => {
+      // Unsubscribe from the playback status update when the component unmounts
+      playbackStatusSubscription?.remove();
+    };
+  }, [audioStatus, audioObject]);
+
+  const handleSliderChange = async (value) => {
+    try {
+      setSliderValue(value);
+      await audioObject.setPositionAsync(value * 1000); // Convert seconds to milliseconds
+    } catch (error) {
+      console.error('Error setting audio position:', error);
+    }
+  };
+
+  const onSlidingComplete = async (value) => {
+    try {
+      await audioObject.playFromPositionAsync(value * 1000); // Convert seconds to milliseconds
+    } catch (error) {
+      console.error('Error starting audio playback:', error);
+    }
+
+
+
+  }; const handlePlayPause = async () => {
+    try {
+      if (!audioObject) return;
+
+      if (isPlaying) {
+        await audioObject.pauseAsync();
+      } else {
+        await audioObject.playAsync();
+      }
+      setIsPlaying(!isPlaying);
+    } catch (error) {
+      console.error('Error handling play/pause:', error);
+    }
+  };
+//=======================================================end slider======================
+
+
+useEffect(() => {
+  // Get the audio status to determine the length of the audio
+  const getAudioStatus = async () => {
+    if (audioObject) {
+      const status = await audioObject.getStatusAsync();
+      setAudioStatus(status);
+    }
+  };
+
+  getAudioStatus();
+}, [audioObject]);
+
+const formatTime = (seconds) => {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds - minutes * 60;
+  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+};
   return (
     <View style={{ flexGrow: 1,}}>
                 <LinearAtom    pv={5}  ph={10} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.black,COLORS.dark]} >
@@ -177,17 +274,26 @@ const Chat = ({navigation}) => {
       <TextAtom text={message.message}f="Poppins"s={SIZES.h5} w={"500"} ta={message.userId === 'user1' ?"right":"left"} c={COLORS.black} />
 
       <View style={styles.slider_view}>
-      {message.userId === 'user1' ?<></> : <Icon name="play" type="ionicon" color={theme.color} size={SIZES.h2}  />}
+      {message.userId === 'user1' ?<></> :  <TouchableOpacity onPress={handlePlayPause}>
+        <Icon
+          name={isPlaying ? 'pause' : 'play'}
+          type="ionicon"
+          color={theme.color}
+          size={SIZES.h2}
+        />
+      </TouchableOpacity>}
       {message.userId === 'user1' ?<></> :  
                 <Slider
-                  style={styles.slider_style}
-                  minimumValue={0}
-                  maximumValue={12.02}
-                  minimumTrackTintColor={theme.color}
-                  maximumTrackTintColor={theme.color}
-                  thumbTintColor={theme.color}
-                  value={3.5}
-                />}
+                style={styles.slider_style}
+                minimumValue={0}
+                maximumValue={3}
+                minimumTrackTintColor={theme.color}
+                maximumTrackTintColor={theme.color}
+                thumbTintColor={theme.color}
+                value={sliderValue}
+                onValueChange={handleSliderChange}
+                onSlidingComplete={onSlidingComplete}
+              />}
       
 
            

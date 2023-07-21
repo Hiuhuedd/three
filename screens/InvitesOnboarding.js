@@ -26,21 +26,21 @@ const {width, height} = Dimensions.get('window');
 const slides = [
   {
     id: '1',
-    images: ["key","scan-outline","scan-outline","scan-outline"],
+    images: ["key",require("../assets/ob1.png")],
     title: 'Create your scan key',
-    subtitle: 'Become Premium student, create your scan key, Join 360 student ambassador Community, earn',
+    subtitle: 'Your scan key facilitates receiving and sending of tokens safely to and from your 360 account. This is auto-created when you upgrade to any premium plan. ',
   },
   {
     id: '2',
-    images: ["scan","scan-outline","scan-outline","scan-outline"],
-    title: 'Invite and earn',
-    subtitle: "Scan your invites' QR code, Earn tokens.  ",
+    images: ["scan",require("../assets/ob.png")],
+    title: 'Invite, scan and earn',
+    subtitle: "Scan your invites' QR code, Earn instant tokens. The number of tokens you collect daily depends on the quantity of QR codes you can swiftly scan. No limits. its that smooth ",
   },
   {
     id: '3',
-    images: ["cash","scan-outline","scan-outline","scan-outline"],
+    images: ["cash",require("../assets/ob2.png")],
     title: 'Convert your tokens to cash',
-    subtitle: 'Redeem your 360 tokens to cash in your preferred payment method.',
+    subtitle:  '360 allows you to instantly redeem your tokens to cash in your preferred payment method hussle free. Never been so easy to earn!',
   },
 ];
 
@@ -48,22 +48,22 @@ const Slide = ({item}) => {
   const theme=useSelector(state => state.userReducer.theme);
 
   return (
-    <View style={{ alignItems: 'center',justifyContent:"center"}}>
+    <View style={{ alignItems: 'center',justifyContent:"center", w:"100%"}}>
      
      <TextAtom text={`Step ${item.id} of 3`}s={SIZES.h2} w={"500"} f="Poppins" ta="center" ls={-2}c={COLORS.white} />
-                      <Image source={require('../assets/ob.png')} style={[styles.Icon]} />
+                      <Image source={item.images[1]} style={[styles.Icon]} />
 
-    <CardAtom fd="column" jc="center"   ai="center" w="80%"  pv={0} ph={20}  br={15} mv={0}>   
+    <CardAtom fd="column" jc="center"   ai="center" w="100%"  pv={0} ph={20}  br={15} mv={0}>   
     
 
       <CardAtom   pv={5} ph={5}  br={5} mv={0} bg={COLORS.black}>   
- <Icon name={item.images[0]} type="ionicon" color={COLORS.white} size={SIZES.largeTitle} onPress={() => {navigation.navigate('Me')}} />
+ <Icon name={item.images[0]} type="ionicon" color={COLORS.gray2} size={SIZES.largeTitle} onPress={() => {navigation.navigate('Me')}} />
 
      </CardAtom>
       <View>
       <TextAtom text={item?.title}s={SIZES.h2} w={"500"} f="Poppins" ta="center" ls={-1}c={COLORS.white} />
 
-     <TextAtom text={item?.subtitle}s={SIZES.h5} w={"500"} f="Poppins"ta="center" ls={0}c={COLORS.gray4} />
+     <TextAtom text={item?.subtitle}s={SIZES.h6} w={"500"} f="Poppins"ta="center" ls={0}c={COLORS.gray4} />
       </View>
      </CardAtom>
     </View>
@@ -78,9 +78,12 @@ const InvitesOnboarding = ({navigation}) => {
   
 
   const goToNextSlide = () => {
-   
-      ref?.current.scrollToOffset({currentSlideIndex});
-      setCurrentSlideIndex(currentSlideIndex + 1);
+    setCurrentSlideIndex((prevIndex) => prevIndex + 1);
+
+    // Snap the carousel to the next slide
+    if (ref.current) {
+      ref.current.snapToNext();
+    }
     
   };
 
@@ -133,8 +136,8 @@ const InvitesOnboarding = ({navigation}) => {
                   backgroundColor: theme.color,
                   justifyContent: 'center',
                   alignItems: 'center'}}
-                onPress={() => navigation.navigate('Tokens')}>
-                     <TextAtom text="get started"s={SIZES.h5} w={"500"} f="Poppins"ta="center" ls={0}c={COLORS.white} />
+                onPress={() => navigation.navigate('Premium')}>
+                     <TextAtom text="get started now"s={SIZES.h5} w={"500"} f="Poppins"ta="center" ls={0}c={COLORS.white} />
 
               </TouchableOpacity>
             </View>
@@ -202,14 +205,11 @@ const InvitesOnboarding = ({navigation}) => {
             swipeThreshold={100}
             layoutCardOffset={-12}
             inactiveSlideOpacity={0.4}
-            containerCustomStyle={{
-              // overflow: 'visible',
-              // marginVertical: 10
-            }}
             onSnapToItem = { index => setCurrentSlideIndex(index) }
             contentContainerCustomStyle={{
               height: height*.8,
             }}
+            firstItem={currentSlideIndex} 
             />
 
       <Footer />
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontSize: 13,
     marginTop: 10,
-    maxWidth: '70%',
+    maxWidth: '100%',
     textAlign: 'center',
     lineHeight: 23,
   },

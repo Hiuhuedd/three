@@ -14,6 +14,7 @@ import { ProgramsArray } from '../constants/content/programs';
 import { ImageBackground } from 'react-native';
 import UserAvatar from 'react-native-user-avatar';
 import { getShade } from '../utils/colorShade';
+import CardAtom from '../components/Atoms/CardAtom';
 
 const Events = ({navigation,route}) => {
     const { event } = route.params;
@@ -63,8 +64,9 @@ const Events = ({navigation,route}) => {
       >
      <ViewAtom  fd="column" jc="center"  w="100%"  pv={20} ph={15} br={0} mv={0} mh={0}>
      <TextAtom text={'Event details'} f="Poppins"s={SIZES.h2} w={"500"} ta="left" ls={-1}c={COLORS.white} />
-     <ViewAtom fd="column" jc="flex-start" ai="flex-start" bg="transparent" pv={0} ph={10} br={0} >
-     <ViewAtom fd="row" jc="space-between" ai="center"  bg="transparent" pv={0} br={0} mv={20} mh={0}>
+     <ViewAtom fd="column" jc="flex-start" ai="flex-start" bg="transparent" pv={0} ph={0} br={0} >
+    
+     <CardAtom  fd="row" jc="space-between" ai="center" bg={theme.color}  el={30} sh={COLORS.black}  br={15} pv={20} ph={20} mv={5} mh={0}>
      <Icon name={"calendar"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Home')}} />
        
  
@@ -77,23 +79,24 @@ const Events = ({navigation,route}) => {
       </ViewAtom>         
    <ViewAtom fd="row" jc="space-between"  ai="center"  pv={0} br={0} mv={10} mh={0}>
 
-               <TextAtom text={event.date.month} c={COLORS.gray2} f="Roboto" s={SIZES.h5} w="500" />
-               <TextAtom text={`Start ${event.date.start} - End ${event.date.end}`} c={COLORS.gray2} f="Roboto" s={SIZES.h5} w="500" />
+               <TextAtom text={event.date.month} c={COLORS.gray4} f="Roboto" s={SIZES.h5} w="500" />
+               <TextAtom text={`Start ${event.date.start} - End ${event.date.end}`} c={COLORS.gray4} f="Roboto" s={SIZES.h5} w="500" />
               
       </ViewAtom>         
       </ViewAtom>   
        
       {/* <ViewAtom fd="row"  ph={8} pv={8} bg={theme.color} br={3} mh={10} >
       </ViewAtom>       */}
-       </ViewAtom>
-<ViewAtom fd="row"  ph={0} pv={10}  ai="center" >
+       </CardAtom >
+<ViewAtom fd="row"  w="100%"  jc="space-between" ph={15} pv={10}  ai="center" >
         <Icon name={"location"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Home')}} />
 
         <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal:20}}>
         <TextAtom text={`${event.venue}, ${event.location}`} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={-.5}c={COLORS.white} />
         </TouchableOpacity>
+        <Icon name={"chevron-forward-circle"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {navigation.navigate('navigation')}} />
 </ViewAtom>
-<ViewAtom fd="row"   bg="transparent" pv={0} br={0} mv={20} mh={0}>
+<ViewAtom fd="row"  w="100%"  jc="space-between"  ai="center" bg="transparent" pv={0} ph={15} br={0} mv={20} mh={0}>
    
        
 
@@ -103,7 +106,8 @@ const Events = ({navigation,route}) => {
                <TextAtom text={event.inquiry.deskName} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
                <TextAtom text={event.inquiry.email} c={COLORS.gray} f="Roboto" s={SIZES.base} w="500" />
               
-      </ViewAtom>         
+      </ViewAtom>   
+      <Icon name={"chevron-forward-circle"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {navigation.navigate('navigation')}} />      
        </ViewAtom>
        </ViewAtom>
 

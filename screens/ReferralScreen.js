@@ -52,17 +52,17 @@ const ReferralScreen = ({navigation}) => {
         <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Me')}} />
       <ViewAtom fd="row"  ph={7} pv={5} bg={COLORS.dark} br={15} >
         <TouchableOpacity onPress={()=>{ setIsScanning(!isScanning)}}>
-          <TextAtom text={isScanning?"Generate QR":"Scan QR"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
+          <TextAtom text={isScanning?"Generate QR":"Wallet"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
         </TouchableOpacity>
       </ViewAtom>
 </ViewAtom>
   <TextAtom text={"Invites"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
-  <TextAtom text={"Lets you keep track of your campus activities and much more.."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray} />
+  <TextAtom text={"Lets you earn while you share the goodness of 360 to friends and peers"} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray} />
  
   {hasPermission === null? <ViewAtom  fd="column" jc="center" ai="center" w="100%" bg="transparent" pv={50} br={0} mv={5} mh={0}>
      
      <ActivityIndicator size="small" color={COLORS.white} style={{marginBottom:20}} />
-     <TextAtom text={"Requesting for camera permission"} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.gray2} />
+     <TextAtom text={"Requesting for camera permission"} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.gray} />
 
  </ViewAtom>:
   <>
@@ -96,13 +96,13 @@ const ReferralScreen = ({navigation}) => {
      </ViewAtom>
      <ViewAtom  fd="column" jc="flex-start" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>    
     
-     <TextAtom text={"Refer-a-Friend Program  "} f="Poppins"s={SIZES.h2} w={"500"} ta="center" ls={-2}c={COLORS.white} />
-     <TextAtom text={"Invite your friends and peers to 360 student app and earn fast passive cash."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
+     <TextAtom text={!isScanning?"Refer-a-Friend Program  ":"Your scan key"} f="Poppins"s={SIZES.h2} w={"500"} ta="center" ls={-2}c={COLORS.white} />
+     {!isScanning?<TextAtom text={"Earn fast easy cash sharing 360 with your friends and peers and grow together"} f="Poppins"s={SIZES.h5} w={"500"} ta="center" ls={0}c={COLORS.gray2} />:<TextAtom text={"-#GFG8F6-"} f="Poppins"s={SIZES.h1} w={"500"} ta="center" ls={0}c={COLORS.gray2} />}
 
      </ViewAtom>
      <View style={{}} >
 
-     <Button text={!isScanning?"Start earning now":"Invites & revenue"}width={"100%"}bg={theme.color} navigation={navigation} screen={"InvitesOnboarding"} onMethodSelected={()=>{}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />
+     <Button text={!isScanning?"Take a tour":"Invites & revenue"}width={"100%"}bg={theme.color} navigation={navigation} screen={!isScanning?"InvitesOnboarding":"Tokens"} onMethodSelected={()=>{}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />
      </View>
   </>
   }

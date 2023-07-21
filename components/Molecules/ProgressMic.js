@@ -29,29 +29,44 @@ const ProgressMic = ({ theme }) => {
       console.error('Error playing audio:', error);
     }
   };
-  const handlePlay = async () => {
-    const apiUrl = 'http://192.168.43.222:3000/text-to-speech'; // Replace with your server URL
-  
-    const text = `Hi ${user.firstName}. Experience the power of three sixty Student! ... I am Bella, your personalized virtual assistant that revolutionizes your academic and career journey. Stay organized with the Smart Timetable feature, sync your program's schedule, and receive scheduled notifications. Connect with peers in the vibrant Peer Aid Community and earn while sharing knowledge. Explore networking opportunities with three sixty Events and gain insights through Performance Reports. Uncover your purpose with the captivating "Why" Feature and excel with Comprehensive Resume Building. Access student resources, customize themes, and chart your course with the Program Guide. three sixty student is built for you. Unleash your full potential now!  `;
-   
-    const voiceSettings = {
-      stability: 0.5,
-      similarity_boost: 0.5
-    };
-  
+  const playLocalAudio = async () => {
     try {
-      const response = await axios.post(apiUrl, {
-        text: text,
-        voiceSettings: voiceSettings,
-        voiceId:"EXAVITQu4vr4xnSDxMaL"
-      });
+      // Replace 'require' with the actual path to your local audio file
+      const soundObject = new Audio.Sound();
   
-      if (response.data) {
-        playAudio(response.data);
-      }
+      await soundObject.loadAsync(require('../../assets/audio.mp3'));
+      await soundObject.playAsync();
     } catch (error) {
-      console.error('An error occurred while making the request:', error);
+      console.error('Error playing audio:', error);
     }
+  };
+  const handlePlay = async () => {
+    playLocalAudio()
+
+    // const apiUrl = 'http://192.168.0.106:3000/text-to-speech'; // Replace with your server URL
+  
+    // const text = `Hi ${user.firstName}. welcome to three sixty ai... I combine the power of worlds knowledge with my understanding of your long-term interests to advocate solutions, decisions, and strategies for you to consider on every part of this journey. My name is Bella, it's always a pleasure speaking to you! `;
+  
+   
+    // const voiceSettings = {
+    //   stability: 0.5,
+    //   similarity_boost: 0.5
+    // };
+  
+    // try {
+    //   const response = await axios.post(apiUrl, {
+    //     text: text,
+    //     voiceSettings: voiceSettings,
+    //     voiceId:"EXAVITQu4vr4xnSDxMaL"
+    //   });
+  
+    //   if (response.data) {
+    //     // playLocalAudio()
+    //     // playAudio(response.data);
+    //   }
+    // } catch (error) {
+    //   console.error('An error occurred while making the request:', error);
+    // }
   };
   
 

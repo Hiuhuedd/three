@@ -36,7 +36,7 @@ const Tokens = ({navigation}) => {
       userImage: 'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       userName: 'Jessica',
       transactionDate: '25 April 20',
-      amount: '$350',
+      amount: '350',
       credit: true
     },
     {
@@ -44,7 +44,7 @@ const Tokens = ({navigation}) => {
       userImage: 'https://images.pexels.com/photos/1024311/pexels-photo-1024311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       userName: 'Micela',
       transactionDate: '16 April 20',
-      amount: '$150',
+      amount: '150',
       credit: false
     },
     {
@@ -52,7 +52,7 @@ const Tokens = ({navigation}) => {
       userImage: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       userName: 'Gabriel',
       transactionDate: '05 April 20',
-      amount: '$364',
+      amount: '364',
       credit: false
     },
     {
@@ -60,7 +60,7 @@ const Tokens = ({navigation}) => {
       userImage: 'https://images.pexels.com/photos/1082962/pexels-photo-1082962.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       userName: 'Jasmine',
       transactionDate: '28 March 20',
-      amount: '$100',
+      amount: '100',
       credit: true
     },
     {
@@ -68,7 +68,7 @@ const Tokens = ({navigation}) => {
       userImage: 'https://images.pexels.com/photos/1212984/pexels-photo-1212984.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       userName: 'Alex',
       transactionDate: '14 March 20',
-      amount: '$450',
+      amount: '450',
       credit: true
     },
     {
@@ -76,7 +76,7 @@ const Tokens = ({navigation}) => {
       userImage: 'https://images.pexels.com/photos/1548164/pexels-photo-1548164.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       userName: 'Mark',
       transactionDate: '05 March 20',
-      amount: '$288',
+      amount: '288',
       credit: true
     },
     {
@@ -84,7 +84,7 @@ const Tokens = ({navigation}) => {
       userImage: 'https://images.pexels.com/photos/1090387/pexels-photo-1090387.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
       userName: 'Daria',
       transactionDate: '03 March 20',
-      amount: '$350',
+      amount: '350',
       credit: false
     },
     {
@@ -92,7 +92,7 @@ const Tokens = ({navigation}) => {
       userImage: 'https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       userName: 'George',
       transactionDate: '01 March 20',
-      amount: '$350',
+      amount: '350',
       credit: true
     },
   ]
@@ -159,19 +159,7 @@ const Tokens = ({navigation}) => {
       </ViewAtom>
 </ViewAtom>
 
-          {/* <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <View>
-              <Text style={{fontSize:26,color: '#fff'}}>Welcome Back,</Text>
-              <Text style={{fontSize:26,color: '#fff', opacity: 0.6}}>James Murray</Text>
-            </View>
-            <View>
-              <Image
-               source={{uri: 'https://images.pexels.com/photos/936229/pexels-photo-936229.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260' }}
-              style={styles.ProfileImage}
-              />
-              <View style={styles.ProfileImageNotification}></View>
-            </View>
-          </View> */}
+      
 
           <View>
         
@@ -257,7 +245,7 @@ const Tokens = ({navigation}) => {
             <View style={{flex: 1, backgroundColor: COLORS.black, borderRadius: 24, padding: 14}}>
               <View style={styles.PanelHandle}></View>
               <View>
-                <Text style={{marginVertical: 16, color: '#fff'}}>Recent Transactions</Text>
+              <TextAtom text={"Recent transactions"}f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.white} />
               </View>
 
               <View style={{height: 500, paddingBottom: 10}}>
@@ -269,20 +257,21 @@ const Tokens = ({navigation}) => {
                     <View style={styles.PanelItemContainer}>
                         <View style={{flexDirection: 'row',alignItems: 'center'}}>
                           <View style={{marginRight: 10}}>
-                          <UserAvatar size={40} style={{width:40,height:40, borderRadius:50, }} name={item.userName.slice(0,1)} bgColor="#000" />
+                          <UserAvatar size={40} style={{width:40,height:40, borderRadius:50, }} name={"C"} bgColor={COLORS.green} />
                           </View>
                           <View>
-                            <Text style={{fontSize: 14, color: '#fff'}}>{item.userName}</Text>
+                          <TextAtom text={"Credit"}f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.white} />
                             <Text style={{fontSize: 10, color: '#fff', opacity: 0.6}}>{item.transactionDate}</Text>
                           </View>
                         </View>
                         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                          <Text style={{fontSize: 16, color: '#fff', marginHorizontal: 2}}>{item.amount}</Text>
+                        <Icon name={"disc-outline"} type="ionicon" color={COLORS.white} size={SIZES.h5} onPress={() => {}} />
 
+                          <TextAtom text={`  ${item.amount}0`}f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.white} />
                           {item.credit ? (
-                            <MaterialIcons name='arrow-drop-up' size={22} color='green' />
+                            <MaterialIcons name='arrow-drop-up' size={22} color={COLORS.green} />
                           ) : (
-                            <MaterialIcons name='arrow-drop-down' size={22} color='#ff3838' />
+                            <MaterialIcons name='arrow-drop-up' size={22}color={COLORS.green} />
                           )}
                         </View>
                     </View>
