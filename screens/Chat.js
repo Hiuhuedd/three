@@ -163,47 +163,9 @@ const Chat = ({navigation}) => {
     loadAudio();
   }, []);
 
-  useEffect(() => {
-    // Update the slider value based on the audio playback position
-    const updateSlider = () => {
-      if (audioStatus && audioObject) {
-        const positionInSeconds = audioStatus.positionMillis / 1000;
-        setSliderValue(positionInSeconds);
-      }
-    };
+  
 
-    const playbackStatusSubscription = audioObject?.setOnPlaybackStatusUpdate(
-      (status) => {
-        setAudioStatus(status);
-        updateSlider();
-      }
-    );
-
-    return () => {
-      // Unsubscribe from the playback status update when the component unmounts
-      playbackStatusSubscription?.remove();
-    };
-  }, [audioStatus, audioObject]);
-
-  const handleSliderChange = async (value) => {
-    try {
-      setSliderValue(value);
-      await audioObject.setPositionAsync(value * 1000); // Convert seconds to milliseconds
-    } catch (error) {
-      console.error('Error setting audio position:', error);
-    }
-  };
-
-  const onSlidingComplete = async (value) => {
-    try {
-      await audioObject.playFromPositionAsync(value * 1000); // Convert seconds to milliseconds
-    } catch (error) {
-      console.error('Error starting audio playback:', error);
-    }
-
-
-
-  }; const handlePlayPause = async () => {
+const handlePlayPause = async () => {
     try {
       if (!audioObject) return;
 
@@ -220,23 +182,6 @@ const Chat = ({navigation}) => {
 //=======================================================end slider======================
 
 
-useEffect(() => {
-  // Get the audio status to determine the length of the audio
-  const getAudioStatus = async () => {
-    if (audioObject) {
-      const status = await audioObject.getStatusAsync();
-      setAudioStatus(status);
-    }
-  };
-
-  getAudioStatus();
-}, [audioObject]);
-
-const formatTime = (seconds) => {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds - minutes * 60;
-  return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-};
   return (
     <View style={{ flexGrow: 1,}}>
                 <LinearAtom    pv={5}  ph={10} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.black,COLORS.dark]} >
@@ -286,13 +231,13 @@ const formatTime = (seconds) => {
                 <Slider
                 style={styles.slider_style}
                 minimumValue={0}
-                maximumValue={3}
+                maximumValue={7}
                 minimumTrackTintColor={theme.color}
                 maximumTrackTintColor={theme.color}
                 thumbTintColor={theme.color}
                 value={sliderValue}
-                onValueChange={handleSliderChange}
-                onSlidingComplete={onSlidingComplete}
+                onValueChange={{}}
+                onSlidingComplete={{}}
               />}
       
 

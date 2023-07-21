@@ -13,7 +13,7 @@ const settings=[
     {icon:"key",name:"Premium",active:"Create announcements, ",number:"",screen:"Premium"},
     {icon:"color-palette",name:"Themes",active:"Expolore up to generic 15 themes",number:"Atlantic" ,screen:"Themes"},
     {icon:"hardware-chip",name:"360ai",active:"Customize 360ai to your preferences",number:""},
-    {icon:"card",name:"Wallet",active:"Manage your student wallet, ",number:"",screen:"Tokens"},
+    {icon:"card",name:"360Wallet",active:"Manage your student wallet, ",number:"",screen:"Tokens"},
     {icon:"walk",name:"Invites",active:"Generate invite code, invite peers & earn",number:"",screen:"ReferralScreen"},
     {icon:"navigate",name:"Navigate",active:"Find venues and places around school",number:"",screen:"Navigate"},
     {icon:"wifi",name:"Eduroam",active:"configure eduroam quick & easy ",number:"",screen:"Themes"},
