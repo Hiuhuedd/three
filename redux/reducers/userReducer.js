@@ -5,7 +5,10 @@ let defaultState = {
     timetable: timetable,
     user: {},
     location: {},
-    theme:{color:COLORS.rose,name:"Rose"},
+    theme:{color:COLORS.primary,name:"Atlantic"},
+    model:{color:COLORS.rose,name:"Susan"},
+    premium:{isPremium:false,plan:"Start"},
+    tokens:{total:3000,pending:0,ai:3000,withdrawableTokens:3000,withdrawableAmount:0.03},
   };
 
 
@@ -36,6 +39,21 @@ const UserReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 theme: payload    
+            }
+        case 'MY_MODEL':
+            return {
+                ...state,
+                model: payload    
+            }
+        case 'MY_PREMIUM':
+            return {
+                ...state,
+                premium: payload    
+            }
+        case 'MY_TOKENS':
+            return {
+                ...state,
+                tokens: payload    
             }
               
 

@@ -8,8 +8,22 @@ import { useSelector } from 'react-redux';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { Button } from '../components/Atoms/Button';
 import { ActivityIndicator } from 'react-native-paper';
+import { BackHandler } from 'react-native';
 
 const THook = ({navigation}) => {
+      //=================backpress====================
+const handleBackPress = () => {
+ BackHandler.exitApp()
+    return true;
+  };
+  
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+    };
+  }, []);
+  //=================backpress====================
     const user=useSelector(state => state.userReducer.user);
    const [checking,setchecking]=useState(true)
    useEffect(() => {
@@ -46,7 +60,7 @@ const THook = ({navigation}) => {
   <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={5} mh={0}>
      
      </ViewAtom>
-        <Button text={"Update later"}width={"90%"}bg={COLORS.gray2} navigation={navigation} screen={"Home"} onMethodSelected={()=>{}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />
+        <Button text={"Update later"}width={"90%"}bg={COLORS.gray2}  screen={""} onMethodSelected={()=>{navigation.replace("Home")}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />
       
       </> } 
     </View>

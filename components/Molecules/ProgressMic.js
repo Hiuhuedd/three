@@ -43,9 +43,9 @@ const ProgressMic = ({ theme }) => {
   const handlePlay = async () => {
     playLocalAudio()
 
-    // const apiUrl = 'http://192.168.0.106:3000/text-to-speech'; // Replace with your server URL
+    // const apiUrl = 'http://192.168.43.222:3000/text-to-speech'; // Replace with your server URL
   
-    // const text = `Hi ${user.firstName}. welcome to three sixty ai... I combine the power of worlds knowledge with my understanding of your long-term interests to advocate solutions, decisions, and strategies for you to consider on every part of this journey. My name is Bella, it's always a pleasure speaking to you! `;
+    // const text = `Hi ${user.firstName}. welcome to three sixty ai... I combine the power of general artificial intelligence with my understanding of your unique academic and career long-term interests to recommend, solutions, decisions, and strategies you'll need on every part of this journey. My name is Bella, it's always a pleasure engaging with you! `;
   
    
     // const voiceSettings = {

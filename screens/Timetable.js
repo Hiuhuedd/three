@@ -14,6 +14,7 @@ import BottomTabs from '../components/Molecules/BottomTabs';
 import { getProgramByCode } from '../utils/helper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LinearAtom from '../components/Atoms/LinearAtom';
+import { BackHandler } from 'react-native';
 
 
 const width = Dimensions.get('window').width;
@@ -87,7 +88,7 @@ navigation.navigate("UnitDetails",{slot:slot,day:day})
           <ViewAtom fd="row" jc="space-between" ai="center" w="90%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
 
             <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
-            <TextAtom text={slot.unitCode?slot.unitCode.toUpperCase():''} c={COLORS.white} f="Poppins" s={SIZES.h2} w="500" ls={-2}/>
+            <TextAtom text={slot.unitCode?slot.unitCode.toUpperCase():''} c={theme.color} f="Poppins" s={SIZES.h2} w="500" ls={-2}/>
             <TextAtom text={slot.unitName?slot.unitName:""} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" />
 
           </ViewAtom>
@@ -110,6 +111,19 @@ navigation.navigate("UnitDetails",{slot:slot,day:day})
 });
 
 function Timetable({ navigation }) {
+      //=================backpress====================
+const handleBackPress = () => {
+  navigation.navigate("Home")
+    return true;
+  };
+  
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+    };
+  }, []);
+  //=================backpress====================
   const dispatch = useDispatch();
   // const [Loaded, setLoaded] = React.useState(false);
   const handleUpdateTimetable=  async(sd,si,obj)=>{

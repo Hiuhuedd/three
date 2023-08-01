@@ -10,19 +10,37 @@ import { Icon } from 'react-native-elements';
 import TextAtom from '../components/Atoms/TextAtom';
 import { Button } from '../components/Atoms/Button';
 import { useSelector } from 'react-redux';
+import { BackHandler } from 'react-native';
 
 const ReferralScreen = ({navigation}) => {
+           //=================backpress====================
+const handleBackPress = () => {
+  navigation.navigate("Me")
+    return true;
+  };
+  
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+    };
+  }, []);
+  //=================backpress====================
+  const theme=useSelector(state => state.userReducer.theme);
+  const premium=useSelector(state => state.userReducer.premium);
+
   const [qrCodeData, setQrCodeData] = useState(null);
-  const [isScanning, setIsScanning] = useState(false);
+  const [isScanning, setIsScanning] = useState(premium.isPremium);
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState('Not yet scanned')
-  const theme=useSelector(state => state.userReducer.theme);
 
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      setTimeout(() => {
+        setHasPermission(status === 'granted');
+      }, 2000);
     })()
   }
 
@@ -50,11 +68,12 @@ const ReferralScreen = ({navigation}) => {
 
      <ViewAtom fd="row" width="100%" ph={10} pv={10} jc="space-between" >
         <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Me')}} />
-      <ViewAtom fd="row"  ph={7} pv={5} bg={COLORS.dark} br={15} >
+        {isScanning?<ViewAtom fd="row"  ph={7} pv={5} bg={COLORS.dark} br={15} >
         <TouchableOpacity onPress={()=>{ setIsScanning(!isScanning)}}>
-          <TextAtom text={isScanning?"Generate QR":"Wallet"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
+          <TextAtom text={"Generate QR"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
         </TouchableOpacity>
-      </ViewAtom>
+      </ViewAtom>:<></>}
+      
 </ViewAtom>
   <TextAtom text={"Invites"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
   <TextAtom text={"Lets you earn while you share the goodness of 360 to friends and peers"} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray} />
@@ -101,8 +120,8 @@ const ReferralScreen = ({navigation}) => {
 
      </ViewAtom>
      <View style={{}} >
-
-     <Button text={!isScanning?"Take a tour":"Invites & revenue"}width={"100%"}bg={theme.color} navigation={navigation} screen={!isScanning?"InvitesOnboarding":"Tokens"} onMethodSelected={()=>{}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />
+     { premium.isPremium &!isScanning?<Button text={"Add invite"}width={"100%"}bg={theme.color}  screen={""} onMethodSelected={()=>{setIsScanning(!isScanning)}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />:
+      <Button text={!isScanning?"Take a tour":"Invites & revenue"}width={"100%"}bg={theme.color} navigation={navigation} screen={!isScanning?"InvitesOnboarding":"Tokens"} onMethodSelected={()=>{}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />}
      </View>
   </>
   }

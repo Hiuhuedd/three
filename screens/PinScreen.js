@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { useState ,useEffect} from 'react';
+import { View, TouchableOpacity, Text, StyleSheet ,BackHandler} from 'react-native';
 import { COLORS, SIZES } from '../constants/theme';
 import TextAtom from '../components/Atoms/TextAtom';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
@@ -8,6 +8,19 @@ import { useSelector } from 'react-redux';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 
 const PinScreen = ({navigation}) => {
+        //=================backpress====================
+const handleBackPress = () => {
+ BackHandler.exitApp()
+   return true;
+ };
+ 
+ useEffect(() => {
+   BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+   return () => {
+     BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+   };
+ }, []);
+ //=================backpress====================
     const user=useSelector(state => state.userReducer.user);
     const showAlert = (type, title, msg) => {
         Toast.show({
@@ -37,7 +50,7 @@ const PinScreen = ({navigation}) => {
       setPin(pin + digit);
     }else if(pin.length===3){
         if (user.pin===pin+ digit) {
-          navigation.navigate("THook")
+          navigation.replace("THook")
           // navigation.navigate("AnimatedHeader")
         }else{
             showAlert(ALERT_TYPE.WARNING,"", 'Incorrect pin!');

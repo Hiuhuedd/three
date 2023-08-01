@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, FlatList,ScrollView} from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, FlatList,ScrollView,BackHandler} from 'react-native';
 import { COLORS, SIZES } from '../constants/theme';
 import TextAtom from '../components/Atoms/TextAtom';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
@@ -17,6 +17,19 @@ import { getShade } from '../utils/colorShade';
 import CardAtom from '../components/Atoms/CardAtom';
 
 const Events = ({navigation,route}) => {
+    //=================backpress====================
+const handleBackPress = () => {
+  navigation.navigate("Home")
+   return true;
+ };
+ 
+ useEffect(() => {
+   BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+   return () => {
+     BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+   };
+ }, []);
+ //=================backpress====================
     const { event } = route.params;
 
     const theme=useSelector(state => state.userReducer.theme);

@@ -14,7 +14,21 @@ import { text } from '../constants/content/textPrompts';
 import Slider from '@react-native-community/slider';
 import moment from 'moment';
 import { Audio } from 'expo-av';
+import { BackHandler } from 'react-native';
 const Chat = ({navigation}) => {
+  //=================backpress====================
+const handleBackPress = () => {
+ navigation.navigate("Home")
+  return true;
+};
+
+useEffect(() => {
+  BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+  return () => {
+    BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+  };
+}, []);
+//=================backpress====================
     const user=useSelector(state => state.userReducer.user);
     const theme=useSelector(state => state.userReducer.theme);
    const [checking,setchecking]=useState(true)

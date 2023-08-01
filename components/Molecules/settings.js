@@ -5,16 +5,20 @@ import { COLORS, SIZES } from '../../constants/theme';
 import { StyleSheet, View ,TouchableOpacity} from 'react-native';
 import CardAtom from '../Atoms/CardAtom';
 import { Icon } from 'react-native-elements';
+import { useSelector } from 'react-redux';
 const Settings=({navigation})=>{
- 
+  const theme=useSelector(state => state.userReducer.theme);
+  const model=useSelector(state => state.userReducer.model);
+  const premium=useSelector(state => state.userReducer.premium);
+
 const [selectedItem, setSelectedItem]=useState('')
 
 const settings=[
-    {icon:"key",name:"Premium",active:"Create announcements, ",number:"",screen:"Premium"},
-    {icon:"color-palette",name:"Themes",active:"Expolore up to generic 15 themes",number:"Atlantic" ,screen:"Themes"},
-    {icon:"hardware-chip",name:"360ai",active:"Customize 360ai to your preferences",number:""},
-    {icon:"card",name:"360Wallet",active:"Manage your student wallet, ",number:"",screen:"Tokens"},
-    {icon:"walk",name:"Invites",active:"Generate invite code, invite peers & earn",number:"",screen:"ReferralScreen"},
+  {icon:"color-palette",name:"Themes",active:"Expolore themes ",number:theme.name ,screen:"Themes"},
+  {icon:"hardware-chip",name:"360ai",active:"Select & Customize your 360ai assistant to your preferences",number:model.name,screen:"AiModels"},
+  // {icon:"key",name:"Premium",active:"Discover the packs of premium leverage ",number:premium.plan,screen:"Premium"},
+    {icon:"card",name:"360Wallet",active:"Manage your student wallet, instantly withdraw to cash ",number:"",screen:"Tokens"},
+    // {icon:"walk",name:"Invites",active:"Generate invite code, invite peers & earn",number:"",screen:"ReferralScreen"},
     {icon:"navigate",name:"Navigate",active:"Find venues and places around school",number:"",screen:"Navigate"},
     {icon:"wifi",name:"Eduroam",active:"configure eduroam quick & easy ",number:"",screen:"Themes"},
     {icon:"clipboard",name:"Create",active:"Create and view projects, group assignments, announcements and more ",number:"",screen:"Themes"},

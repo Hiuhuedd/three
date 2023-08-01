@@ -10,16 +10,27 @@ import { Button } from '../components/Atoms/Button';
 import { ActivityIndicator } from 'react-native-paper';
 import CardAtom from '../components/Atoms/CardAtom';
 import { myUnitsInfo } from '../constants/content/unitDetails';
+import { BackHandler } from 'react-native';
 
 const UnitDetails = ({navigation,route}) => {
+      //=================backpress====================
+const handleBackPress = () => {
+  navigation.navigate("Timetable")
+    return true;
+  };
+  
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+    };
+  }, []);
+  //=================backpress====================
     const { slot,day } = route.params;
     const user=useSelector(state => state.userReducer.user);
+    const theme=useSelector(state => state.userReducer.theme);
    const [unitObj,setunitObj]=useState({})
-//    useEffect(() => {
-//   setTimeout(() => {
-//     setchecking(false)
-//   }, 5000);
-//   }, []);
+
   function findUnitInfo(unitName) {
     for (let i = 0; i < myUnitsInfo.length; i++) {
       if (myUnitsInfo[i].name === unitName) {
@@ -48,7 +59,7 @@ const UnitDetails = ({navigation,route}) => {
 </ViewAtom> */}
   <ViewAtom fd="row"  jc="space-between" ai="center" bg="transparent"  pv={5} br={0} mv={0} mh={0}>
         <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {}} />
-      <ViewAtom fd="row"  ph={7} pv={5} bg={COLORS.amber} br={15} >
+      <ViewAtom fd="row"  ph={7} pv={5} bg={theme.color} br={15} >
         <TouchableOpacity onPress={()=>{}}>
           <TextAtom text={"Edit"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
         </TouchableOpacity>
@@ -57,19 +68,19 @@ const UnitDetails = ({navigation,route}) => {
 <ViewAtom fd="row" jc="space-between" ai="flex-end" w="100%" bg="transparent" ph={0}pv={5} br={0} mv={0} mh={0}>
 
 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent"  pv={5} br={0} mv={0} mh={0}>
-<TextAtom text={slot.unitCode?slot.unitCode.toUpperCase():''} c={COLORS.white} f="Poppins" s={SIZES.largeTitle} w="500" ls={-2}/>
+<TextAtom text={slot.unitCode?slot.unitCode.toUpperCase():''} c={theme.color} f="Poppins" s={SIZES.largeTitle} w="500" ls={-2}/>
 <TextAtom text={`${day.day}s`} c={COLORS.white} f="Poppins" s={SIZES.h2} w="500" ls={-2} />
 
 <TextAtom text={slot.start?slot.start:""} c={COLORS.gray2} f="Roboto" s={SIZES.h4} w="500" />
 
 </ViewAtom>
-<ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
+<ViewAtom fd="column" jc="flex-start" ai="flex-end"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
 
 <TextAtom text={slot.professor?slot.professor:''} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
 <TextAtom text={slot.unitName?slot.unitName:""} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" />
 </ViewAtom>
 </ViewAtom>
-<CardAtom fd="column" jc="center" ai="center"   pv={.3} ph="48%" bg={COLORS.green} br={3} mv={1} mh={1}   el={3} sh='#525252' >
+<CardAtom fd="column" jc="center" ai="center"   pv={.3} ph="48%" bg={theme.color} br={3} mv={1} mh={1}   el={3} sh='#525252' >
           </CardAtom>
 
 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={15} br={0} mv={0} mh={0}>
@@ -123,8 +134,8 @@ const UnitDetails = ({navigation,route}) => {
 
 <TextAtom text={`Peer Aid Community`}  c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <ViewAtom fd="column" jc="center" ai="center"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
-<Icon name={"add-circle"} type="ionicon" color={COLORS.white} size={SIZES.largeTitle} onPress={() => {navigation.navigate("")}} />
-<TextAtom text={`Peer aid community features require that you update your class performance to get started`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
+<Icon name={"add-circle"} type="ionicon" color={COLORS.white} size={SIZES.largeTitle} onPress={() => {alert("Available from 9th Sep 2023 ")}} />
+<TextAtom text={`Peer aid community feature let's you access knowledge from peers, share knowledge to peers, earn and become a community`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" ta="center" />
 <TextAtom text={`Your peers are waiting for you`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
 
 

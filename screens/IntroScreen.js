@@ -47,13 +47,14 @@ function IntroScreen({navigation}) {
             
                 }
                 setTimeout(() =>{
-                    navigation.navigate('PinScreen')
+                    // navigation.navigate('PinScreen')
+                    navigation.navigate('AuthScreen')
                 }, 3000)    
               })
 
             }else{
               setTimeout(() =>{
-                  navigation.navigate('AuthScreen')
+                  navigation.replace('AuthScreen')
               }, 6000)
               
             }
@@ -62,7 +63,7 @@ function IntroScreen({navigation}) {
   
       return (
         <View  style={styles.screen}>
-             <Image source={require('../assets/360.gif')}  style={styles.Icon} />
+             <Image source={require('../assets/360intro.gif')}  style={styles.Icon} />
             { loader? 
               <ActivityIndicator size="small" color="#fff" />
                     :<></>

@@ -1,5 +1,5 @@
 import React, { useState,useEffect,useRef } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet,Image , ScrollView,  SafeAreaView,  Animated,  TextInput,} from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet,Image , ScrollView,  SafeAreaView,  Animated,  TextInput,BackHandler} from 'react-native';
 import { COLORS, SIZES } from '../constants/theme';
 import TextAtom from '../components/Atoms/TextAtom';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
@@ -25,6 +25,23 @@ const UPPER_HEADER_HEIGHT = 32;
 const UPPER_HEADER_PADDING_TOP = 4;
 const LOWER_HEADER_HEIGHT = 130;
 const Home = ({navigation}) => {
+
+  const handleBackPress = () => {
+    BackHandler.exitApp();
+    return true;
+  };
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+    };
+  }, []);
+
+
+
+
+
   const user=useSelector(state => state.userReducer.user);
  
   const theme=useSelector(state => state.userReducer.theme);

@@ -13,6 +13,19 @@ import BottomTabs from '../components/Molecules/BottomTabs';
 import CardAtom from '../components/Atoms/CardAtom';
 
 const Themes = ({navigation}) => {
+     //=================backpress====================
+const handleBackPress = () => {
+  navigation.navigate("Me")
+    return true;
+  };
+  
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+    };
+  }, []);
+  //=================backpress====================
     const dispatch = useDispatch();
 
     const user=useSelector(state => state.userReducer.user);

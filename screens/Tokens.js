@@ -25,11 +25,27 @@ import { useSelector } from 'react-redux';
 import LinearAtom from '../components/Atoms/LinearAtom';
 import ViewAtom from '../components/Atoms/ViewAtom';
 import { Icon } from 'react-native-elements';
+import { BackHandler } from 'react-native';
 
 const Tokens = ({navigation}) => {
+      //=================backpress====================
+const handleBackPress = () => {
+  navigation.navigate("Me")
+    return true;
+  };
+  
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+    };
+  }, []);
+  //=================backpress====================
 
   // Users Data
-
+  
+  const tokens=useSelector(state => state.userReducer.tokens);
+  const premium=useSelector(state => state.userReducer.premium);
   const Users = [
     {
       key: '1',
@@ -97,34 +113,10 @@ const Tokens = ({navigation}) => {
     },
   ]
 
-  // Carousel data
-
-  const Images= [
-    {
-        image: require("../assets/bella.jpg"),
-    },
-    {
-      image: require("../assets/360.png"),
-    },
-    {
-      image: require("../assets/bella.jpg"),
-    },
-    {
-      image: require("../assets/user.jpg"),
-    },
-  ];
+ 
 
   const {width,height} = Dimensions.get('window')
-  const carouselRef = useRef(null)
-
-  const RenderItem = ({item}) => {
-    return(
-      <TouchableWithoutFeedback>
-        <Image source={item.image} style={{width: 360, height: 240, borderRadius: 10}} />
-      </TouchableWithoutFeedback>
-    )
-  }
-
+ 
 
 
 
@@ -175,7 +167,7 @@ const Tokens = ({navigation}) => {
           <ViewAtom fd="column" ai="flex-start" ph={0} pv={-3} jc="space-between" >
           <TextAtom text={"Available Tokens"} f="Poppins"s={SIZES.h5} w={"500"} ta="center" ls={-1}c={COLORS.white} />
           <ViewAtom fd="row" ai="flex-start" ph={0} pv={-3} jc="space-between" >
-          <TextAtom text={"35,460"} f="Poppins"s={SIZES.largeTitle} w={"500"} ta="center" ls={0}c={COLORS.gray4} />
+          <TextAtom text={Number(tokens.total).toLocaleString('en-US')} f="Poppins"s={SIZES.largeTitle} w={"500"} ta="center" ls={0}c={COLORS.gray4} />
           <Icon name={"disc-outline"} type="ionicon" color={COLORS.white} size={SIZES.h5} onPress={() => {}} />
           
          </ViewAtom>
@@ -183,17 +175,26 @@ const Tokens = ({navigation}) => {
       </ViewAtom>
  <ViewAtom fd="row" ai="flex-start" ph={0} pv={-3} w="100%" jc="space-between" >
           <ViewAtom fd="column" ai="flex-start" ph={0} pv={3} jc="space-between" >
+          <TextAtom text={"Pending Tokens"} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.gray} />
+
+         <ViewAtom fd="row" ai="flex-start" ph={0} pv={-3} jc="space-between" >
+          <TextAtom text={Number(tokens.pending).toLocaleString('en-US')} f="Poppins"s={SIZES.h2} w={"500"} ta="center" ls={0}c={COLORS.white} />
+          <Icon name={"disc-outline"} type="ionicon" color={COLORS.white} size={SIZES.base} onPress={() => {}} />
+          
+         </ViewAtom>
+      </ViewAtom>
+          <ViewAtom fd="column" ai="flex-start" ph={0} pv={3} jc="space-between" >
           <TextAtom text={"Redeemable Tokens"} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.gray} />
 
          <ViewAtom fd="row" ai="flex-start" ph={0} pv={-3} jc="space-between" >
-          <TextAtom text={"30,460"} f="Poppins"s={SIZES.h2} w={"500"} ta="center" ls={0}c={COLORS.white} />
+          <TextAtom text={ Number(tokens.total-tokens.ai).toLocaleString('en-US')} f="Poppins"s={SIZES.h2} w={"500"} ta="center" ls={0}c={COLORS.white} />
           <Icon name={"disc-outline"} type="ionicon" color={COLORS.white} size={SIZES.base} onPress={() => {}} />
           
          </ViewAtom>
       </ViewAtom>
           <ViewAtom fd="column" ai="flex-start" ph={0} pv={3} jc="space-between" >
           <TextAtom text={"Cash equivalent value"} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.gray} />
-          <TextAtom text={"Ksh 1,460/="} f="Poppins"s={SIZES.h2} w={"500"} ta="center" ls={0}c={COLORS.white} />
+          <TextAtom text={`Ksh ${Number((tokens.total-tokens.ai)*tokens.withdrawableAmount).toLocaleString('en-US')}/=`} f="Poppins"s={SIZES.h2} w={"500"} ta="center" ls={0}c={COLORS.white} />
         
       </ViewAtom>
       </ViewAtom>
@@ -265,7 +266,7 @@ const Tokens = ({navigation}) => {
                           </View>
                         </View>
                         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <Icon name={"disc-outline"} type="ionicon" color={COLORS.white} size={SIZES.h5} onPress={() => {}} />
+                        <Icon name={"disc-outline"} type="ionicon" color={COLORS.white} size={SIZES.base} onPress={() => {}} />
 
                           <TextAtom text={`  ${item.amount}0`}f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.white} />
                           {item.credit ? (

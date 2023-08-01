@@ -14,6 +14,7 @@ import { Button } from '../components/Atoms/Button';
 import CardAtom from '../components/Atoms/CardAtom';
 import { useDispatch } from 'react-redux';
 import InputCarousel from '../components/Molecules/InputCarousel';
+import { AUTH } from '../firebase';
 
 const AuthScreen = ({navigation}) => {
    
@@ -23,7 +24,7 @@ const AuthScreen = ({navigation}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [UserData, setUserData] = useState({});
   const [txt, settxt] = useState("next");
-
+const auth = AUTH;
   const validateEmail = (email) => {
     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     return emailRegex.test(email);
@@ -46,13 +47,17 @@ const AuthScreen = ({navigation}) => {
 
     try {
       setLoading(true)
-     
+     const response= await auth.signInWithEmailAndPassword(u.email,u.pin);
+     console.log(response);
       dispatch({
         type: "ON_USER",
         payload:u
       });
+
+
      AsyncStorage.setItem('Student', JSON.stringify(u)).then(res=>{
-       navigation.navigate('PinScreen')
+      //  navigation.navigate('PinScreen')
+       navigation.replace('PolicyAgreement')
        setLoading(false)
 
      })
@@ -107,7 +112,7 @@ const AuthScreen = ({navigation}) => {
       <ViewAtom fd="column"  ph={10} pv={0} >
       <TextAtom text={"Set up your profile"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
       <TextAtom text={"Create a student profile to personalize 360"} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
-      <TextAtom text={"student to your career goals."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
+      <TextAtom text={"student to your academic & career goals."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
 
 
       </ViewAtom>

@@ -21,6 +21,9 @@ import ReferralScreen from "./screens/ReferralScreen";
 import InvitesOnboarding from "./screens/InvitesOnboarding";
 import Tokens from "./screens/Tokens";
 import Premium from "./screens/Premium";
+import AiModels from "./screens/AiModels";
+import PolicyAgreement from "./screens/PolicyAgreement";
+import Walkthrough from "./screens/Walkthrough";
 
 
 //Screens
@@ -54,6 +57,9 @@ export default function RootNavigation() {
           <Stack.Screen name="InvitesOnboarding" component={InvitesOnboarding} /> 
           <Stack.Screen name="Tokens" component={Tokens} /> 
           <Stack.Screen name="Premium" component={Premium} /> 
+          <Stack.Screen name="AiModels" component={AiModels} /> 
+          <Stack.Screen name="PolicyAgreement" component={PolicyAgreement} /> 
+          <Stack.Screen name="Walkthrough" component={Walkthrough} /> 
           
         </Stack.Navigator>
       

@@ -88,7 +88,7 @@
 
 
 import React, { useState,useEffect,useRef } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet,Image , ScrollView,  SafeAreaView,  Animated,  TextInput,} from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet,Image , ScrollView,  SafeAreaView,  Animated,  TextInput, BackHandler,} from 'react-native';
 import { COLORS, SIZES } from '../constants/theme';
 import TextAtom from '../components/Atoms/TextAtom';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
@@ -112,6 +112,19 @@ const AnimatedTO = Animated.createAnimatedComponent(TouchableOpacity );
 
 
 const Me = ({navigation}) => {
+        //=================backpress====================
+const handleBackPress = () => {
+  navigation.navigate("Home")
+   return true;
+ };
+ 
+ useEffect(() => {
+   BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+   return () => {
+     BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+   };
+ }, []);
+ //=================backpress====================
   const user=useSelector(state => state.userReducer.user);
   const theme=useSelector(state => state.userReducer.theme);
 

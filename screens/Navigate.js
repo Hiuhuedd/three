@@ -18,6 +18,7 @@ const LATITUDE_DELTA = 0.007;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const Navigate = ({ navigation}) => {
+    
     const dispatch = useDispatch();
     //==============================BOTTOM SHEET============================
     const closeSheet = (t) => {

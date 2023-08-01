@@ -11,6 +11,7 @@ const InputComponent = React.memo(({ pairArr }) => {
     <View>
       {pairArr.map((input) => (
         <React.Fragment key={input.label}>
+
           <ViewAtom key={input.label} fd="row" jc="flex-start" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
             <TextAtom text={`${input.label}  `} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
           </ViewAtom>
@@ -179,11 +180,13 @@ setUserData({firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,St
 
   return (
     <View style={{}}>
+ <TextAtom text={`Step ${activeIndex+1} of ${inputArray.length}`}s={SIZES.h3} w={"500"} f="Poppins" ta="left" ls={-1}c={COLORS.white} />
+
       <Carousel
         ref={ref}
         loop={false}
         width={width}
-        height={height - 590}
+        height={height*.25 }
         autoPlay={false}
         data={inputArray}
         scrollAnimationDuration={1000}

@@ -19,6 +19,7 @@ import TextAtom from '../components/Atoms/TextAtom';
 import { useSelector } from 'react-redux';
 import CardAtom from '../components/Atoms/CardAtom';
 import Carousel from 'react-native-snap-carousel'
+import { BackHandler } from 'react-native';
 const {width, height} = Dimensions.get('window');
 
 
@@ -71,6 +72,19 @@ const Slide = ({item}) => {
 };
 
 const InvitesOnboarding = ({navigation}) => {
+      //=================backpress====================
+const handleBackPress = () => {
+  navigation.navigate("Me")
+   return true;
+ };
+ 
+ useEffect(() => {
+   BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+   return () => {
+     BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+   };
+ }, []);
+ //=================backpress====================
   const theme=useSelector(state => state.userReducer.theme);
 
   const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);

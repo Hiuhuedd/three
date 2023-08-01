@@ -13,8 +13,22 @@ import BottomTabs from '../components/Molecules/BottomTabs';
 import { ProgramsArray } from '../constants/content/programs';
 import Carousel from 'react-native-reanimated-carousel';
 import { useRef } from 'react';
+import { BackHandler } from 'react-native';
 
 const Program = ({navigation}) => {
+           //=================backpress====================
+const handleBackPress = () => {
+  navigation.navigate("Home")
+    return true;
+  };
+  
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
+    };
+  }, []);
+  //=================backpress====================
   const programItems=["Guide","Resources","Resume"]
   const [program,setProgramName]=useState("")
   function getProgramByCode(programCode) {
