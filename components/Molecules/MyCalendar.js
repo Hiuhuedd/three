@@ -17,7 +17,7 @@ const handleSetSelectedDate=(d)=>{
   setselectedDate(d)
 }
   return (
-    <View >
+    <View style={{width:"100%"}} >
       <DatePicker
         style={styles.datePicker}
         date={selectedDate}
@@ -62,9 +62,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: COLORS.gray2,
     borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-    width: '90%',
+    paddingHorizontal: 5,
+    marginBottom: 5,
+    width: '100%',
     color: '#fff',
 
   },

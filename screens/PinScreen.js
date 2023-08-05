@@ -78,7 +78,7 @@ const handleBackPress = () => {
   return (
     <View style={styles.container}>
         
-  <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>
+  <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
      
 </ViewAtom>
   <TextAtom text={"Enter your pin code"} f="Poppins"s={SIZES.h1} w={"500"} ta="center" ls={-2}c={COLORS.white} />
@@ -92,7 +92,7 @@ const handleBackPress = () => {
         ))}
 
   </ViewAtom>
-  <TextAtom text={"Forgot pin"} f="Poppins"s={SIZES.h5} w={"500"} ta="center" ls={0}c={COLORS.primary} />
+  {/* <TextAtom text={"Forgot pin"} f="Poppins"s={SIZES.h5} w={"500"} ta="center" ls={0}c={COLORS.primary} /> */}
 
 
   <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>

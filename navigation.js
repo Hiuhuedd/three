@@ -24,6 +24,7 @@ import Premium from "./screens/Premium";
 import AiModels from "./screens/AiModels";
 import PolicyAgreement from "./screens/PolicyAgreement";
 import Walkthrough from "./screens/Walkthrough";
+import SignIn from "./screens/SignIn";
 
 
 //Screens
@@ -60,6 +61,7 @@ export default function RootNavigation() {
           <Stack.Screen name="AiModels" component={AiModels} /> 
           <Stack.Screen name="PolicyAgreement" component={PolicyAgreement} /> 
           <Stack.Screen name="Walkthrough" component={Walkthrough} /> 
+          <Stack.Screen name="SignIn" component={SignIn} /> 
           
         </Stack.Navigator>
       

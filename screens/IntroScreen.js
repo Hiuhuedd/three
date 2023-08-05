@@ -47,8 +47,8 @@ function IntroScreen({navigation}) {
             
                 }
                 setTimeout(() =>{
-                    // navigation.navigate('PinScreen')
-                    navigation.navigate('AuthScreen')
+                    navigation.navigate('PinScreen')
+                    // navigation.navigate('AuthScreen')
                 }, 3000)    
               })
 

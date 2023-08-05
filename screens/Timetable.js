@@ -23,7 +23,7 @@ const width = Dimensions.get('window').width;
   
   
   
-  const DayView = React.memo(({ dayObj,updatedTimetable,handleUpdateTimetable,navigation,}) => {
+  const DayView = React.memo(({ dayObj,updatedTimetable,handleUpdateTimetable,navigation,setAdding}) => {
     const theme=useSelector(state => state.userReducer.theme);
     const user=useSelector(state => state.userReducer.user);
 
@@ -45,6 +45,8 @@ const width = Dimensions.get('window').width;
  const sheetRef = useRef(null);  
  
  const handleAddClass = () => {
+  setAdding(false)
+
   setTimeout(() => {
     closeSheet()
   }, 1000);
@@ -52,6 +54,7 @@ const width = Dimensions.get('window').width;
 
 
  const handleTap = (slot,day) => {
+  setAdding(true)
    if(slot.unitCode&&slot.unitName&&slot.professor){
 navigation.navigate("UnitDetails",{slot:slot,day:day})
     }else{
@@ -150,6 +153,7 @@ const handleBackPress = () => {
   const ref = useRef(null);
     const [activeIndex,setActiveIndex]=useState(0)
     const [updatedTimetable,setupdatedTimetable]=useState(timetable)
+    const [Adding,setAdding]=useState(false)
 
 
   useEffect(() => {
@@ -157,7 +161,7 @@ const handleBackPress = () => {
   }, [activeIndex]);
 
   useEffect(() => {
-  }, [updatedTimetable]);
+  }, [updatedTimetable,Adding]);
 
  
   return (
@@ -176,7 +180,7 @@ const handleBackPress = () => {
         onSnapToItem={(index) => {
           setActiveIndex(index);
         }}
-        renderItem={({ item: dayObj }) => <DayView dayObj={dayObj}  updatedTimetable={updatedTimetable} handleUpdateTimetable={handleUpdateTimetable} navigation={navigation} />}
+        renderItem={({ item: dayObj }) => <DayView dayObj={dayObj} setAdding={setAdding} updatedTimetable={updatedTimetable} handleUpdateTimetable={handleUpdateTimetable} navigation={navigation} />}
       />
            </LinearAtom>
 

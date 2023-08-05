@@ -5,31 +5,11 @@ import ViewAtom from '../Atoms/ViewAtom';
 import TextAtom from '../Atoms/TextAtom';
 import { COLORS, SIZES } from '../../constants/theme';
 import MyInput from '../Atoms/MyInput';
+import { ProgramsArray } from '../../constants/content/programs';
 
-const InputComponent = React.memo(({ pairArr }) => {
-  return (
-    <View>
-      {pairArr.map((input) => (
-        <React.Fragment key={input.label}>
+const StepComponent  = React.memo(({ children, isActive }) => {
+  return <View style={{ display: isActive ? 'flex' : 'none' }}>{children}</View>;
 
-          <ViewAtom key={input.label} fd="row" jc="flex-start" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
-            <TextAtom text={`${input.label}  `} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
-          </ViewAtom>
-          <MyInput
-            editable={true}
-            keyboardType={input.keyboardType}
-            secureTextEntry={input.secureTextEntry}
-            style={styles.input}
-            placeholder={input.placeholder}
-            maxLength={input.maxLength}
-            value={input.value}
-            setisUpdated={input.setValue}
-            label={input.label}
-                      />
-        </React.Fragment>
-      ))}
-    </View>
-  );
 });
 
 function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
@@ -46,6 +26,7 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
   const [Year, setYear] = useState('');
   const [Sem, setSem] = useState('');
   const [StudentId, setStudentId] = useState('');
+  const [StudentProgram, setStudentProgram] = useState(null);
 
   const inputArray = [
     [
@@ -168,48 +149,74 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
     }
   }, [error]);
 
+
   useEffect(() => {
     ref.current?.scrollTo({ index: activeIndex });
   }, [activeIndex]);
   useEffect(() => {
-setUserData({firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId})
-  }, [firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId]);
+setUserData({firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram})
+  }, [firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram]);
 
   const width = Dimensions.get('window').width;
   const height = Dimensions.get('window').height;
 
+
+  const styles = StyleSheet.create({
+    input: {
+      height: height*.06,
+      borderWidth: 1,
+      borderColor: COLORS.gray2,
+      borderRadius: 5,
+      paddingHorizontal: 5,
+      marginBottom: 3,
+      width: '100%',
+      color: '#fff',
+    },
+  });
   return (
     <View style={{}}>
  <TextAtom text={`Step ${activeIndex+1} of ${inputArray.length}`}s={SIZES.h3} w={"500"} f="Poppins" ta="left" ls={-1}c={COLORS.white} />
 
-      <Carousel
-        ref={ref}
-        loop={false}
-        width={width}
-        height={height*.25 }
-        autoPlay={false}
-        data={inputArray}
-        scrollAnimationDuration={1000}
-        onSnapToItem={(index) => {
-          setActiveIndex(index);
-        }}
-        renderItem={({ item: pairArr }) => <InputComponent pairArr={pairArr} />}
-      />
+ {inputArray.map((pairArr, index) => (
+        <StepComponent key={index} isActive={activeIndex === index}>
+          {pairArr.map((input) => (
+                  <ViewAtom key={input.label} fd="column" jc="center" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
+
+              {/* Your InputComponent code here */}
+              <ViewAtom key={input.label} fd="row" jc="flex-start" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
+            <TextAtom text={`${input.label}  `} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
+          </ViewAtom>
+              <MyInput
+                editable={true}
+                keyboardType={input.keyboardType}
+                secureTextEntry={input.secureTextEntry}
+                style={styles.input}
+                placeholder={input.placeholder}
+                maxLength={input.maxLength}
+                value={input.value}
+                setisUpdated={input.setValue}
+                label={input.label}
+                setProgram={setStudentProgram}
+              />
+            </ViewAtom>
+          ))}
+        </StepComponent>
+      ))}
     </View>
   );
 }
 
 export default InputCarousel;
+// const styles = StyleSheet.create({
+//   input: {
+//     height: 50,
+//     borderWidth: 1,
+//     borderColor: COLORS.gray2,
+//     borderRadius: 5,
+//     paddingHorizontal: 5,
+//     marginBottom: 5,
+//     width: '100%',
+//     color: '#fff',
+//   },
+// });
 
-const styles = StyleSheet.create({
-  input: {
-    height: 50,
-    borderWidth: 1,
-    borderColor: COLORS.gray2,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-    width: '90%',
-    color: '#fff',
-  },
-});

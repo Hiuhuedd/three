@@ -217,7 +217,7 @@ const FilterArr=["events","projects","research"]
 
   const params=63
   const defaultParams=180
-  const tokens=36
+  const tokens=50
   const defaultTokens=50
   return (
     <View style={styles.container}>

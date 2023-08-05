@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image ,Animated} from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { COLORS, SIZES } from '../../constants/theme';
 import CardAtom from '../Atoms/CardAtom';
@@ -15,9 +15,11 @@ import { storage } from "../../firebase";
 const ProgressMic = ({ theme }) => {
   const user = useSelector(state => state.userReducer.user);
   const [isModalVisible, setModalVisible] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(0.4);
 
 
+
+  
   const playAudio = async (uri) => {
     try {
       const { sound: audioSound } = await Audio.Sound.createAsync(

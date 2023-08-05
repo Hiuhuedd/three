@@ -17,7 +17,7 @@ const settings=[
   {icon:"color-palette",name:"Themes",active:"Expolore themes ",number:theme.name ,screen:"Themes"},
   {icon:"hardware-chip",name:"360ai",active:"Select & Customize your 360ai assistant to your preferences",number:model.name,screen:"AiModels"},
   // {icon:"key",name:"Premium",active:"Discover the packs of premium leverage ",number:premium.plan,screen:"Premium"},
-    {icon:"card",name:"360Wallet",active:"Manage your student wallet, instantly withdraw to cash ",number:"",screen:"Tokens"},
+    // {icon:"card",name:"360Wallet",active:"Manage your student wallet, instantly withdraw to cash ",number:"",screen:"Tokens"},
     // {icon:"walk",name:"Invites",active:"Generate invite code, invite peers & earn",number:"",screen:"ReferralScreen"},
     {icon:"navigate",name:"Navigate",active:"Find venues and places around school",number:"",screen:"Navigate"},
     {icon:"wifi",name:"Eduroam",active:"configure eduroam quick & easy ",number:"",screen:"Themes"},

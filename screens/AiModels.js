@@ -38,15 +38,15 @@ useEffect(() => {
 
    const [checking,setchecking]=useState(true)
    const modelsArr=[
-     {img:require("../assets/bella.jpg"),name:"Bella"},
+     {img:require("../assets/ai.png"),name:"Bella"},
      // {color:COLORS.black,name:"Charcoal"},
-     {img:require("../assets/bella8.jpg"),name:"Mae"},
-     {img:require("../assets/bella2.jpg"),name:"Susan"},
-     {img:require("../assets/antoni.jpg"),name:"Victor"},
-     {img:require("../assets/antoni2.jpg"),name:"Paul"},
-     {img:require("../assets/bella3.jpg"),name:"Diana"},
-     {img:require("../assets/antoni3.jpg"),name:"George"},
-     {img:require("../assets/bella7.jpg"),name:"Anne"},
+     {img:require("../assets/ai.png"),name:"Raquel"},
+     {img:require("../assets/ai.png"),name:"Antoni"},
+     {img:require("../assets/ai.png"),name:"Victor"},
+     {img:require("../assets/ai.png"),name:"Paul"},
+     {img:require("../assets/ai.png"),name:"Helen"},
+     {img:require("../assets/ai.png"),name:"George"},
+     {img:require("../assets/ai.png"),name:"Anne"},
      
      
     ]
@@ -102,11 +102,11 @@ useEffect(() => {
           fd="row"
           jc="space-between"
           ai="flex-start"
-          pv={15}
-          ph={15}
+          pv={13}
+          ph={13}
           bg={COLORS.black}
-          br={15}
-          mv={2}
+          br={10}
+          mv={0}
           mh={0}
           el={3}
           sh="#525252"
@@ -166,19 +166,15 @@ useEffect(() => {
         <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Me')}} />
       <ViewAtom fd="row"  ph={7} pv={5} bg={COLORS.dark} br={15} >
         <TouchableOpacity onPress={()=>{}}>
-          <TextAtom text={"Create"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
+          <TextAtom text={""} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
         </TouchableOpacity>
       </ViewAtom>
 </ViewAtom>
-  <TextAtom text={"360 Assistant"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
+  <TextAtom text={"360 Assistant"} f="Poppins"s={SIZES.h2} w={"500"} ta="left" ls={-2}c={COLORS.white} />
   <TextAtom text={"Lets you select and customize your 360 assistant to your desired wants.."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
 
   <ScrollView>
-  <TextAtom text={"About 360 Assistant "} f="Poppins"s={SIZES.h2} w={"500"} ta="left" ls={-2}c={COLORS.white} />
-  <TextAtom text={"360ai "} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-2}c={COLORS.white} />
-  <TextAtom text={"360 ai is a powerful tool. it explores the advantage of your uniqueness while leveraging the power of AGI to guide you through your daily experiences "} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
-  <TextAtom text={"Parameter value "} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-2}c={COLORS.white} />
-  <TextAtom text={"360 ai works under the concept of Machine Learning(ML). The more engagement you provide, the more accurate in responses it gets. This is the parameter value   "} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
+ 
 
   <TextAtom text={"Select your assistant"} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={0}c={COLORS.gray} />
   <ViewAtom  fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
@@ -203,6 +199,15 @@ useEffect(() => {
         numColumns={4}
         // style={{width}}
       />
+     </ViewAtom>
+     <TextAtom text={"About 360 Assistant "} f="Poppins"s={SIZES.h2} w={"500"} ta="left" ls={-2}c={COLORS.white} />
+  <TextAtom text={"360ai "} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-2}c={COLORS.white} />
+  <TextAtom text={"360 ai is an interesting tool. it explores the advantage of your uniqueness while leveraging the power of AGI to guide you through your daily experiences "} f="Poppins"s={SIZES.base} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
+  <TextAtom text={"Parameter value "} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-2}c={COLORS.white} />
+  <TextAtom text={"360 ai works under the concept of Machine Learning(ML). The more engagement you provide, the more accurate in responses it gets. This is the parameter value   "} f="Poppins"s={SIZES.base} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
+  <ViewAtom  fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
+  <TextAtom text={'v-1.1.02'} f="Poppins"s={SIZES.base} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
+ 
      </ViewAtom>
   </ScrollView>
 

@@ -10,6 +10,7 @@ import { RadioButton } from 'react-native-paper';
 import CardAtom from '../Atoms/CardAtom';
 import PopUp from './PopUp';
 import { ProgramsArray } from '../../constants/content/programs';
+import PopUp2 from './PopUp2';
 
 const {COLORS, SIZES, FONTS}=appTheme
 const AddClass= React.forwardRef(({slot,handleAddClass,handleUpdateTimetable }, ref) => {
@@ -112,6 +113,7 @@ const AddClass= React.forwardRef(({slot,handleAddClass,handleUpdateTimetable }, 
       }}
       >
           <ViewAtom fd="column" jc="space-between"  w="100%" pv={10} ph={30} bg="transparent" br={0} mv={0} mh={0} >
+          <TextAtom text={`Add class `} c={COLORS.white} f="Roboto" s={SIZES.h5} ta="center" w="500" />
 
           <ViewAtom  fd="row" jc="flex-start" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
             <TextAtom text={`${slot.start}  `} c={COLORS.white} f="Roboto" s={SIZES.base} w="500" />
@@ -159,7 +161,7 @@ const AddClass= React.forwardRef(({slot,handleAddClass,handleUpdateTimetable }, 
                  <TextAtom text={` ${location}`} c={COLORS.primary} f="Poppins" s={SIZES.base} w="500"/>
 
                 </ViewAtom>
-             <PopUp handleSetItem={handleSetLocation} arr={locationArr} />
+             <PopUp2 handleSetItem={handleSetLocation} arr={locationArr} />
             
                 </ViewAtom>
             </CardAtom>

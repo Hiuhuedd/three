@@ -7,13 +7,13 @@ import MyCalendar from '../Molecules/MyCalendar';
 import TextAtom from './TextAtom';
 import { ProgramsArray } from '../../constants/content/programs';
 
-const MyInput = ({editable, keyboardType, secureTextEntry, style, placeholder,maxLength,setisUpdated,label}) => {
+const MyInput = ({editable, keyboardType, secureTextEntry, style, placeholder,maxLength,setisUpdated,label,setProgram}) => {
  //arrays
- const genders=["Male","Female","Other"]
- const year=["1st","2nd","3rd","4th","5th"]
- const semester=["1st","2nd","3rd"]
+ const genders=["select","Male","Female","Other"]
+ const year=["select","1st","2nd","3rd","4th","5th"]
+ const semester=["select","1st","2nd","3rd"]
  //arrays
- //arrays states
+ 
  const [selectedGender, setSelectedGender] = useState("");
  const [selectedYear, setSelectedYear] = useState("");
  const [selectedSem, setSelectedSem] = useState("");
@@ -39,6 +39,7 @@ function getProgramByCode(programCode) {
   for (let i = 0; i < ProgramsArray.length; i++) {
     if (ProgramsArray[i].programCode === programCode) {
       setLoadProgram(false)
+      setProgram(ProgramsArray[i].programName)
         return (ProgramsArray[i]) 
     }
   }
@@ -116,7 +117,7 @@ else{
       style={style}
     />
     {LoadProgram&&<ActivityIndicator size={10} color={COLORS.gold} style={{alignSelf:"flex-start", marginLeft:3}} />}
-{StudentProgram&& <TextAtom text={`${StudentProgram.programName}  `} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
+{StudentProgram&& <TextAtom text={`${StudentProgram.programName}  `} c={COLORS.gold} f="Roboto" s={SIZES.h5} w="500" />
 }
    </>
   );}
