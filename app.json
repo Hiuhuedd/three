@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "360",
+    "slug": "student",
+    "version": "1.0.0",
+    "scheme": "com.threesixty.student",
+    "orientation": "portrait",
+    "icon": "./assets/360.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.threesixty.student",
+      "adaptiveIcon": {
+        "foregroundImage": "",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/360.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "060a032f-4700-451b-9f8a-4c57b926e7ab"
+      }
+    }
+  }
+}

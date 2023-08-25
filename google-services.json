@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "868564611977",
+    "project_id": "campus360-e88ab",
+    "storage_bucket": "campus360-e88ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868564611977:android:509d2112eb3845b7972758",
+        "android_client_info": {
+          "package_name": "com.threesixty.student"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868564611977-8dqok3fri4jquqdg3so71ts0t58ua1vb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABDRRPeRUvBvm6NgfuK1ctmLTleDxdyWg"
+
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868564611977-8dqok3fri4jquqdg3so71ts0t58ua1vb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
