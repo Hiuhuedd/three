@@ -120,7 +120,7 @@ const ProgressMic = ({ theme,isMsg, setisMsg }) => {
     try {
       const newSoundObject = new Audio.Sound();
   
-      await newSoundObject.loadAsync(require('../../assets/audio.mp3'));
+      await newSoundObject.loadAsync(require('../../assets/audio1.mp3'));
       await newSoundObject.playAsync();
   
       // Update the soundObject state

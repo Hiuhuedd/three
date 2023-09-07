@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 import { getUserLocation } from '../utils/helper';
 import { UnitsArray, getTimetableFromFirestore } from '../constants/content/programs';
+import { NetworksArray } from '../constants/content/networksArr';
 
 function IntroScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -21,10 +22,21 @@ function IntroScreen({ navigation }) {
           const discordData = JSON.parse(discordValue);
           dispatch({ type: 'DISCORD', payload: discordData });
         }
+        const TValue = await AsyncStorage.getItem('theme');
+        if (TValue !== null) {
+          const discordData = JSON.parse(TValue);
+          dispatch({ type: 'MY_THEME', payload: discordData });
+        }
 
         const units = await UnitsArray();
         if (units) {
           dispatch({ type: 'UNITS', payload: units });
+        }
+        const net = await NetworksArray();
+        if (net) {
+          const str=JSON.stringify(net)
+          dispatch({ type: 'NETWORKS', payload: net });
+          await AsyncStorage.setItem('mynetworks',str)
         }
 
         const timetableValue = await getTimetableFromFirestore(userData);

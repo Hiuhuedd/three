@@ -16,6 +16,8 @@ import UserAvatar from 'react-native-user-avatar';
 import { getShade } from '../utils/colorShade';
 import CardAtom from '../components/Atoms/CardAtom';
 
+import V2Modal from '../components/Molecules/V2Modal';
+import Modal from "react-native-modal";
 const Events = ({navigation,route}) => {
     //=================backpress====================
 const handleBackPress = () => {
@@ -86,14 +88,14 @@ const handleBackPress = () => {
    <ViewAtom fd="column"  jc="center"  w="80%"   bg="transparent"  ph={0} br={0} mv={0} mh={20}>
    <ViewAtom fd="row" jc="space-between"  ai="center"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
 
-               <TextAtom text={`${event?.date?.date}th`} c={COLORS.white} f="Roboto" s={SIZES.h3} w="700" />
-               <TextAtom text={event?.date?.day} c={COLORS.gray} f="Roboto" s={SIZES.h3} w="700" />
+               <TextAtom text={`${event?.date}`} c={COLORS.white} f="Roboto" s={SIZES.h3} w="700" />
+               {/* <TextAtom text={event?.date?.day} c={COLORS.gray} f="Roboto" s={SIZES.h3} w="700" /> */}
               
       </ViewAtom>         
    <ViewAtom fd="row" jc="space-between"  ai="center"  pv={0} br={0} mv={10} mh={0}>
 
                <TextAtom text={event?.date?.month} c={COLORS.gray4} f="Roboto" s={SIZES.h5} w="500" />
-               <TextAtom text={`Start ${event?.date?.start} - End ${event?.date?.end}`} c={COLORS.gray4} f="Roboto" s={SIZES.h5} w="500" />
+               <TextAtom text={`Start 8:00am - End 12 noon`} c={COLORS.gray4} f="Roboto" s={SIZES.h5} w="500" />
               
       </ViewAtom>         
       </ViewAtom>   
@@ -160,7 +162,13 @@ const handleBackPress = () => {
      </ViewAtom>
      </ViewAtom>
      </ScrollView>
-             
+     <Modal isVisible={true}>
+        <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
+           <V2Modal navigation={navigation} screen={"Home"} feature={'360 Events'} date={'9th September 2023.'} text='360 Events feature is scheduled for release on '/>
+   
+              
+         </ViewAtom>
+      </Modal>
      
     
         </LinearAtom>  

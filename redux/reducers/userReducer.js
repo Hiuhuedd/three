@@ -7,6 +7,7 @@ let defaultState = {
     user: {},
     programs: [],
     units: [],
+    networks: [],
     discord: [],
     location: {},
     theme:{color:COLORS.rose,name:"Rose"},
@@ -36,6 +37,11 @@ const UserReducer = (state = defaultState, action) => {
                 return {
                     ...state,
                     units: payload,
+                }
+            case 'NETWORKS':
+                return {
+                    ...state,
+                    networks: payload,
                 }
             case 'DISCORD':
                 return {

@@ -20,7 +20,7 @@ import * as Notifications from "expo-notifications";
 import { RefreshControl } from 'react-native';
 import V2Alerts from '../components/Molecules/V2Alerts';
 import BottomSheetHome from '../components/Molecules/BottomSheetHome';
-import { NetworksArr } from '../constants/content/networksArr';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const AnimatedCard = Animated.createAnimatedComponent(View);
@@ -125,7 +125,19 @@ console.log(UpcomingArr);
 
 
   const user=useSelector(state => state.userReducer.user);
- 
+  const networks=useSelector(state => state.userReducer.networks);
+  useEffect(() => {
+    AsyncStorage.getItem('mynetworks').then(value => {
+  console.log(JSON.parse(value),"then for dispatch",networks);
+      if (value !== null) {
+        const nets=JSON.parse(value)
+        setnetArr(nets)
+      }else{
+        setnetArr(networks)
+  
+      }
+    })
+   }, []);
   const theme=useSelector(state => state.userReducer.theme);
   //==============SCROLL ANIMATION===========
   const animatedValue = useRef(new Animated.Value(0)).current;
@@ -279,7 +291,7 @@ console.log(UpcomingArr);
   };
   
   const [isV2AlertVisible, setV2AlertVisibility] = useState(true);
-  const [NetArr, setnetArr] = useState(NetworksArr);
+  const [NetArr, setnetArr] = useState(networks);
 
   useEffect(() => {
     if (isV2AlertVisible) {
@@ -295,16 +307,16 @@ console.log(UpcomingArr);
   }, [isV2AlertVisible]);
 
   useEffect(() => {
-    for (let i = NetworksArr.length - 1; i > 0; i--) {
+    for (let i = networks.length - 1; i > 0; i--) {
       // Generate a random index between 0 and i (inclusive)
       const randomIndex = Math.floor(Math.random() * (i + 1));
       
-      // Swap elements NetworksArr[i] and NetworksArr[randomIndex]
-      [NetworksArr[i], NetworksArr[randomIndex]] = [NetworksArr[randomIndex], NetworksArr[i]];
+      // Swap elements networks[i] and networks[randomIndex]
+      [networks[i], networks[randomIndex]] = [networks[randomIndex], networks[i]];
     }
-    setnetArr(NetworksArr)
+    setnetArr(networks)
       handleRefresh()
-    // return NetworksArr;
+    // return networks;
   }, [Filter]);
 
   //==============================BOTTOM SHEET============================
@@ -330,8 +342,8 @@ const sheetRef = useRef(null);
 
   const params=63
   const defaultParams=180
-  const tokens=50
-  const defaultTokens=50
+  const tokens=3
+  const defaultTokens=3
   return (
     <View style={styles.container}>
 <LinearAtom  ai="center"  pv={0}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
@@ -488,7 +500,7 @@ const sheetRef = useRef(null);
 </ViewAtom>
 <ViewAtom fd="column" jc="space-between"  ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
 <Networks navigation={navigation} arr={NetArr} />
-<Networks navigation={navigation} arr={NetArr} />
+{/* <Networks navigation={navigation} arr={NetArr} /> */}
 
 
 </ViewAtom>

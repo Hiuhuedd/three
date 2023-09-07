@@ -250,7 +250,6 @@ export const UnitsArray = async () => {
       ...doc.data(),
     }));
     
-    console.log(collectionData,collectionData.length);
     return collectionData;
   } catch (error) {
     // Handle any errors that may occur during the retrieval process
@@ -264,7 +263,7 @@ export const getTimetableFromFirestore = async (user) => {
     const usersCollection = collection(db, 'timetables');
     const refNo=`${user.ProgramId}${user.Year}`
 
-    const userDocRef = doc(usersCollection, user.ProgramId);
+    const userDocRef = doc(usersCollection, refNo);
 
     // Get the user document using the userDocRef
     const userDocSnapshot = await getDoc(userDocRef);

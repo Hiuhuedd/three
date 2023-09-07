@@ -215,7 +215,7 @@ useEffect(() => {
 
   <Modal isVisible={true}>
         <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
-           <V2Modal navigation={navigation} screen={"Home"} feature={'360 assistant'} date={'28th September 2023.'} text='360 assistant feature is scheduled for release on '/>
+           <V2Modal navigation={navigation} screen={"Me"} feature={'360 assistant'} date={'28th September 2023.'} text='360 assistant feature is scheduled for release on '/>
    
               
          </ViewAtom>

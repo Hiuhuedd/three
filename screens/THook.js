@@ -12,6 +12,7 @@ import { BackHandler } from 'react-native';
 import { getFirestore, collection, doc, getDoc } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CardAtom from '../components/Atoms/CardAtom';
+import { getTimetableFromFirestore } from '../constants/content/programs';
 
 const THook = ({navigation}) => {
   const dispatch = useDispatch();
@@ -29,17 +30,31 @@ const handleBackPress = () => {
     };
   }, []);
   //=================backpress====================
+
+const gettimetable=async()=>
+{  const timetableValue = await getTimetableFromFirestore(userData);
+  if (timetableValue) {
+
+    setisAvailable(timetableValue)
+    
+
+  } else {
+    setisAvailable(null)
+  
+  }}
+
+
     const user=useSelector(state => state.userReducer.user);
     const theme=useSelector(state => state.userReducer.theme);
-    const tUpdate=useSelector(state => state.userReducer.timetableUpdate);
-
+    const tUpdate=useSelector(state => state.userReducer.timetable);
    const [checking,setchecking]=useState(true)
-   const [isAvailable,setisAvailable]=useState(false)
+   const [isAvailable,setisAvailable]=useState(true)
    useEffect(() => {
    setTimeout(() => {
     setchecking(false)
+    gettimetable(user)
    }, 1000);
-setisAvailable(tUpdate)
+   
   }, []);
  
   return (

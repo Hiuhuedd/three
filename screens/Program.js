@@ -18,6 +18,8 @@ import Discord from './Discord';
 import Resources from '../components/Molecules/Resources';
 import { ScrollView } from 'react-native';
 
+import V2Modal from '../components/Molecules/V2Modal';
+import Modal from "react-native-modal";
 const Program = ({navigation}) => {
            //=================backpress====================
 const handleBackPress = () => {
@@ -71,6 +73,13 @@ const handleBackPress = () => {
   
       <Resources navigation={navigation}/> 
   </ScrollView>
+  <Modal isVisible={true}>
+        <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
+           <V2Modal navigation={navigation} screen={"Home"} feature={'360 Program resources'} date={'9th September 2023.'} text='360 Program resources feature is scheduled for release on '/>
+   
+              
+         </ViewAtom>
+      </Modal>
         </LinearAtom>  
             
   <BottomTabs navigation={navigation} theme={COLORS.primary} />
