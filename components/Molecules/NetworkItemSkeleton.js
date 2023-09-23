@@ -47,7 +47,7 @@ const NetworkItemSkeleton = () => {
               {/* Your skeleton content goes here */}
               <ViewAtom fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
                 <ViewAtom fd="row" jc="flex-start" ai="center" bg="transparent" pv={5} br={0} mv={0} mh={0}>
-                  <CardAtom fd="row" jc="space-between" ai="flex-start" pv={0} ph={0} bg={COLORS.black} br={20} mv={0} mh={0} el={3} sh='#525252'>
+                  <CardAtom fd="row" jc="space-between" ai="flex-start" pv={0} ph={0} br={20} mv={0} mh={0} el={3} sh='#525252'>
                     <Image source={require("../../assets/events.png")} style={styles.Icon} resizeMode="contain" />
                   </CardAtom>
                   <ViewAtom fd="column" jc="flex-start" ai="flex-start"  w="50%" bg="transparent" pv={5} br={0} mv={0} mh={5}>

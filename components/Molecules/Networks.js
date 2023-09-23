@@ -24,7 +24,7 @@ export default Networks = ({ navigation ,arr}) => {
 
    <ViewAtom fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
       <ViewAtom fd="row" jc="flex-start" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
-      <CardAtom fd="row"  jc="space-between" ai="flex-start" pv={0} ph={0} bg={COLORS.black} br={20} mv={0} mh={0}   el={3} sh='#525252' >
+      <CardAtom fd="row"  jc="space-between" ai="flex-start" pv={0} ph={0}  br={0} mv={0} mh={0}   el={3} sh='#525252' >
 
       <Image source={network.img!==''?{ uri: network.img }:require("../../assets/events.png")} style={styles.Icon}  resizeMode="contain"/>
 
@@ -63,7 +63,7 @@ export default Networks = ({ navigation ,arr}) => {
     Icon:{
       width:60,
       height: 60,
-      borderRadius:5,
+      borderRadius:2,
 
       
     },

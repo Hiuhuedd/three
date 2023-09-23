@@ -50,9 +50,12 @@ export const  NotificationsHandler = () => {
         importance: Notifications.AndroidImportance.MAX,
         vibrationPattern: [0, 250, 250, 250],
         lightColor: "#FF231F7C",
+        icon: '../assets/notificationIcon.png', // Specify the path to your icon
+
       });
     }
   };
+
 
   const handleNotification = (notification) => {
     // could be useful if you want to display your own toast message

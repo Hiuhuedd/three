@@ -67,7 +67,7 @@ const width = Dimensions.get('window').width;
  const handleTap = (slot,day) => {
   setAdding(true)
    if(slot.unitCode&&slot.unitName&&slot.professor){
-navigation.navigate("UnitDetails",{slot:slot,day:day,del:handleUpdateTimetable})
+navigation.navigate("UnitDetails",{slot:{...slot,day:updatedTimetable.indexOf(dayObj)},day:day,del:handleUpdateTimetable ,})
     }else{
      setTappedSlot({...slot,day:updatedTimetable.indexOf(dayObj)})
      openSheet()

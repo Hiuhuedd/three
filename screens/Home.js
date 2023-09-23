@@ -125,6 +125,7 @@ console.log(UpcomingArr);
 
 
   const user=useSelector(state => state.userReducer.user);
+  console.log(user);
   const networks=useSelector(state => state.userReducer.networks);
   useEffect(() => {
     AsyncStorage.getItem('mynetworks').then(value => {

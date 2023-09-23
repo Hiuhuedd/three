@@ -10,6 +10,7 @@ let defaultState = {
     networks: [],
     discord: [],
     location: {},
+    eventAttendance: {},
     theme:{color:COLORS.rose,name:"Rose"},
     model:{color:COLORS.rose,name:"Bella"},
     premium:{isPremium:false,plan:"Start"},
@@ -50,6 +51,11 @@ const UserReducer = (state = defaultState, action) => {
                 }
     
     
+        case 'E_ATTENDANCE':
+            return {
+                ...state,
+                eventAttendance: payload    
+            }
         case 'ON_USER':
             return {
                 ...state,

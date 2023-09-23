@@ -28,7 +28,7 @@ const handleBackPress = () => {
     };
   }, []);
   //=================backpress====================
-    const { slot,day,del } = route.params;
+    const { slot,day,del,handleAdd } = route.params;
     const user=useSelector(state => state.userReducer.user);
     const theme=useSelector(state => state.userReducer.theme);
    const [unitObj,setunitObj]=useState({})
@@ -44,8 +44,25 @@ const handleBackPress = () => {
     return null; // Unit not found
   }
   
-  const handleDeleteClass=()=>{
-    alert("delete")
+  const handleDeleteClass=async()=>{
+    const slotObj={
+      unitCode:null,
+      unitName:null,
+      start:slot.start,
+      end: slot.end,
+      professor: null,
+      index:slot.index,
+      location:null,
+      broadcast:false
+    }
+    const slotDay=slot.day
+    const slotHr=slot.index
+  const updated=await del(slotDay,slotHr,slotObj)
+   if (updated) {
+     setTimeout(() => {
+      navigation.navigate("Timetable")
+    }, 2000);
+   }
   }
   
   useEffect(() => {
@@ -67,7 +84,7 @@ const handleBackPress = () => {
 }} />
       <ViewAtom fd="row"  ph={7} pv={5} bg={theme.color} br={15} >
         <TouchableOpacity onPress={()=>{handleDeleteClass()}}>
-          <TextAtom text={"Delete Class"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
+          <TextAtom text={"Remove Class"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
         </TouchableOpacity>
       </ViewAtom>
       </ViewAtom>
@@ -149,7 +166,7 @@ const handleBackPress = () => {
 
 </ViewAtom>
 </ViewAtom>
-<Modal isVisible={true}>
+<Modal isVisible={false}>
         <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
            <V2Modal navigation={navigation} feature={'360 assistant'} screen={"Timetable"} date={'28th September 2023'} text='Class descriptions & Peer aid community  features are scheduled for release on '/>
    

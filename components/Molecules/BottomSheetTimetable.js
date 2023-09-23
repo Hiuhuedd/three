@@ -75,7 +75,7 @@ const BottomSheetTimetable = React.forwardRef(({onMethodSelected,navigation,tDat
 
   <TextAtom text={"About"} f="Poppins"s={SIZES.h3} w={"500"} ta="center" ls={-2}c={COLORS.black} />
   <TextAtom text={"360 student smart timetable  "} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.black} />
-  <TextAtom text={"360 offer you a platform to schedule your day,week and semester while harmonizing with your program timetable so that you can focus on what matters  "} f="Poppins"s={SIZES.base} w={"500"} ta="center"  ls={0}c={COLORS.black}  />
+  <TextAtom text={"360 offers you a platform to schedule your day,week and semester while harmonizing with your program timetable so that you can focus on what matters  "} f="Poppins"s={SIZES.base} w={"500"} ta="center"  ls={0}c={COLORS.black}  />
   <TextAtom text={"Receive notifications on due classes/schedules on your timetable so that you never miss out.  "} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.black} />
   <TextAtom text={"Swipe left< or right> to switch between week-days "} f="Poppins1"s={SIZES.base} w={"500"} ta="center"  ls={0}c={COLORS.black} />
   <TextAtom text={"Tap on empty slots to add a class/schedule "} f="Poppins1"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.black} />

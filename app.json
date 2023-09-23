@@ -2,7 +2,7 @@
   "expo": {
     "name": "360",
     "slug": "student",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "scheme": "com.threesixty.student",
     "orientation": "portrait",
     "icon": "./assets/360.png",
@@ -19,12 +19,18 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode":2,
       "package": "com.threesixty.student",
       "adaptiveIcon": {
-        "foregroundImage": "",
+        "foregroundImage": "./assets/360.png",
         "backgroundColor": "#ffffff"
       }
     },
+    "notification": {
+      "icon": "./assets/notificationIcon.png",
+      "color": "#111111" 
+    },
+    
     "web": {
       "favicon": "./assets/360.png"
     },
