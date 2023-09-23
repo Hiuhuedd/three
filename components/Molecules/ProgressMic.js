@@ -12,6 +12,7 @@ import axios from "axios"
 
 import {  ref,  uploadBytes,  getDownloadURL,  listAll,  list,} from "firebase/storage";
 import { storage } from "../../firebase";
+<<<<<<< HEAD
 const ProgressMic = ({ theme,isMsg, setisMsg }) => {
   const user = useSelector(state => state.userReducer.user);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -78,6 +79,16 @@ const ProgressMic = ({ theme,isMsg, setisMsg }) => {
   const animatedStyles2 = {
     transform: [{ scaleX: colorValue },{scaleY:colorValue}],
   };
+=======
+const ProgressMic = ({ theme }) => {
+  const user = useSelector(state => state.userReducer.user);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [progress, setProgress] = useState(0.4);
+
+
+
+  
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   const playAudio = async (uri) => {
     try {
       const { sound: audioSound } = await Audio.Sound.createAsync(
@@ -89,6 +100,7 @@ const ProgressMic = ({ theme,isMsg, setisMsg }) => {
       console.error('Error playing audio:', error);
     }
   };
+<<<<<<< HEAD
   const pauseLocalAudio = async () => {
     try {
       if (soundObject) {
@@ -131,10 +143,20 @@ const ProgressMic = ({ theme,isMsg, setisMsg }) => {
   
       // Update the playback state to true
       setIsPlaying(true);
+=======
+  const playLocalAudio = async () => {
+    try {
+      // Replace 'require' with the actual path to your local audio file
+      const soundObject = new Audio.Sound();
+  
+      await soundObject.loadAsync(require('../../assets/audio.mp3'));
+      await soundObject.playAsync();
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     } catch (error) {
       console.error('Error playing audio:', error);
     }
   };
+<<<<<<< HEAD
   
   
   const handlePlay = async () => {
@@ -146,6 +168,11 @@ const ProgressMic = ({ theme,isMsg, setisMsg }) => {
       // setisMsg(false)
     }
       
+=======
+  const handlePlay = async () => {
+    playLocalAudio()
+
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     // const apiUrl = 'http://192.168.43.222:3000/text-to-speech'; // Replace with your server URL
   
     // const text = `Hi ${user.firstName}. welcome to three sixty ai... I combine the power of general artificial intelligence with my understanding of your unique academic and career long-term interests to recommend, solutions, decisions, and strategies you'll need on every part of this journey. My name is Bella, it's always a pleasure engaging with you! `;
@@ -176,6 +203,7 @@ const ProgressMic = ({ theme,isMsg, setisMsg }) => {
 
 
   return (
+<<<<<<< HEAD
     
     <Animated.View style={[{flexDirection:"row-reverse",}]}>
     { isMsg&&  <Animated.View style={animatedStyles}>
@@ -194,12 +222,21 @@ const ProgressMic = ({ theme,isMsg, setisMsg }) => {
         width={3}
         fill={progress}
         padding={0}
+=======
+    <View>
+      <AnimatedCircularProgress
+        size={60}
+        width={3}
+        fill={progress}
+        padding={5}
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         tintColor={theme.name==="Dark"?COLORS.white:theme.color}
         backgroundColor={theme.name==="Dark"?COLORS.white:theme.color}
       >
         {(fill) => (
           <>
             <TouchableOpacity onPress={()=>{handlePlay()}}>
+<<<<<<< HEAD
 
               <ViewAtom jc="center" ai="center" bg={theme.name==="Dark"?COLORS.white:theme.color} pv={2} ph={2} br={50} mv={0} mh={0}>
       
@@ -209,20 +246,33 @@ const ProgressMic = ({ theme,isMsg, setisMsg }) => {
                   <Icon name={ isPlaying?"pause":"mic"} type="ioniconv4" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h3} />
       </Animated.View>
                
+=======
+              <ViewAtom jc="center" ai="center" bg={theme.name==="Dark"?COLORS.white:theme.color} pv={2} ph={2} br={50} mv={0} mh={0}>
+                <CardAtom fd="row" jc="center" ai="center" pv={8} ph={8} bg={COLORS.dark2} br={50} mv={0} mh={0} el={30} sh={COLORS.amber}>
+                  <Icon name="mic" type="ioniconv4" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h3} />
+                </CardAtom>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
               </ViewAtom>
             </TouchableOpacity>
         
           </>
         )}
       </AnimatedCircularProgress>
+<<<<<<< HEAD
 
       </Animated.View>
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       {/* <Modal isVisible={false}>
         <View style={{}}>
           <Image source={require('../../assets/360aimodel.gif')} style={styles.Icon} resizeMode="cover" />
         </View>
       </Modal> */}
+<<<<<<< HEAD
     </Animated.View>
+=======
+    </View>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   );
 };
 

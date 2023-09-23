@@ -14,6 +14,7 @@ import { timetable } from '../utils/timetable';
 import moment from 'moment';
 import ProgressMic from '../components/Molecules/ProgressMic';
 import CardAtom from '../components/Atoms/CardAtom';
+<<<<<<< HEAD
 import PopUp2 from '../components/Molecules/PopUp2';
 import { NotificationsHandler } from '../utils/notifications';
 import * as Notifications from "expo-notifications";
@@ -21,6 +22,9 @@ import { RefreshControl } from 'react-native';
 import V2Alerts from '../components/Molecules/V2Alerts';
 import BottomSheetHome from '../components/Molecules/BottomSheetHome';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+=======
+import PopUp from '../components/Molecules/PopUp';
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
 const AnimatedCard = Animated.createAnimatedComponent(View);
@@ -31,6 +35,7 @@ const UPPER_HEADER_HEIGHT = 32;
 const UPPER_HEADER_PADDING_TOP = 4;
 const LOWER_HEADER_HEIGHT = 130;
 const Home = ({navigation}) => {
+<<<<<<< HEAD
   
   const [bodyText,setbodyText]=useState(`You're done for the day! `)
      const [checking,setchecking]=useState(true)
@@ -107,6 +112,9 @@ console.log(UpcomingArr);
 }, []);
 
 //======================================================
+=======
+
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   const handleBackPress = () => {
     BackHandler.exitApp();
     return true;
@@ -120,11 +128,15 @@ console.log(UpcomingArr);
   }, []);
 
 
+<<<<<<< HEAD
   const [isMsg, setisMsg] = useState(true);
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
 
   const user=useSelector(state => state.userReducer.user);
+<<<<<<< HEAD
   console.log(user);
   const networks=useSelector(state => state.userReducer.networks);
   useEffect(() => {
@@ -140,6 +152,11 @@ console.log(UpcomingArr);
     })
    }, []);
   const theme=useSelector(state => state.userReducer.theme);
+=======
+ 
+  const theme=useSelector(state => state.userReducer.theme);
+  console.log(theme);
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   //==============SCROLL ANIMATION===========
   const animatedValue = useRef(new Animated.Value(0)).current;
   const scrollViewRef = useRef(null);
@@ -162,7 +179,11 @@ console.log(UpcomingArr);
   //   }),
    height: animatedValue.interpolate({
       inputRange: [0, 100],
+<<<<<<< HEAD
       outputRange: [155, 100],
+=======
+      outputRange: [150, 100],
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       extrapolate: 'clamp',
     }),
    borderRadius: animatedValue.interpolate({
@@ -233,7 +254,11 @@ console.log(UpcomingArr);
       {
         translateX: animatedValue.interpolate({
           inputRange: [0, 25],
+<<<<<<< HEAD
           outputRange: [-35, -35],
+=======
+          outputRange: [-10, -25],
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
           extrapolate: 'clamp',
         }),
       },
@@ -274,6 +299,7 @@ console.log(UpcomingArr);
 
   //==============SCROLL ANIMATION===========
  
+<<<<<<< HEAD
 
 
   const [Filter, setFilter] = React.useState("");
@@ -351,16 +377,72 @@ const sheetRef = useRef(null);
                 <AnimatedCard 
                     style={[{
                       position:"absolute",                
+=======
+const [UpcomingArr,setUpcomingArr]=useState([])
+
+const returnTTDay=(day)=>{
+  for (const dayObject of timetable) {
+    if (dayObject.day ===day) {
+      const currentTime = new Date();
+
+      const filteredSlots = dayObject.slots.filter((slot) => {
+        const convertedDate = moment( slot.start, 'h:mm A').format();
+const date1 = new Date(currentTime);
+const date2 = new Date(convertedDate);
+        return  date1<= date2 && slot.unitCode!==null
+      });
+    setUpcomingArr(filteredSlots)
+    }
+  }
+  return null; // Day object not found
+}
+   
+   const [checking,setchecking]=useState(true)
+   useEffect(() => {
+    returnTTDay(getTimeSpans().today.day.trim().replace(",", ""))
+  setTimeout(() => {
+    setchecking(false)
+  }, 5000);
+  }, []);
+
+
+  const handleSetFilter=(f)=>{
+    setFilter(f)
+  }
+ 
+const FilterArr=["events","projects","research"]
+  const [Filter, setFilter] = React.useState("");
+
+  const params=63
+  const defaultParams=180
+  const tokens=50
+  const defaultTokens=50
+  return (
+    <View style={styles.container}>
+<LinearAtom  ai="center"  pv={0}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
+      
+                <AnimatedCard 
+                    style={[{
+                    position:"absolute",                
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
                     display:"flex",
                     flexDirection:"row",
                     justifyContent: "space-between",
                     paddingVertical:10,
                     paddingHorizontal:10,
+<<<<<<< HEAD
                     
                     backgroundColor:COLORS.dark2,
                     elevation:3,
                     shadowColor:'#525252'
                   },featureNameAnimation]}>
+=======
+          
+                   backgroundColor:COLORS.dark2,
+                     elevation:3,
+                    shadowColor:'#525252'
+                    },featureNameAnimation]}>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
                 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  w={"45%"} pv={0} br={0} mv={0} mh={0}>
                 <AnimatedTO style={[{display:"flex",flexDirection:"row"},aiAnimation]} onPress={()=>{}}>
                 <AnimatedImage source={require('../assets/360ai.png')} style={[styles.Icon]} />
@@ -388,7 +470,11 @@ const sheetRef = useRef(null);
 
             <TextAtom text={`${tokens}k / ${defaultTokens}k`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
             </ViewAtom>
+<<<<<<< HEAD
             {/* <ViewAtom fd="column" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
+=======
+            <ViewAtom fd="column" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
             <TextAtom text={`Parameters`} c={theme.name==="Dark"?COLORS.white:theme.color} f="Poppins" s={SIZES.base} w="500" />
             <CardAtom fd="row" jc="flex-start" w={"100%"}  ai="center" pv={0} ph={0}  br={5} mv={-3}  mh={0} el={30} sh={COLORS.black}>
@@ -397,12 +483,17 @@ const sheetRef = useRef(null);
 
            </CardAtom>
             <TextAtom text={`${params}k / ${defaultParams}k`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
+<<<<<<< HEAD
             </ViewAtom> */}
           {isMsg&& <>
             <TextAtom text={`You have a new message. Tap the mic to listen`} c={theme.color} f="Poppins" s={SIZES.base} w="500" />
              <TextAtom text={``} c={COLORS.green2} f="Poppins" s={SIZES.base} w="500" />
           </>
             }</ViewAtom>
+=======
+            </ViewAtom>
+            </ViewAtom>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
           </AnimatedCard>
             </ViewAtom>  
             <AnimatedCard style={[{               
@@ -410,6 +501,7 @@ const sheetRef = useRef(null);
        <TextAtom text={`${getTimeSpans().today.date} `} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 
              </AnimatedCard>
+<<<<<<< HEAD
             <AnimatedCard style={[{     alignItems:"flex-end",justifyContent:"space-between"        
             },aiAnimation2 ]}>
             <ProgressMic theme={theme} isMsg={isMsg} setisMsg={setisMsg}/>
@@ -436,6 +528,17 @@ const sheetRef = useRef(null);
    
               
          </ViewAtom>}
+=======
+            <AnimatedCard style={[{              
+            },aiAnimation2 ]}>
+            <ProgressMic theme={theme}/>
+             </AnimatedCard>
+            
+            </AnimatedCard>
+            <AnimatedCard style={[{display:"flex",zIndex:0
+                    },cardContainerAnimation]}>
+          </AnimatedCard >
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   
     
 <ScrollView
@@ -455,6 +558,7 @@ const sheetRef = useRef(null);
         //   });
         // }}
         scrollEventThrottle={0}
+<<<<<<< HEAD
         refreshControl={
           <RefreshControl
             refreshing={isRefreshing}
@@ -462,6 +566,8 @@ const sheetRef = useRef(null);
             tintColor={theme.color} // Customize the loading indicator color
           />
         }
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         style={{zIndex:120}}
       >
     
@@ -477,13 +583,18 @@ const sheetRef = useRef(null);
 </ViewAtom>
 </ViewAtom>
 <ViewAtom   bg="transparent" pv={0} br={0} mv={0} mh={10}>
+<<<<<<< HEAD
 <Upcoming UpcomingArr={UpcomingArr.slice(0,3)}/>
+=======
+<Upcoming UpcomingArr={UpcomingArr}/>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 </ViewAtom>
 
 <ViewAtom fd="row" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
 <TextAtom text={`My networks`}  c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <ViewAtom fd="row" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
 <ViewAtom fd="row" ai="center"  bg={theme} pv={3} ph={3} br={50} mv={0} mh={0}>
+<<<<<<< HEAD
   
  {/* <PopUp2 handleSetItem={handleSetFilter} arr={FilterArr} /> */}
  <TouchableOpacity onPress={()=>openSheet()} style={{flexDirection:"row",alignItems:"center"}}>
@@ -502,6 +613,24 @@ const sheetRef = useRef(null);
 <ViewAtom fd="column" jc="space-between"  ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
 <Networks navigation={navigation} arr={NetArr} />
 {/* <Networks navigation={navigation} arr={NetArr} /> */}
+=======
+<TextAtom text={`filter  `} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
+
+ <Icon name={"filter"} type="ionicon" color={COLORS.white} size={SIZES.h3} />
+
+
+</ViewAtom>
+ {/* <PopUp handleSetItem={handleSetFilter} arr={FilterArr} /> */}
+<ViewAtom fd="row" ai="center"  bg={theme} pv={3} ph={3} br={50} mv={0} mh={0}>
+<TextAtom text={`    newest  `} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
+ <Icon name={"swap-vertical-outline"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {}} />
+</ViewAtom>
+</ViewAtom>
+</ViewAtom>
+<ViewAtom fd="column" jc="space-between"  ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
+<Networks navigation={navigation} />
+<Networks navigation={navigation} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
 </ViewAtom>
@@ -509,7 +638,10 @@ const sheetRef = useRef(null);
  </ScrollView>
 
 
+<<<<<<< HEAD
  <BottomSheetHome onMethodSelected={onMethodSelected} navigation={navigation} ref={sheetRef} tData={{}} />
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 </LinearAtom>
   <BottomTabs navigation={navigation} theme={theme} />

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useEffect, useState } from 'react';
+=======
+import { useState } from 'react';
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 import ViewAtom from '../Atoms/ViewAtom';
 import TextAtom from '../Atoms/TextAtom';
 import { COLORS, SIZES } from '../../constants/theme';
@@ -10,6 +14,7 @@ const Settings=({navigation})=>{
   const theme=useSelector(state => state.userReducer.theme);
   const model=useSelector(state => state.userReducer.model);
   const premium=useSelector(state => state.userReducer.premium);
+<<<<<<< HEAD
   const location = useSelector (
     (state) => state.userReducer.location
     );
@@ -39,6 +44,21 @@ const settings=[
     {icon:"clipboard",name:"Contribute",active:"Contribute study materials ",number:"",screen:"Me",disabled:false},
     {icon:"clipboard",name:"Create",active:"Create and view projects, group assignments, announcements and more ",number:"",screen:"Me",disabled:true},
     {icon:"information-circle",name:"Help & Support",active:"Create announcements, ",number:"",screen:"Me",disabled:true},
+=======
+
+const [selectedItem, setSelectedItem]=useState('')
+
+const settings=[
+  {icon:"color-palette",name:"Themes",active:"Expolore themes ",number:theme.name ,screen:"Themes"},
+  {icon:"hardware-chip",name:"360ai",active:"Select & Customize your 360ai assistant to your preferences",number:model.name,screen:"AiModels"},
+  // {icon:"key",name:"Premium",active:"Discover the packs of premium leverage ",number:premium.plan,screen:"Premium"},
+    // {icon:"card",name:"360Wallet",active:"Manage your student wallet, instantly withdraw to cash ",number:"",screen:"Tokens"},
+    // {icon:"walk",name:"Invites",active:"Generate invite code, invite peers & earn",number:"",screen:"ReferralScreen"},
+    {icon:"navigate",name:"Navigate",active:"Find venues and places around school",number:"",screen:"Navigate"},
+    {icon:"wifi",name:"Eduroam",active:"configure eduroam quick & easy ",number:"",screen:"Themes"},
+    {icon:"clipboard",name:"Create",active:"Create and view projects, group assignments, announcements and more ",number:"",screen:"Themes"},
+    {icon:"information-circle",name:"Help & Support",active:"Create announcements, ",number:"",screen:"Themes"},
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 ]
 
     return(
@@ -58,13 +78,21 @@ const settings=[
                 <ViewAtom fd="row" jc="center" ai="center"  bg="transparent" pv={5} ph={0} br={0} mv={0} mh={0}>
                 <CardAtom fd="row"  jc="space-between" ai="flex-start" pv={15} ph={15} bg={COLORS.black} br={15} mv={0} mh={0}   el={3} sh='#525252' >
           
+<<<<<<< HEAD
                 <Icon name={i.icon} type="ionicon" color={i.disabled?COLORS.gray:COLORS.white} size={SIZES.h2}  />
+=======
+                <Icon name={i.icon} type="ionicon" color={COLORS.white} size={SIZES.h2}  />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
           
                   </CardAtom>
              
                <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={5}>
              
+<<<<<<< HEAD
                            <TextAtom text={i.name} c={i.disabled?COLORS.gray:COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
+=======
+                           <TextAtom text={i.name} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
                            <TextAtom text={i.active} c={COLORS.gray4} f="Roboto" s={SIZES.base} w="500" />
                            {/* <TextAtom text={` Two Rivers`} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" /> */}
           
@@ -96,14 +124,23 @@ const settings=[
                 <ViewAtom fd="row" jc="center" ai="center"  bg="transparent" pv={5} ph={0} br={0} mv={0} mh={0}>
                 <CardAtom fd="row"  jc="space-between" ai="flex-start" pv={15} ph={15} bg={COLORS.black} br={15} mv={0} mh={0}   el={3} sh='#525252' >
           
+<<<<<<< HEAD
                 <Icon name={i.icon} type="ionicon" color={i.disabled?COLORS.gray2:COLORS.white} size={SIZES.h2}  />
+=======
+                <Icon name={i.icon} type="ionicon" color={COLORS.white} size={SIZES.h2}  />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
           
                   </CardAtom>
              
                <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={5}>
              
+<<<<<<< HEAD
                            <TextAtom text={i.name} c={i.disabled?COLORS.gray2:COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
                            <TextAtom text={i.active} c={i.disabled?COLORS.gray2:COLORS.gray4} f="Roboto" s={SIZES.base} w="500" />
+=======
+                           <TextAtom text={i.name} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
+                           <TextAtom text={i.active} c={COLORS.gray4} f="Roboto" s={SIZES.base} w="500" />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
                            {/* <TextAtom text={` Two Rivers`} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" /> */}
           
                            {/* <ViewAtom  ai="center" ph={3}pv={2}  bg={COLORS.black}  br={5} mv={2} mh={0}>
@@ -112,7 +149,11 @@ const settings=[
                   </ViewAtom>         
                    </ViewAtom>
                 <ViewAtom fd="row" jc="flex-start" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
+<<<<<<< HEAD
                 <Icon name={"chevron-forward-outline"} type="ionicon" color={i.disabled?COLORS.gray2:COLORS.white} size={SIZES.h3} onPress={() => {}} />
+=======
+                <Icon name={"chevron-forward-outline"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {}} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
           
                  
                    </ViewAtom>

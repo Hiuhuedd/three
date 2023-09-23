@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+<<<<<<< HEAD
 import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View,Animated } from 'react-native';
+=======
+import { Dimensions, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 import Carousel from 'react-native-reanimated-carousel';
 
 import { COLORS, SIZES } from '../constants/theme';
@@ -15,6 +19,7 @@ import { getProgramByCode } from '../utils/helper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LinearAtom from '../components/Atoms/LinearAtom';
 import { BackHandler } from 'react-native';
+<<<<<<< HEAD
 import { getFirestore, collection, setDoc, doc,getDoc } from 'firebase/firestore';
 import moment from 'moment';
 import { Icon } from 'react-native-elements';
@@ -22,6 +27,9 @@ import BottomSheetTimetable from '../components/Molecules/BottomSheetTimetable';
 import { UnitsArray } from '../constants/content/programs';
 
 // import { getFirestore, collection, doc, getDoc } from 'firebase/firestore';
+=======
+
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 const width = Dimensions.get('window').width;
   const height = Dimensions.get('window').height;
@@ -29,12 +37,19 @@ const width = Dimensions.get('window').width;
   
   
   
+<<<<<<< HEAD
   const DayView = React.memo(({ dayObj,updatedTimetable,handleUpdateTimetable,navigation,setAdding,seth,openSheetD}) => {
     const theme=useSelector(state => state.userReducer.theme);
     const user=useSelector(state => state.userReducer.user);
 
     const dispatch = useDispatch();
 
+=======
+  const DayView = React.memo(({ dayObj,updatedTimetable,handleUpdateTimetable,navigation,setAdding}) => {
+    const theme=useSelector(state => state.userReducer.theme);
+    const user=useSelector(state => state.userReducer.user);
+
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   //==============================BOTTOM SHEET============================
   const [TappedSlot,setTappedSlot]=useState({})
   const closeSheet = (t) => {
@@ -43,6 +58,7 @@ const width = Dimensions.get('window').width;
      }
   
    };
+<<<<<<< HEAD
    const openSheet = async() => {
      if (sheetRef.current) {
        sheetRef.current.open();
@@ -51,6 +67,13 @@ const width = Dimensions.get('window').width;
      if (units) {
        dispatch({ type: 'UNITS', payload: units });
      }
+=======
+   const openSheet = () => {
+     if (sheetRef.current) {
+       sheetRef.current.open();
+     }
+    
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
    };
  
  const sheetRef = useRef(null);  
@@ -67,7 +90,11 @@ const width = Dimensions.get('window').width;
  const handleTap = (slot,day) => {
   setAdding(true)
    if(slot.unitCode&&slot.unitName&&slot.professor){
+<<<<<<< HEAD
 navigation.navigate("UnitDetails",{slot:{...slot,day:updatedTimetable.indexOf(dayObj)},day:day,del:handleUpdateTimetable ,})
+=======
+navigation.navigate("UnitDetails",{slot:slot,day:day})
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     }else{
      setTappedSlot({...slot,day:updatedTimetable.indexOf(dayObj)})
      openSheet()
@@ -75,11 +102,15 @@ navigation.navigate("UnitDetails",{slot:{...slot,day:updatedTimetable.indexOf(da
     
    }
 
+<<<<<<< HEAD
      
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
   return (
     <View style={{marginTop:0,}}>
     
+<<<<<<< HEAD
                   <ViewAtom fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={0} br={0} mv={0} mh={0}>
      <TextAtom text={`${dayObj.day}s`} c={COLORS.white} f="Poppins" s={SIZES.h1} w="500" ls={-2} />
      <TouchableOpacity onPress={()=>{  openSheetD()}} >
@@ -96,6 +127,16 @@ navigation.navigate("UnitDetails",{slot:{...slot,day:updatedTimetable.indexOf(da
      <TextAtom text={'Tap on empty slots to add classes.'} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" ls={0} />
 
      <ScrollView style={{height:height-130,width:width-30}} showsVerticalScrollIndicator={false}  >
+=======
+                  {/* <ViewAtom fd="row" jc="space-between" ai="flex-start" w="100%" bg="transparent" pv={0} br={0} mv={0} mh={0}>
+          </ViewAtom> */}
+
+
+     <TextAtom text={`${dayObj.day}s`} c={COLORS.white} f="Poppins" s={SIZES.h1} w="500" ls={-2} />
+     <TextAtom text={'Tap on empty slots to add classes.'} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" ls={0} />
+
+     <ScrollView style={{height:height-130}} showsVerticalScrollIndicator={false}  >
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       {dayObj.slots.map((slot) => (
 <TouchableOpacity onPress={()=>{handleTap(slot,dayObj)}} >
 
@@ -134,9 +175,12 @@ navigation.navigate("UnitDetails",{slot:{...slot,day:updatedTimetable.indexOf(da
 });
 
 function Timetable({ navigation }) {
+<<<<<<< HEAD
   const user=useSelector(state => state.userReducer.user);
   const theme=useSelector(state => state.userReducer.theme);
 
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       //=================backpress====================
 const handleBackPress = () => {
   navigation.navigate("Home")
@@ -151,6 +195,7 @@ const handleBackPress = () => {
   }, []);
   //=================backpress====================
   const dispatch = useDispatch();
+<<<<<<< HEAD
   const handleUpdateTimetable=  async(sd,si,obj)=>{
   const timetableUpdate=  await updateTimetableSlot(sd,si,obj)
 
@@ -175,6 +220,13 @@ const handleBackPress = () => {
     //  if(obj.broadast){
     //     // Update Firestore document
     //  }
+=======
+  // const [Loaded, setLoaded] = React.useState(false);
+  const handleUpdateTimetable=  async(sd,si,obj)=>{
+  
+   const timetableUpdate=  await updateTimetableSlot(sd,si,obj)
+   if(timetableUpdate){
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
      
      return  AsyncStorage.setItem('myTimetable', JSON.stringify(timetableUpdate)).then(()=>{
       setupdatedTimetable(timetableUpdate)
@@ -190,12 +242,19 @@ const handleBackPress = () => {
       return false
     }
     }
+<<<<<<< HEAD
+=======
+    // const timetableUpdate=useSelector(state => state.userReducer.timetable);
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
   const ref = useRef(null);
     const [activeIndex,setActiveIndex]=useState(0)
     const [updatedTimetable,setupdatedTimetable]=useState(timetable)
     const [Adding,setAdding]=useState(false)
+<<<<<<< HEAD
     const [h,seth]=useState(0)
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
   useEffect(() => {
@@ -205,6 +264,7 @@ const handleBackPress = () => {
   useEffect(() => {
   }, [updatedTimetable,Adding]);
 
+<<<<<<< HEAD
   // useEffect(() => {
   //   openSheet()
   // }, []);
@@ -236,10 +296,14 @@ const handleBackPress = () => {
 
   console.log(updatedTimetable[0]);
   
+=======
+ 
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   return (
     <View style={{backgroundColor:COLORS.dark2,flex:1, paddingTop: 0, padding: 0,height,}}>
            <LinearAtom  ai="center"  pv={35}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.dark,COLORS.dark]} >
 
+<<<<<<< HEAD
            <ViewAtom  fd="row" jc="space-between" ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
            {updatedTimetable.map((day)=>{
             // console.log(day);
@@ -264,6 +328,9 @@ const handleBackPress = () => {
           }
             
           </ViewAtom>
+=======
+
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       <Carousel
         ref={ref}
         loop={true}
@@ -275,12 +342,20 @@ const handleBackPress = () => {
         onSnapToItem={(index) => {
           setActiveIndex(index);
         }}
+<<<<<<< HEAD
         renderItem={({ item: dayObj }) => <DayView dayObj={dayObj} seth={seth} setAdding={setAdding} updatedTimetable={updatedTimetable} handleUpdateTimetable={handleUpdateTimetable} navigation={navigation} openSheetD={openSheet} />}
       />
       <BottomSheetTimetable onMethodSelected={onMethodSelected} navigation={navigation} ref={sheetRef} tData={tUpdate} />
            </LinearAtom>
 
 <BottomTabs navigation={navigation}  />
+=======
+        renderItem={({ item: dayObj }) => <DayView dayObj={dayObj} setAdding={setAdding} updatedTimetable={updatedTimetable} handleUpdateTimetable={handleUpdateTimetable} navigation={navigation} />}
+      />
+           </LinearAtom>
+
+<BottomTabs navigation={navigation} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     </View>
   );
 }

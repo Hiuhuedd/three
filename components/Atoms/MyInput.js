@@ -6,7 +6,10 @@ import ViewAtom from './ViewAtom';
 import MyCalendar from '../Molecules/MyCalendar';
 import TextAtom from './TextAtom';
 import { ProgramsArray } from '../../constants/content/programs';
+<<<<<<< HEAD
 import { useSelector } from 'react-redux';
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 const MyInput = ({editable, keyboardType, secureTextEntry, style, placeholder,maxLength,setisUpdated,label,setProgram}) => {
  //arrays
@@ -14,8 +17,12 @@ const MyInput = ({editable, keyboardType, secureTextEntry, style, placeholder,ma
  const year=["select","1st","2nd","3rd","4th","5th"]
  const semester=["select","1st","2nd","3rd"]
  //arrays
+<<<<<<< HEAD
  const programs=useSelector(state => state.userReducer.programs);
 
+=======
+ 
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
  const [selectedGender, setSelectedGender] = useState("");
  const [selectedYear, setSelectedYear] = useState("");
  const [selectedSem, setSelectedSem] = useState("");
@@ -38,12 +45,20 @@ const MyInput = ({editable, keyboardType, secureTextEntry, style, placeholder,ma
  
 
 function getProgramByCode(programCode) {
+<<<<<<< HEAD
   console.log("pCode",programCode);
   for (let i = 0; i < programs.length; i++) {
     if (programs[i].programCode.toLowerCase() === programCode.toLowerCase()) {
       setLoadProgram(false)
       setProgram(programs[i].programName)
         return (programs[i]) 
+=======
+  for (let i = 0; i < ProgramsArray.length; i++) {
+    if (ProgramsArray[i].programCode === programCode) {
+      setLoadProgram(false)
+      setProgram(ProgramsArray[i].programName)
+        return (ProgramsArray[i]) 
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     }
   }
   return(null)
@@ -64,7 +79,11 @@ function addSlashEveryFourCharacters(text) {
     if (label==="Course ID") {
       if (value.length>0) {setLoadProgram(true)}else{setLoadProgram(false)}
 
+<<<<<<< HEAD
     if (value.length>=3) {
+=======
+    if (value.length===3) {
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       setStudentProgram(getProgramByCode(value))
     }else{
       setStudentProgram(null)
@@ -73,9 +92,13 @@ function addSlashEveryFourCharacters(text) {
   }
 
     if(label==="Student ID"){
+<<<<<<< HEAD
         // addSlashEveryFourCharacters(value)  
         setText(value);
         setisUpdated(value);  
+=======
+        addSlashEveryFourCharacters(value)  
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     }else{
       setText(value);
       setisUpdated(value);  

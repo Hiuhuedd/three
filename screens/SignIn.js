@@ -52,6 +52,7 @@ const SignIn = ({navigation}) => {
         const userData = userDocSnapshot.data();
   
         // Now you have the user data as an object
+<<<<<<< HEAD
         console.log('User Data:', userData.user);
         dispatch({
           type: "ON_USER",
@@ -59,6 +60,15 @@ const SignIn = ({navigation}) => {
         });
   
         AsyncStorage.setItem('Student', JSON.stringify(userData.user)).then(res => {
+=======
+        console.log('User Data:', userData);
+        dispatch({
+          type: "ON_USER",
+          payload: userData
+        });
+  
+        AsyncStorage.setItem('Student', JSON.stringify(userData)).then(res => {
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
           navigation.replace('Home');
           setLoading(false);
         });

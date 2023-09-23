@@ -4,7 +4,11 @@ import { COLORS, SIZES } from '../constants/theme';
 import TextAtom from '../components/Atoms/TextAtom';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
 import ViewAtom from '../components/Atoms/ViewAtom';
+<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux';
+=======
+import { useSelector } from 'react-redux';
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { Button } from '../components/Atoms/Button';
 import { ActivityIndicator } from 'react-native-paper';
@@ -16,12 +20,15 @@ import UserAvatar from 'react-native-user-avatar';
 import { getShade } from '../utils/colorShade';
 import CardAtom from '../components/Atoms/CardAtom';
 
+<<<<<<< HEAD
 import V2Modal from '../components/Molecules/V2Modal';
 import Modal from "react-native-modal";
 import moment from 'moment';
 
 import { getFirestore, collection, setDoc, doc } from 'firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 const Events = ({navigation,route}) => {
     //=================backpress====================
 const handleBackPress = () => {
@@ -40,6 +47,7 @@ const handleBackPress = () => {
 
     const theme=useSelector(state => state.userReducer.theme);
     const user=useSelector(state => state.userReducer.user);
+<<<<<<< HEAD
     const [Loading, setLoading] = React.useState(false);
     const [att, setatt] = React.useState(false);
 
@@ -76,10 +84,13 @@ useEffect(() => {
 
 // ...
 
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
    useEffect(() => {
   console.log(event);
   }, []);
   const companies = [
+<<<<<<< HEAD
     'kenyatta university .',
     '360 events .',
    
@@ -150,6 +161,21 @@ useEffect(() => {
   }
 };
 
+=======
+    'Apple Inc.',
+    'Microsoft Corporation',
+    'Amazon.com, Inc.',
+    'Alphabet Inc. (Google)',
+    'Facebook, Inc.',
+    'Tesla, Inc.',
+    'Netflix, Inc.',
+    'Intel Corporation',
+    'Adobe Inc.',
+    'Salesforce.com, Inc.',
+    'Oracle Corporation',
+    'IBM Corporation',
+  ];
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   return (
     <View style={styles.container}>
                 
@@ -159,10 +185,17 @@ useEffect(() => {
      <ViewAtom  fd="column" jc="center"  w="100%" bg={getShade(theme.color,0.8)} pv={25} ph={20} br={0} mv={0} mh={0}>
      <ViewAtom fd="row" width="100%" ph={0} pv={10} jc="space-between" ai="center" >
         <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Home')}} />
+<<<<<<< HEAD
       <ViewAtom fd="row"  ph={7} pv={5}  bg={att?theme.color:COLORS.white} br={15} >
        {att?          <TextAtom text={"Attending"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />: <TouchableOpacity onPress={()=>{handleUpdateEvent()}}>
           <TextAtom text={"Attend"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={theme.color} />
         </TouchableOpacity>}
+=======
+      <ViewAtom fd="row"  ph={7} pv={5}  bg={COLORS.white} br={15} >
+        <TouchableOpacity onPress={()=>{}}>
+          <TextAtom text={"Attend"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={theme.color} />
+        </TouchableOpacity>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       </ViewAtom>
 </ViewAtom>
 <TextAtom text={event.title} f="Poppins"s={SIZES.h1} w={"700"} ta="left" ls={-1}c={COLORS.white} />
@@ -175,16 +208,25 @@ useEffect(() => {
        
       >
      <ViewAtom  fd="column" jc="center"  w="100%"  pv={20} ph={15} br={0} mv={0} mh={0}>
+<<<<<<< HEAD
      <TextAtom text={'Event details'} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-1}c={COLORS.white} />
      <ViewAtom fd="column" jc="flex-start" ai="flex-start" bg="transparent" pv={0} ph={0} br={0} >
     
      <CardAtom  fd="row" jc="space-between" ai="center" bg={COLORS.black}  el={30} sh={COLORS.black}  br={15} pv={20} ph={20} mv={5} mh={0}>
      <Icon name={"calendar"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {navigation.navigate('Home')}} />
+=======
+     <TextAtom text={'Event details'} f="Poppins"s={SIZES.h2} w={"500"} ta="left" ls={-1}c={COLORS.white} />
+     <ViewAtom fd="column" jc="flex-start" ai="flex-start" bg="transparent" pv={0} ph={0} br={0} >
+    
+     <CardAtom  fd="row" jc="space-between" ai="center" bg={theme.color}  el={30} sh={COLORS.black}  br={15} pv={20} ph={20} mv={5} mh={0}>
+     <Icon name={"calendar"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Home')}} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
        
  
    <ViewAtom fd="column"  jc="center"  w="80%"   bg="transparent"  ph={0} br={0} mv={0} mh={20}>
    <ViewAtom fd="row" jc="space-between"  ai="center"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
 
+<<<<<<< HEAD
                <TextAtom text={moment( event.date,"DD MMMM YYYY").format("MMMM YYYY")} c={COLORS.white} f="Roboto" s={SIZES.h3} w="700" />
                <TextAtom text={moment( event.date,"DD MMMM YYYY").format("dddd")} c={COLORS.gray} f="Roboto" s={SIZES.h3} w="700" />
               
@@ -193,6 +235,16 @@ useEffect(() => {
                <TextAtom text={moment(event.date, "DD MMMM YYYY").format("Do")} c={COLORS.white} f="Roboto" s={SIZES.h3} w="700" />
 
                <TextAtom text={`Start 7:00am - End 6pm`} c={COLORS.gray4} f="Roboto" s={SIZES.h5} w="500" />
+=======
+               <TextAtom text={`${event.date.date}th`} c={COLORS.white} f="Roboto" s={SIZES.h3} w="700" />
+               <TextAtom text={event.date.day} c={COLORS.gray} f="Roboto" s={SIZES.h3} w="700" />
+              
+      </ViewAtom>         
+   <ViewAtom fd="row" jc="space-between"  ai="center"  pv={0} br={0} mv={10} mh={0}>
+
+               <TextAtom text={event.date.month} c={COLORS.gray4} f="Roboto" s={SIZES.h5} w="500" />
+               <TextAtom text={`Start ${event.date.start} - End ${event.date.end}`} c={COLORS.gray4} f="Roboto" s={SIZES.h5} w="500" />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
               
       </ViewAtom>         
       </ViewAtom>   
@@ -201,10 +253,17 @@ useEffect(() => {
       </ViewAtom>       */}
        </CardAtom >
 <ViewAtom fd="row"  w="100%"  jc="space-between" ph={15} pv={10}  ai="center" >
+<<<<<<< HEAD
         <Icon name={"location"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {navigation.navigate('Home')}} />
 
         <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal:20}}>
         <TextAtom text={`${event?.venue}, ${event?.location}`} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={-.5}c={COLORS.white} />
+=======
+        <Icon name={"location"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Home')}} />
+
+        <TouchableOpacity onPress={()=>{}} style={{paddingHorizontal:20}}>
+        <TextAtom text={`${event.venue}, ${event.location}`} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={-.5}c={COLORS.white} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         </TouchableOpacity>
         <Icon name={"chevron-forward-circle"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {navigation.navigate('navigation')}} />
 </ViewAtom>
@@ -212,33 +271,58 @@ useEffect(() => {
    
        
 
+<<<<<<< HEAD
 <Icon name={"navigate"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {navigation.navigate('Home')}} />
    <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" ph={20} br={0} mv={0} mh={0}>
  
                <TextAtom text={event?.location} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
                <TextAtom text={event?.inquiry?.email} c={COLORS.gray} f="Roboto" s={SIZES.base} w="500" />
+=======
+<Icon name={"mail"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Home')}} />
+   <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" ph={20} br={0} mv={0} mh={0}>
+ 
+               <TextAtom text={event.inquiry.deskName} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
+               <TextAtom text={event.inquiry.email} c={COLORS.gray} f="Roboto" s={SIZES.base} w="500" />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
               
       </ViewAtom>   
       <Icon name={"chevron-forward-circle"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {navigation.navigate('navigation')}} />      
        </ViewAtom>
        </ViewAtom>
 
+<<<<<<< HEAD
 <TextAtom text={"About this event"} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-1}c={COLORS.white} />
 <ViewAtom fd="column"   ai="flex-start"jc="flex-start"  pv={0} br={0} mv={10} mh={15}>
 
 <TextAtom text={'Theme  '} c={COLORS.gray} f="Roboto" s={SIZES.h5} w="500" />
 <TextAtom text={`${event?.theme} `} c={COLORS.gray2} f="Roboto" s={SIZES.h5} w="500" />
+=======
+<TextAtom text={"About this event"} f="Poppins"s={SIZES.h2} w={"500"} ta="left" ls={-1}c={COLORS.white} />
+<ViewAtom fd="column"   ai="flex-start"jc="flex-start"  pv={0} br={0} mv={10} mh={15}>
+
+<TextAtom text={'Theme  '} c={COLORS.gray} f="Roboto" s={SIZES.h5} w="500" />
+<TextAtom text={`${event.theme} `} c={COLORS.gray2} f="Roboto" s={SIZES.h5} w="500" />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 </ViewAtom>  
 <ViewAtom fd="column"   ai="flex-start"jc="flex-start"  pv={0} br={0} mv={10} mh={15}>
 
 <TextAtom text={'Description '} c={COLORS.gray} f="Roboto" s={SIZES.h5} w="500" />
+<<<<<<< HEAD
 <TextAtom text={`${event?.description} `} c={COLORS.gray2} f="Roboto" s={SIZES.h5} w="500" />
 
 </ViewAtom>  
 <TextAtom text={"Sponsored by"} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-1}c={COLORS.white} />
 <ViewAtom fd="column"   ai="flex-start"jc="flex-start"  pv={0} br={0} mv={10} mh={10}>
 {companies?.length>1&&
+=======
+<TextAtom text={`${event.description} `} c={COLORS.gray2} f="Roboto" s={SIZES.h5} w="500" />
+
+</ViewAtom>  
+<TextAtom text={"Sponsored by"} f="Poppins"s={SIZES.h2} w={"500"} ta="left" ls={-1}c={COLORS.white} />
+<ViewAtom fd="column"   ai="flex-start"jc="flex-start"  pv={0} br={0} mv={10} mh={10}>
+
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 <FlatList
       data={companies}
       keyExtractor={(item, index) => index.toString()}
@@ -249,6 +333,7 @@ useEffect(() => {
 
         </View>
       )}
+<<<<<<< HEAD
     />}
 </ViewAtom>  
 <TextAtom text={"Peers attending"} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-1}c={COLORS.white} />
@@ -256,10 +341,19 @@ useEffect(() => {
 <Icon name={"people"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {navigation.navigate('Home')}} />{Loading?<ActivityIndicator size={10} color={COLORS.amber} />:
 
 <TextAtom text={att?`   you and ${Math.floor(Math.random()*100)} others`:`   ${Math.floor(Math.random()*100)} students`} f="Poppins"s={SIZES.h4} w={"500"} ta="left" ls={-1}c={COLORS.white} />}
+=======
+    />
+</ViewAtom>  
+<TextAtom text={"Peers attending"} f="Poppins"s={SIZES.h2} w={"500"} ta="left" ls={-1}c={COLORS.white} />
+<ViewAtom fd="row"   ai="flex-start"  pv={0} br={0} mv={10} mh={10}>
+<Icon name={"people"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Home')}} />
+<TextAtom text={"     32 students"} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-1}c={COLORS.white} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
      </ViewAtom>
      </ViewAtom>
      </ScrollView>
+<<<<<<< HEAD
      <Modal isVisible={false}>
         <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
            <V2Modal navigation={navigation} screen={"Home"} feature={'360 Events'} date={'9th September 2023.'} text='360 Events feature is scheduled for release on '/>
@@ -267,6 +361,9 @@ useEffect(() => {
               
          </ViewAtom>
       </Modal>
+=======
+             
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
      
     
         </LinearAtom>  

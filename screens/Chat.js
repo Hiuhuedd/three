@@ -15,8 +15,11 @@ import Slider from '@react-native-community/slider';
 import moment from 'moment';
 import { Audio } from 'expo-av';
 import { BackHandler } from 'react-native';
+<<<<<<< HEAD
 import V2Modal from '../components/Molecules/V2Modal';
 import Modal from "react-native-modal";
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 const Chat = ({navigation}) => {
   //=================backpress====================
 const handleBackPress = () => {
@@ -65,7 +68,24 @@ useEffect(() => {
       imageUrl: 'https://example.com/user1.jpg',
       time: '12:01 PM',
     },
+<<<<<<< HEAD
 
+=======
+    {
+      userId: 'user2',
+      name: 'Jane',
+      message: `Hi ${user.firstName}!`,
+      imageUrl: 'https://example.com/user2.jpg',
+      time: '12:03 PM',
+    },
+    {
+      userId: 'user2',
+      name: 'Jane',
+      message: 'How are you?',
+      imageUrl: 'https://example.com/user2.jpg',
+      time: '12:04 PM',
+    },
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     
     // Add more messages as needed
   ])
@@ -191,10 +211,16 @@ const handlePlayPause = async () => {
   <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
      
 </ViewAtom>
+<<<<<<< HEAD
   <ViewAtom fd="column" jc="center" ai="center" w="100%" bg="transparent" ph={10} br={0} mh={0}>
      
   <TextAtom text={"Chat 360"} f="Poppins"s={SIZES.h1} w={"500"} ta="center" ls={-2}c={COLORS.white} />
   <TextAtom text={"360 assistant"} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={-2}c={COLORS.white} />
+=======
+  <ViewAtom fd="row" jc="flex-start" ai="center" w="100%" bg="transparent" ph={10} br={0} mh={0}>
+     
+  <TextAtom text={"360.ai"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 </ViewAtom>
   <ScrollView contentContainerStyle={styles.container}>
 
@@ -220,7 +246,11 @@ const handlePlayPause = async () => {
       message.userId === 'user1' ? styles.sentMessageContainer : styles.receivedMessageContainer,
     ]}
   >
+<<<<<<< HEAD
       <TextAtom text={message.message}f="Poppins"s={SIZES.h6+1} w={"500"} ta={message.userId === 'user1' ?"right":"left"} c={COLORS.black} />
+=======
+      <TextAtom text={message.message}f="Poppins"s={SIZES.h5} w={"500"} ta={message.userId === 'user1' ?"right":"left"} c={COLORS.black} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
       <View style={styles.slider_view}>
       {message.userId === 'user1' ?<></> :  <TouchableOpacity onPress={handlePlayPause}>
@@ -267,6 +297,7 @@ const handlePlayPause = async () => {
         <Icon name="mic" type="ionicon" color={COLORS.white} size={SIZES.h2}  />
         </TouchableOpacity> */}
       </View>
+<<<<<<< HEAD
         <Modal isVisible={true}>
         <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
            <V2Modal navigation={navigation} screen={"Home"} feature={'360 assistant'} date={'28th September 2023.'} text='360 assistant feature is scheduled for release on '/>
@@ -274,6 +305,8 @@ const handlePlayPause = async () => {
               
          </ViewAtom>
       </Modal>
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 </LinearAtom>  
             
   <BottomTabs navigation={navigation} theme={COLORS.primary} />

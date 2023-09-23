@@ -1,3 +1,93 @@
+<<<<<<< HEAD
+=======
+// import React, { useState,useEffect } from 'react';
+// import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+// import { COLORS, SIZES } from '../constants/theme';
+// import TextAtom from '../components/Atoms/TextAtom';
+// import { CheckBox, Divider, Icon } from 'react-native-elements';
+// import ViewAtom from '../components/Atoms/ViewAtom';
+// import { useSelector } from 'react-redux';
+// import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
+// import { Button } from '../components/Atoms/Button';
+// import { ActivityIndicator } from 'react-native-paper';
+// import LinearAtom from '../components/Atoms/LinearAtom';
+// import BottomTabs from '../components/Molecules/BottomTabs';
+// import { greet } from '../utils/helper';
+
+// const Me= ({navigation}) => {
+//     const user=useSelector(state => state.userReducer.user);
+//    const [checking,setchecking]=useState(true)
+//    useEffect(() => {
+//   setTimeout(() => {
+//     setchecking(false)
+//   }, 5000);
+//   }, []);
+      
+//   return (
+//     <View style={styles.container}>
+//     <LinearAtom   pv={5}  ph={10} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.black,COLORS.dark]} >
+//     <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
+     
+//      </ViewAtom>
+//     <ViewAtom  fd="column" jc="flex-start" ai="flex-start" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
+     
+//     <ViewAtom  fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
+//      <TextAtom text={greet()} f="Poppins"s={SIZES.h2} w={"500"}  ls={-2}c={COLORS.white} />
+//         <ViewAtom  fd="row" jc="space-between" ai="center" w="30%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
+//         <Icon name="information-circle" type="ionicon" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h2} />
+//         <Icon name="mail-unread" type="ionicon" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h2} />
+//         <Icon name="log-out" type="ionicon" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h2} />
+
+//           </ViewAtom>
+//     </ViewAtom>
+//           <TextAtom text={user.firstName} f="Poppins"s={SIZES.h3} w={"500"}  ls={-2}c={COLORS.white} />
+//      </ViewAtom>
+   
+//         </LinearAtom>  
+
+// <BottomTabs navigation={navigation} theme={COLORS.primary} />
+
+// </View>
+// );
+// };
+
+// const styles = StyleSheet.create({
+// container: {
+// flex:1,
+// backgroundColor:COLORS.dark,
+// height:SIZES.height,
+// paddingTop:0,
+// },
+ 
+//   pinDot: {
+//     width: SIZES.h3,
+//     height: SIZES.h3,
+//     borderRadius: 5,
+//     borderWidth: 1,
+//     borderColor: COLORS.gray2,
+//     marginHorizontal: 5,
+//   },
+//   pinDotFilled: {
+//     backgroundColor:COLORS.gray2,
+//   },
+//   keypadContainer: {
+//     flexDirection: 'row',
+//     flexWrap: 'wrap',
+//     alignItems:"center",
+//     justifyContent:"center",
+//   },
+//   keypadButton: {
+//     width: '30%',
+//    aspectRatio:1.5,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+
+//   },
+ 
+// });
+
+// export default Me;
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
 import React, { useState,useEffect,useRef } from 'react';
@@ -15,6 +105,10 @@ import moment from 'moment';
 import ProgressMic from '../components/Molecules/ProgressMic';
 import CardAtom from '../components/Atoms/CardAtom';
 import { greet } from '../utils/helper';
+<<<<<<< HEAD
+=======
+import { ProgramsArray } from '../constants/content/programs';
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 import Settings from '../components/Molecules/settings';
 
 
@@ -133,9 +227,28 @@ const handleBackPress = () => {
     ],
  
    };
+<<<<<<< HEAD
   
   //==============SCROLL ANIMATION===========
 
+=======
+
+  //==============SCROLL ANIMATION===========
+  const [program,setProgramName]=useState("")
+  function getProgramByCode(programCode) {
+    for (let i = 0; i < ProgramsArray.length; i++) {
+      if (ProgramsArray[i].programCode === programCode) {
+        setProgramName(ProgramsArray[i])
+          return (ProgramsArray[i]) 
+      }
+    }
+    return(null)
+  }
+
+  useEffect(() => {
+    getProgramByCode(user.ProgramId)
+  }, []);
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   return (
     <View style={styles.container}>
 <LinearAtom  ai="center"  pv={0}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
@@ -171,7 +284,11 @@ const handleBackPress = () => {
                </ViewAtom>
           </ViewAtom>
                <TextAtom text={`${user.firstName} `} f="Poppins"s={SIZES.h5} w={"500"}  c={COLORS.gray4} />
+<<<<<<< HEAD
                <TextAtom text={`${user.StudentProgram} `} f="Poppins"s={SIZES.base} w={"500"}  c={COLORS.gray4} />
+=======
+               <TextAtom text={`${program.programName} `} f="Poppins"s={SIZES.base} w={"500"}  c={COLORS.gray4} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
              
          
           </AnimatedCard>
@@ -182,7 +299,11 @@ const handleBackPress = () => {
             <AnimatedCard style={[{               
             },aiAnimation3 ]}>
                <ViewAtom  fd="row" jc="space-between" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
+<<<<<<< HEAD
                 <Image source={require('../assets/usericon.jpg')} style={[styles.Icon]} />
+=======
+                <Image source={require('../assets/user.jpg')} style={[styles.Icon]} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
               <ViewAtom  fd="column" jc="space-between" ai="flex-start" w="70%" bg="transparent" pv={1} br={0} mv={0} mh={0}>
               <TextAtom text={`${user.firstName} ${user.lastName}`} f="Poppins"s={SIZES.h3} w={"500"}  ls={-1}c={COLORS.white} />
               <ViewAtom  fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={1} br={0} mv={0} mh={0}>

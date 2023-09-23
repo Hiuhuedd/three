@@ -79,6 +79,7 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
         maxLength: 40,
         secureTextEntry: true,
       },
+<<<<<<< HEAD
       // {
       //   label: 'Date of Birth',
       //   placeholder: 'DoB',
@@ -88,6 +89,17 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
       //   maxLength: 40,
       //   secureTextEntry: true,
       // },
+=======
+      {
+        label: 'Date of Birth',
+        placeholder: 'DoB',
+        value: DOB,
+        setValue: setDOB,
+        keyboardType: 'default',
+        maxLength: 40,
+        secureTextEntry: true,
+      },
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     ],
     [
       {
@@ -96,7 +108,11 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
         value: ProgramId,
         setValue: setProgramId,
         keyboardType: 'defaut',
+<<<<<<< HEAD
         maxLength: 5,
+=======
+        maxLength: 4,
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         secureTextEntry: false,
       },
     ],
@@ -127,8 +143,13 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
         placeholder: '2121/2019',
         value: StudentId,
         setValue: setStudentId,
+<<<<<<< HEAD
         keyboardType: 'default',
         maxLength: 12,
+=======
+        keyboardType: 'numeric',
+        maxLength: 9,
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         secureTextEntry: false,
       },
       {
@@ -155,7 +176,10 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
   }, [activeIndex]);
   useEffect(() => {
 setUserData({firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram})
+<<<<<<< HEAD
 console.log(firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram);
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   }, [firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram]);
 
   const width = Dimensions.get('window').width;
