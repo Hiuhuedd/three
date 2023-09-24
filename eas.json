@@ -10,10 +10,21 @@
     "preview": {
       "android":{
         "buildType":"apk"
+<<<<<<< HEAD
+      },
+      "distribution": "internal"
+    },
+    "production": {
+      "android":{
+      "buildType":"app-bundle"
+    }
+  }
+=======
       }
     },
     
     "production": {}
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   },
   "submit": {
     "production": {}

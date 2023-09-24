@@ -12,6 +12,74 @@ import axios from "axios"
 
 import {  ref,  uploadBytes,  getDownloadURL,  listAll,  list,} from "firebase/storage";
 import { storage } from "../../firebase";
+<<<<<<< HEAD
+const ProgressMic = ({ theme,isMsg, setisMsg }) => {
+  const user = useSelector(state => state.userReducer.user);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [progress, setProgress] = useState(0.4);
+  const [opacityValue] = useState(new Animated.Value(1));
+  const [colorValue] = useState(new Animated.Value(1));
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [soundObject, setSoundObject] = useState(null);
+  const [playbackStatus, setPlaybackStatus] = useState(null);
+
+  useEffect(() => {
+    const colorAnimation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(colorValue, {
+          toValue: .9,
+          duration: 1500, // 1 second
+          useNativeDriver: true,
+        }),
+        Animated.timing(colorValue, {
+          toValue: 1,
+          duration: 1500, // 1 second
+          useNativeDriver: true,
+        }),
+      ]),
+      { iterations: -1 }, // Infinite loop
+     
+    );
+
+    colorAnimation.start();
+
+    return () => colorAnimation.stop();
+  }, [colorValue]);
+  useEffect(() => {
+   if(playbackStatus && playbackStatus?.didJustFinish){
+    setIsPlaying(false)
+   }
+  }, [playbackStatus]);
+  useEffect(() => {
+    const opacityAnimation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(opacityValue, {
+          toValue: 0.2,
+          duration: 1500, // 1 second
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacityValue, {
+          toValue: 1,
+          duration: 1500, // 1 second
+          useNativeDriver: true,
+        }),
+      ]),
+      { iterations: -1 }, // Infinite loop
+     
+    );
+
+    opacityAnimation.start();
+
+    return () => opacityAnimation.stop();
+  }, [opacityValue]);
+
+  const animatedStyles = {
+    opacity: opacityValue,
+  };
+  const animatedStyles2 = {
+    transform: [{ scaleX: colorValue },{scaleY:colorValue}],
+  };
+=======
 const ProgressMic = ({ theme }) => {
   const user = useSelector(state => state.userReducer.user);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -20,6 +88,7 @@ const ProgressMic = ({ theme }) => {
 
 
   
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   const playAudio = async (uri) => {
     try {
       const { sound: audioSound } = await Audio.Sound.createAsync(
@@ -31,6 +100,50 @@ const ProgressMic = ({ theme }) => {
       console.error('Error playing audio:', error);
     }
   };
+<<<<<<< HEAD
+  const pauseLocalAudio = async () => {
+    try {
+      if (soundObject) {
+        // Pause the audio playback
+        await soundObject.pauseAsync();
+  
+        // Update the playback state to false
+        setIsPlaying(false);
+      }
+    } catch (error) {
+      console.error('Error pausing audio:', error);
+    }
+  };
+  const onPlaybackStatusUpdate = (status) => {
+    // Update the playback status state
+    setPlaybackStatus(status);
+  
+    // Check if the audio has finished playing
+    if (status && status.isLoaded && !status.isPlaying && status.didJustFinish) {
+      // Audio has finished playing, you can perform any necessary actions here
+      console.log('Audio has finished playing');
+      
+      // Update the playback state to false
+      setIsPlaying(false);
+    }
+  };
+  
+  const playLocalAudio = async () => {
+    try {
+      const newSoundObject = new Audio.Sound();
+  
+      await newSoundObject.loadAsync(require('../../assets/audio1.mp3'));
+      await newSoundObject.playAsync();
+  
+      // Update the soundObject state
+      setSoundObject(newSoundObject);
+  
+      // Set up the event listener for playback status updates
+      newSoundObject.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+  
+      // Update the playback state to true
+      setIsPlaying(true);
+=======
   const playLocalAudio = async () => {
     try {
       // Replace 'require' with the actual path to your local audio file
@@ -38,13 +151,28 @@ const ProgressMic = ({ theme }) => {
   
       await soundObject.loadAsync(require('../../assets/audio.mp3'));
       await soundObject.playAsync();
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     } catch (error) {
       console.error('Error playing audio:', error);
     }
   };
+<<<<<<< HEAD
+  
+  
+  const handlePlay = async () => {
+    if(!isPlaying){
+      playLocalAudio()
+      setisMsg(false)
+    }else{
+      pauseLocalAudio()
+      // setisMsg(false)
+    }
+      
+=======
   const handlePlay = async () => {
     playLocalAudio()
 
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     // const apiUrl = 'http://192.168.43.222:3000/text-to-speech'; // Replace with your server URL
   
     // const text = `Hi ${user.firstName}. welcome to three sixty ai... I combine the power of general artificial intelligence with my understanding of your unique academic and career long-term interests to recommend, solutions, decisions, and strategies you'll need on every part of this journey. My name is Bella, it's always a pleasure engaging with you! `;
@@ -75,34 +203,76 @@ const ProgressMic = ({ theme }) => {
 
 
   return (
+<<<<<<< HEAD
+    
+    <Animated.View style={[{flexDirection:"row-reverse",}]}>
+    { isMsg&&  <Animated.View style={animatedStyles}>
+        <Icon
+          name="chatbubble-ellipses-outline"
+          type="ionicon"
+          ios="ios-lock"
+          md="ios-lock"
+          color={theme.color}
+          size={SIZES.h3}
+        />
+      </Animated.View>}
+      <Animated.View style={isPlaying?animatedStyles:{}}>
+      <AnimatedCircularProgress
+        size={55}
+        width={3}
+        fill={progress}
+        padding={0}
+=======
     <View>
       <AnimatedCircularProgress
         size={60}
         width={3}
         fill={progress}
         padding={5}
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         tintColor={theme.name==="Dark"?COLORS.white:theme.color}
         backgroundColor={theme.name==="Dark"?COLORS.white:theme.color}
       >
         {(fill) => (
           <>
             <TouchableOpacity onPress={()=>{handlePlay()}}>
+<<<<<<< HEAD
+
+              <ViewAtom jc="center" ai="center" bg={theme.name==="Dark"?COLORS.white:theme.color} pv={2} ph={2} br={50} mv={0} mh={0}>
+      
+                
+                <Animated.View style={{flexDirection:"row",alignItems:"center",justifyContent:"center",padding:8,borderRadius:50,backgroundColor:COLORS.dark2}}>
+       
+                  <Icon name={ isPlaying?"pause":"mic"} type="ioniconv4" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h3} />
+      </Animated.View>
+               
+=======
               <ViewAtom jc="center" ai="center" bg={theme.name==="Dark"?COLORS.white:theme.color} pv={2} ph={2} br={50} mv={0} mh={0}>
                 <CardAtom fd="row" jc="center" ai="center" pv={8} ph={8} bg={COLORS.dark2} br={50} mv={0} mh={0} el={30} sh={COLORS.amber}>
                   <Icon name="mic" type="ioniconv4" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h3} />
                 </CardAtom>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
               </ViewAtom>
             </TouchableOpacity>
         
           </>
         )}
       </AnimatedCircularProgress>
+<<<<<<< HEAD
+
+      </Animated.View>
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       {/* <Modal isVisible={false}>
         <View style={{}}>
           <Image source={require('../../assets/360aimodel.gif')} style={styles.Icon} resizeMode="cover" />
         </View>
       </Modal> */}
+<<<<<<< HEAD
+    </Animated.View>
+=======
     </View>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   );
 };
 

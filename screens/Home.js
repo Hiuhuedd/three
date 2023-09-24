@@ -14,7 +14,17 @@ import { timetable } from '../utils/timetable';
 import moment from 'moment';
 import ProgressMic from '../components/Molecules/ProgressMic';
 import CardAtom from '../components/Atoms/CardAtom';
+<<<<<<< HEAD
+import PopUp2 from '../components/Molecules/PopUp2';
+import { NotificationsHandler } from '../utils/notifications';
+import * as Notifications from "expo-notifications";
+import { RefreshControl } from 'react-native';
+import V2Alerts from '../components/Molecules/V2Alerts';
+import BottomSheetHome from '../components/Molecules/BottomSheetHome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+=======
 import PopUp from '../components/Molecules/PopUp';
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
 const AnimatedCard = Animated.createAnimatedComponent(View);
@@ -25,7 +35,86 @@ const UPPER_HEADER_HEIGHT = 32;
 const UPPER_HEADER_PADDING_TOP = 4;
 const LOWER_HEADER_HEIGHT = 130;
 const Home = ({navigation}) => {
+<<<<<<< HEAD
+  
+  const [bodyText,setbodyText]=useState(`You're done for the day! `)
+     const [checking,setchecking]=useState(true)
+  const [UpcomingArr,setUpcomingArr]=useState([])
 
+  const returnTTDay=(day)=>{
+    for (const dayObject of timetable) {
+      if (dayObject.day ===day) {
+        const currentTime = new Date();
+  
+        const filteredSlots = dayObject.slots.filter((slot) => {
+          const convertedDate = moment( slot.start, 'h:mm A').format();
+  const date1 = new Date(currentTime);
+  const date2 = new Date(convertedDate);
+          return  date1<= date2 && slot.unitCode!==null
+        });
+        console.log(filteredSlots);
+        if(filteredSlots.length>0){
+          setbodyText(`Getting ready for ${filteredSlots[0]?.unitName}`)
+        setUpcomingArr(filteredSlots)
+      }else{
+          setbodyText(`You're done for the day! `)
+        setUpcomingArr(filteredSlots)
+  
+        }
+      }
+    }
+    return null; // Day object not found
+  }
+     useEffect(() => {
+      returnTTDay(getTimeSpans().today.day.trim().replace(",", ""))
+    setTimeout(() => {
+      setchecking(false)
+    }, 5000);
+    }, []);
+ //======== ============================================================
+ const { registerForPushNotificationsAsync, handleNotificationResponse } =
+ NotificationsHandler();
+
+useEffect(() => {
+  
+ registerForPushNotificationsAsync();
+ Notifications.setNotificationHandler({
+   handleNotification: async () => ({
+     shouldShowAlert: true,
+     shouldPlaySound: true,
+     shouldSetBadge: true,
+   }),
+ });
+
+ const responseListener =
+   Notifications.addNotificationResponseReceivedListener(
+     handleNotificationResponse
+   );
+console.log(UpcomingArr);
+   const schedulingOptions = {
+     content: {
+       title: "360 student",
+       body: bodyText ,
+     },
+     trigger: {
+       seconds: 20,
+     },
+   };
+   
+   // Schedule the notification
+   Notifications.scheduleNotificationAsync(schedulingOptions);
+ return () => {
+   if (responseListener)
+     Notifications.removeNotificationSubscription(responseListener);
+ };
+ 
+
+}, []);
+
+//======================================================
+=======
+
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   const handleBackPress = () => {
     BackHandler.exitApp();
     return true;
@@ -39,13 +128,35 @@ const Home = ({navigation}) => {
   }, []);
 
 
+<<<<<<< HEAD
+  const [isMsg, setisMsg] = useState(true);
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
 
   const user=useSelector(state => state.userReducer.user);
+<<<<<<< HEAD
+  console.log(user);
+  const networks=useSelector(state => state.userReducer.networks);
+  useEffect(() => {
+    AsyncStorage.getItem('mynetworks').then(value => {
+  console.log(JSON.parse(value),"then for dispatch",networks);
+      if (value !== null) {
+        const nets=JSON.parse(value)
+        setnetArr(nets)
+      }else{
+        setnetArr(networks)
+  
+      }
+    })
+   }, []);
+  const theme=useSelector(state => state.userReducer.theme);
+=======
  
   const theme=useSelector(state => state.userReducer.theme);
   console.log(theme);
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   //==============SCROLL ANIMATION===========
   const animatedValue = useRef(new Animated.Value(0)).current;
   const scrollViewRef = useRef(null);
@@ -68,7 +179,11 @@ const Home = ({navigation}) => {
   //   }),
    height: animatedValue.interpolate({
       inputRange: [0, 100],
+<<<<<<< HEAD
+      outputRange: [155, 100],
+=======
       outputRange: [150, 100],
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       extrapolate: 'clamp',
     }),
    borderRadius: animatedValue.interpolate({
@@ -139,7 +254,11 @@ const Home = ({navigation}) => {
       {
         translateX: animatedValue.interpolate({
           inputRange: [0, 25],
+<<<<<<< HEAD
+          outputRange: [-35, -35],
+=======
           outputRange: [-10, -25],
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
           extrapolate: 'clamp',
         }),
       },
@@ -180,6 +299,85 @@ const Home = ({navigation}) => {
 
   //==============SCROLL ANIMATION===========
  
+<<<<<<< HEAD
+
+
+  const [Filter, setFilter] = React.useState("");
+
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+  
+    returnTTDay(getTimeSpans().today.day.trim().replace(",", ""))
+
+    setTimeout(() => {
+      // After refreshing logic is done, set isRefreshing to false
+      setIsRefreshing(false);
+    }, 2000); // Replace this with your actual refreshing logic
+  };
+  
+  const [isV2AlertVisible, setV2AlertVisibility] = useState(true);
+  const [NetArr, setnetArr] = useState(networks);
+
+  useEffect(() => {
+    if (isV2AlertVisible) {
+      const timer = setTimeout(() => {
+        // Hide the component after 5 seconds
+        setV2AlertVisibility(false);
+      }, 20000); // 5 seconds
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [isV2AlertVisible]);
+
+  useEffect(() => {
+    for (let i = networks.length - 1; i > 0; i--) {
+      // Generate a random index between 0 and i (inclusive)
+      const randomIndex = Math.floor(Math.random() * (i + 1));
+      
+      // Swap elements networks[i] and networks[randomIndex]
+      [networks[i], networks[randomIndex]] = [networks[randomIndex], networks[i]];
+    }
+    setnetArr(networks)
+      handleRefresh()
+    // return networks;
+  }, [Filter]);
+
+  //==============================BOTTOM SHEET============================
+  const closeSheet = (t) => {
+
+
+    if (sheetRef.current) {
+      sheetRef.current.close();
+    }
+  };
+  const openSheet = () => {
+    if (sheetRef.current) {
+      sheetRef.current.open();
+    }
+  
+};
+const onMethodSelected = (f) => {
+  setFilter(f)
+  closeSheet();
+};
+const sheetRef = useRef(null); 
+
+
+  const params=63
+  const defaultParams=180
+  const tokens=3
+  const defaultTokens=3
+  return (
+    <View style={styles.container}>
+<LinearAtom  ai="center"  pv={0}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
+                <AnimatedCard 
+                    style={[{
+                      position:"absolute",                
+=======
 const [UpcomingArr,setUpcomingArr]=useState([])
 
 const returnTTDay=(day)=>{
@@ -226,16 +424,25 @@ const FilterArr=["events","projects","research"]
                 <AnimatedCard 
                     style={[{
                     position:"absolute",                
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
                     display:"flex",
                     flexDirection:"row",
                     justifyContent: "space-between",
                     paddingVertical:10,
                     paddingHorizontal:10,
+<<<<<<< HEAD
+                    
+                    backgroundColor:COLORS.dark2,
+                    elevation:3,
+                    shadowColor:'#525252'
+                  },featureNameAnimation]}>
+=======
           
                    backgroundColor:COLORS.dark2,
                      elevation:3,
                     shadowColor:'#525252'
                     },featureNameAnimation]}>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
                 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  w={"45%"} pv={0} br={0} mv={0} mh={0}>
                 <AnimatedTO style={[{display:"flex",flexDirection:"row"},aiAnimation]} onPress={()=>{}}>
                 <AnimatedImage source={require('../assets/360ai.png')} style={[styles.Icon]} />
@@ -263,7 +470,11 @@ const FilterArr=["events","projects","research"]
 
             <TextAtom text={`${tokens}k / ${defaultTokens}k`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
             </ViewAtom>
+<<<<<<< HEAD
+            {/* <ViewAtom fd="column" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
+=======
             <ViewAtom fd="column" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
             <TextAtom text={`Parameters`} c={theme.name==="Dark"?COLORS.white:theme.color} f="Poppins" s={SIZES.base} w="500" />
             <CardAtom fd="row" jc="flex-start" w={"100%"}  ai="center" pv={0} ph={0}  br={5} mv={-3}  mh={0} el={30} sh={COLORS.black}>
@@ -272,8 +483,17 @@ const FilterArr=["events","projects","research"]
 
            </CardAtom>
             <TextAtom text={`${params}k / ${defaultParams}k`} c={COLORS.gray2} f="Poppins" s={SIZES.base} w="500" />
+<<<<<<< HEAD
+            </ViewAtom> */}
+          {isMsg&& <>
+            <TextAtom text={`You have a new message. Tap the mic to listen`} c={theme.color} f="Poppins" s={SIZES.base} w="500" />
+             <TextAtom text={``} c={COLORS.green2} f="Poppins" s={SIZES.base} w="500" />
+          </>
+            }</ViewAtom>
+=======
             </ViewAtom>
             </ViewAtom>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
           </AnimatedCard>
             </ViewAtom>  
             <AnimatedCard style={[{               
@@ -281,6 +501,34 @@ const FilterArr=["events","projects","research"]
        <TextAtom text={`${getTimeSpans().today.date} `} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 
              </AnimatedCard>
+<<<<<<< HEAD
+            <AnimatedCard style={[{     alignItems:"flex-end",justifyContent:"space-between"        
+            },aiAnimation2 ]}>
+            <ProgressMic theme={theme} isMsg={isMsg} setisMsg={setisMsg}/>
+            <TouchableOpacity onPress={()=>{navigation.navigate("AiModels")}}>
+
+<ViewAtom fd="row" jc="center" ai="center"  pv={4} ph={0} br={50} mv={0} mh={0}>
+<TextAtom text={`About 360ai`} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
+
+            <Icon name={"chevron-forward-outline"} type="ionicon" color={COLORS.white} size={SIZES.h3-2} />
+ 
+</ViewAtom>
+</TouchableOpacity>
+
+             </AnimatedCard>
+            
+            </AnimatedCard>
+
+            <AnimatedCard style={[{display:"flex",zIndex:0
+                    },cardContainerAnimation]}>
+                      </AnimatedCard >
+
+                  {isV2AlertVisible&&    <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
+                      <V2Alerts text='360ai assistant feature is scheduled for release on 28th September 2023.'/>
+   
+              
+         </ViewAtom>}
+=======
             <AnimatedCard style={[{              
             },aiAnimation2 ]}>
             <ProgressMic theme={theme}/>
@@ -290,6 +538,7 @@ const FilterArr=["events","projects","research"]
             <AnimatedCard style={[{display:"flex",zIndex:0
                     },cardContainerAnimation]}>
           </AnimatedCard >
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   
     
 <ScrollView
@@ -309,6 +558,16 @@ const FilterArr=["events","projects","research"]
         //   });
         // }}
         scrollEventThrottle={0}
+<<<<<<< HEAD
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={handleRefresh}
+            tintColor={theme.color} // Customize the loading indicator color
+          />
+        }
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         style={{zIndex:120}}
       >
     
@@ -324,13 +583,37 @@ const FilterArr=["events","projects","research"]
 </ViewAtom>
 </ViewAtom>
 <ViewAtom   bg="transparent" pv={0} br={0} mv={0} mh={10}>
+<<<<<<< HEAD
+<Upcoming UpcomingArr={UpcomingArr.slice(0,3)}/>
+=======
 <Upcoming UpcomingArr={UpcomingArr}/>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 </ViewAtom>
 
 <ViewAtom fd="row" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
 <TextAtom text={`My networks`}  c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <ViewAtom fd="row" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
 <ViewAtom fd="row" ai="center"  bg={theme} pv={3} ph={3} br={50} mv={0} mh={0}>
+<<<<<<< HEAD
+  
+ {/* <PopUp2 handleSetItem={handleSetFilter} arr={FilterArr} /> */}
+ <TouchableOpacity onPress={()=>openSheet()} style={{flexDirection:"row",alignItems:"center"}}>
+
+ <Icon name={"filter"} type="ionicon" color={COLORS.white} size={SIZES.h3} />
+<TextAtom text={`   filter  `} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
+ </TouchableOpacity>
+
+ 
+
+
+</ViewAtom>
+
+</ViewAtom>
+</ViewAtom>
+<ViewAtom fd="column" jc="space-between"  ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
+<Networks navigation={navigation} arr={NetArr} />
+{/* <Networks navigation={navigation} arr={NetArr} /> */}
+=======
 <TextAtom text={`filter  `} c={COLORS.white} f="Poppins" s={SIZES.base} w="500" />
 
  <Icon name={"filter"} type="ionicon" color={COLORS.white} size={SIZES.h3} />
@@ -347,6 +630,7 @@ const FilterArr=["events","projects","research"]
 <ViewAtom fd="column" jc="space-between"  ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
 <Networks navigation={navigation} />
 <Networks navigation={navigation} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
 </ViewAtom>
@@ -354,6 +638,10 @@ const FilterArr=["events","projects","research"]
  </ScrollView>
 
 
+<<<<<<< HEAD
+ <BottomSheetHome onMethodSelected={onMethodSelected} navigation={navigation} ref={sheetRef} tData={{}} />
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 </LinearAtom>
   <BottomTabs navigation={navigation} theme={theme} />

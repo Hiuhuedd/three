@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 // import React, { useState,useEffect } from 'react';
 // import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 // import { COLORS, SIZES } from '../constants/theme';
@@ -85,6 +87,7 @@
 // });
 
 // export default Me;
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
 import React, { useState,useEffect,useRef } from 'react';
@@ -102,7 +105,10 @@ import moment from 'moment';
 import ProgressMic from '../components/Molecules/ProgressMic';
 import CardAtom from '../components/Atoms/CardAtom';
 import { greet } from '../utils/helper';
+<<<<<<< HEAD
+=======
 import { ProgramsArray } from '../constants/content/programs';
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 import Settings from '../components/Molecules/settings';
 
 
@@ -221,6 +227,11 @@ const handleBackPress = () => {
     ],
  
    };
+<<<<<<< HEAD
+  
+  //==============SCROLL ANIMATION===========
+
+=======
 
   //==============SCROLL ANIMATION===========
   const [program,setProgramName]=useState("")
@@ -237,6 +248,7 @@ const handleBackPress = () => {
   useEffect(() => {
     getProgramByCode(user.ProgramId)
   }, []);
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   return (
     <View style={styles.container}>
 <LinearAtom  ai="center"  pv={0}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
@@ -272,7 +284,11 @@ const handleBackPress = () => {
                </ViewAtom>
           </ViewAtom>
                <TextAtom text={`${user.firstName} `} f="Poppins"s={SIZES.h5} w={"500"}  c={COLORS.gray4} />
+<<<<<<< HEAD
+               <TextAtom text={`${user.StudentProgram} `} f="Poppins"s={SIZES.base} w={"500"}  c={COLORS.gray4} />
+=======
                <TextAtom text={`${program.programName} `} f="Poppins"s={SIZES.base} w={"500"}  c={COLORS.gray4} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
              
          
           </AnimatedCard>
@@ -283,7 +299,11 @@ const handleBackPress = () => {
             <AnimatedCard style={[{               
             },aiAnimation3 ]}>
                <ViewAtom  fd="row" jc="space-between" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
+<<<<<<< HEAD
+                <Image source={require('../assets/usericon.jpg')} style={[styles.Icon]} />
+=======
                 <Image source={require('../assets/user.jpg')} style={[styles.Icon]} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
               <ViewAtom  fd="column" jc="space-between" ai="flex-start" w="70%" bg="transparent" pv={1} br={0} mv={0} mh={0}>
               <TextAtom text={`${user.firstName} ${user.lastName}`} f="Poppins"s={SIZES.h3} w={"500"}  ls={-1}c={COLORS.white} />
               <ViewAtom  fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={1} br={0} mv={0} mh={0}>

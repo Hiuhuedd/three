@@ -14,7 +14,16 @@ import { ProgramsArray } from '../constants/content/programs';
 import Carousel from 'react-native-reanimated-carousel';
 import { useRef } from 'react';
 import { BackHandler } from 'react-native';
+<<<<<<< HEAD
+import Discord from './Discord';
+import Resources from '../components/Molecules/Resources';
+import { ScrollView } from 'react-native';
 
+import V2Modal from '../components/Molecules/V2Modal';
+import Modal from "react-native-modal";
+=======
+
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 const Program = ({navigation}) => {
            //=================backpress====================
 const handleBackPress = () => {
@@ -29,6 +38,30 @@ const handleBackPress = () => {
     };
   }, []);
   //=================backpress====================
+<<<<<<< HEAD
+  const programItems=[ <Resources navigation={navigation}/>  , <Discord navigation={navigation} />]
+  const [program,setProgramName]=useState("")
+
+    const theme=useSelector(state => state.userReducer.theme);
+    const user=useSelector(state => state.userReducer.user);
+   const [checking,setchecking]=useState(true)
+   useEffect(() => {
+    setProgramName(user.StudentProgram)
+    setTimeout(() => {
+    setchecking(false)
+  }, 5000);
+  }, []);
+    // const ProgramView=({item, navigation})=>{
+    //   return(
+    //     <View style={{ flex: 1,}}>
+
+    //     {/* <TextAtom text={item} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} /> */}
+    //     {/* <TextAtom text={program.programName} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-2}c={COLORS.white} /> */}
+    //     </View>
+
+    //   )
+    // }
+=======
   const programItems=["Guide","Resources","Resume"]
   const [program,setProgramName]=useState("")
   function getProgramByCode(programCode) {
@@ -57,6 +90,7 @@ const handleBackPress = () => {
              </ViewAtom>
       )
     }
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     const ref = useRef(null);
     const [activeIndex,setActiveIndex]=useState(0)
     useEffect(() => {
@@ -64,6 +98,25 @@ const handleBackPress = () => {
     }, [activeIndex]);
   return (
     <View style={styles.container}>
+<<<<<<< HEAD
+                 <LinearAtom   pv={5}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
+            
+             
+
+
+
+          <ScrollView contentContainerStyle={styles.scrollViewContent}>
+  
+      <Resources navigation={navigation}/> 
+  </ScrollView>
+  <Modal isVisible={true}>
+        <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
+           <V2Modal navigation={navigation} screen={"Home"} feature={'360 Program resources'} date={'9th September 2023.'} text='360 Program resources feature is scheduled for release on '/>
+   
+              
+         </ViewAtom>
+      </Modal>
+=======
                  <LinearAtom   pv={5}  ph={20} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.black,COLORS.dark]} >
                 <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>
      
@@ -84,6 +137,7 @@ const handleBackPress = () => {
         }}
         renderItem={({ item: item }) => <ProgramView item={item}  navigation={navigation} />}
       />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         </LinearAtom>  
             
   <BottomTabs navigation={navigation} theme={COLORS.primary} />
@@ -99,7 +153,13 @@ const styles = StyleSheet.create({
     height:SIZES.height,
     paddingTop:0,
   },
+<<<<<<< HEAD
+  scrollViewContent: {
+    flexGrow: 1,
+  },
+=======
  
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   pinDot: {
     width: SIZES.h3,
     height: SIZES.h3,
@@ -129,6 +189,8 @@ const styles = StyleSheet.create({
 
 export default Program;
 
+<<<<<<< HEAD
+=======
 // import React, { useState,useEffect } from 'react';
 // import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 // import { COLORS, SIZES } from '../constants/theme';
@@ -532,4 +594,5 @@ export default Program;
 
 // export default Me;
 
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 

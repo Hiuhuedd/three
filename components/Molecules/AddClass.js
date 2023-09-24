@@ -8,6 +8,73 @@ import { Icon } from 'react-native-elements';
 import MyInput from '../Atoms/MyInput';
 import { RadioButton } from 'react-native-paper';
 import CardAtom from '../Atoms/CardAtom';
+<<<<<<< HEAD
+import { ProgramsArray, UnitsArray } from '../../constants/content/programs';
+import PopUp2 from './PopUp2';
+import { getFirestore, collection, setDoc, doc } from 'firebase/firestore';
+import { useSelector } from 'react-redux';
+
+const {COLORS, SIZES, FONTS}=appTheme
+const AddClass= React.forwardRef(({slot,handleAddClass,handleUpdateTimetable }, ref) => {
+  const locationArr = [
+      { location: "Science Complex", longitude: 123.456, latitude: 78.901 },
+      { location: "SZ39", longitude: 234.567, latitude: 89.012 },
+      { location: "OLM", longitude: 345.678, latitude: 90.123 },
+      { location: "Education", longitude: 456.789, latitude: 12.345 },
+      { location: "Economics", longitude: 567.890, latitude: 23.456 },
+      { location: "SOM", longitude: 678.901, latitude: 34.567 },
+    ];
+
+   const a_units=useSelector(state => state.userReducer.units);
+    
+    
+    
+    
+    
+    const [ClassObj, setClassObj]=useState({})
+ const handleSetLocation=(f)=>{
+      setlocation(f)
+}
+  
+  const [Search, setSearch] = React.useState(false);
+  const [broadcast, setValue] = React.useState(true);
+  const [location, setlocation] = React.useState(locationArr[0].location);
+  const [ClassName, setClassName] = React.useState('');
+  const [NewClassName, setNewClassName] = React.useState('');
+  const [UnitCode, setUnitCode] = React.useState('');
+  const [professor, setprofessor] = React.useState('');
+  const [Loading, setLoading] = React.useState(false);
+  
+
+  useEffect(() => {
+    if (UnitCode.length > 1) setSearch(true);
+    if (UnitCode.length === 6) findUnitByCode(UnitCode.toUpperCase());
+  }, [UnitCode]);
+
+  function findUnitByCode(unitCode) {
+    console.log(a_units);
+
+      const unit = a_units.find(unit => unit.UnitCode.toUpperCase() === unitCode);
+      if (unit) {
+      if (unit?.NewClassName!=='') {
+       console.log(unit)
+        setSearch(false);
+        setNewClassName(unit?.NewClassName);
+        setClassName(unit?.NewClassName);
+      } else {
+        setNewClassName('');
+        setClassName(null);
+        setSearch(false);
+      }
+    
+  }    else {
+    setNewClassName('');
+    setClassName(null);
+    setSearch(false);
+  }
+  }
+
+=======
 import PopUp from './PopUp';
 import { ProgramsArray } from '../../constants/content/programs';
 import PopUp2 from './PopUp2';
@@ -58,10 +125,20 @@ const AddClass= React.forwardRef(({slot,handleAddClass,handleUpdateTimetable }, 
   const [UnitCode, setUnitCode] = React.useState('');
   const [professor, setprofessor] = React.useState('');
   const [Loading, setLoading] = React.useState(false);
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
   useEffect(() => {
     setClassObj({UnitCode,ClassName,location,broadcast,professor,slot})
 }, [UnitCode,ClassName,location,broadcast,professor])
+<<<<<<< HEAD
+
+  const handleUpdate=  async()=>{
+
+    setLoading(true)
+    const slotObj={
+      unitCode:UnitCode,
+      unitName:ClassName?ClassName:NewClassName,
+=======
   useEffect(() => {
     if(UnitCode.length===6){
       findUnitByCode(UnitCode.toUpperCase())
@@ -73,15 +150,53 @@ const AddClass= React.forwardRef(({slot,handleAddClass,handleUpdateTimetable }, 
     const slotObj={
       unitCode:UnitCode,
       unitName:ClassName,
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       start:slot.start,
       end: slot.end,
       professor: professor,
       index:slot.index,
+<<<<<<< HEAD
+      location:location,
+      broadcast:broadcast
+=======
       location:location
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     }
     const slotDay=slot.day
     const slotHr=slot.index
   const updated=await handleUpdateTimetable(slotDay,slotHr,slotObj)
+<<<<<<< HEAD
+ 
+   
+
+   // Update Firestore document
+   try {
+    const db = getFirestore();
+    const collectionRef = collection(db, 'units'); // Collection reference
+    const documentRef = doc(collectionRef, UnitCode); // Document reference
+
+    // const usersCollection = collection(db, 'users'); // Replace 'users' with the name of your Firestore collection
+
+    // Add the user data to Firestore using the set() function to ensure the data is stored with the predetermined user ID
+    await setDoc(documentRef, { UnitCode,NewClassName });
+
+    if (updated) {
+      setTimeout(() => {
+        handleAddClass()
+        setLoading(false)
+      }, 500);
+    }
+
+  } catch (error) {
+    setLoading(false)
+
+    // Handle any errors that occur during the upload process
+    console.error('Error uploading user data:', error);
+  }
+};
+
+  
+=======
   if (updated) {
     setTimeout(() => {
       handleAddClass()
@@ -91,6 +206,7 @@ const AddClass= React.forwardRef(({slot,handleAddClass,handleUpdateTimetable }, 
    
 
   }
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
       
   return (
@@ -124,9 +240,29 @@ const AddClass= React.forwardRef(({slot,handleAddClass,handleUpdateTimetable }, 
           </ViewAtom>
 
             <TextAtom text="Unit Code" c={COLORS.white} f="Poppins" s={SIZES.h5} w="500"/>
+<<<<<<< HEAD
+            <MyInput editable={true} keyboardType="default" secureTextEntry={false} style={styles.input1} placeholder={`UCU100`} maxLength={6} setisUpdated={(ex)=>{setUnitCode(ex)}} index={0} />
+
+       {
+        Search?<ActivityIndicator size={10} color={COLORS.gold} style={{alignSelf:"flex-start", marginLeft:3}} />:
+       <>
+      { ClassName===null? <>
+       <TextAtom text="Unit Name" c={COLORS.white} f="Poppins" s={SIZES.h5} w="500"/>
+            <MyInput editable={true} keyboardType="default" secureTextEntry={false} style={styles.input} placeholder={`Communication Skills`} maxLength={40} setisUpdated={(ex)=>{setNewClassName(ex)}} index={0} />
+       </>
+       :<>
+              <TextAtom text={ClassName} c={COLORS.gold} f="Poppins" s={SIZES.base} w="500"/>
+
+       </>}
+       </>
+            }
+         <TextAtom text="Unit Professor" c={COLORS.white} f="Poppins" s={SIZES.h5} w="500"/>
+            <MyInput editable={true} keyboardType="default" secureTextEntry={false} style={styles.input} placeholder={`Dr. Hiuhu`} maxLength={40} setisUpdated={(ex)=>{setprofessor(ex)}} index={0} />
+=======
             <MyInput editable={true} keyboardType="default" secureTextEntry={false} style={styles.input} placeholder={`ECU100`} maxLength={6} setisUpdated={(ex)=>{setUnitCode(ex)}} index={0} />
          <TextAtom text="Unit Professor" c={COLORS.white} f="Poppins" s={SIZES.h5} w="500"/>
             <MyInput editable={true} keyboardType="default" secureTextEntry={false} style={styles.input} placeholder={`Dr. Karen`} maxLength={40} setisUpdated={(ex)=>{setprofessor(ex)}} index={0} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
             <TextAtom text="Should Your classmates see this update?" c={COLORS.gray} f="Poppins" s={SIZES.base} w="500"/>
             <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={broadcast}>
@@ -186,6 +322,20 @@ const AddClass= React.forwardRef(({slot,handleAddClass,handleUpdateTimetable }, 
 
 export default AddClass
 const styles = StyleSheet.create({
+<<<<<<< HEAD
+    input1: {
+      height: 45,
+      borderWidth: 1,
+      paddingHorizontal: 10,
+      marginBottom: 10,
+      width:"100%",
+      color:COLORS.white,
+      borderColor: COLORS.white,
+      borderRadius: 5,
+      textTransform:"uppercase"
+      },
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     input: {
       height: 45,
       borderWidth: 1,

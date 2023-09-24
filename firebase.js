@@ -16,4 +16,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const AUTH = getAuth(app);
+<<<<<<< HEAD
 export const FIRESTORE = getFirestore(app);
+
+
+          // "current_key": "AIzaSyB66XLCNEXipK4XLoj786iXNqfCIZm94UE"
+        //   "current_key": "AIzaSyBURRB5X7MB1DLUp36w1NCoYdX0BKfyYB4"
+=======
+export const FIRESTORE = getFirestore(app);
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4

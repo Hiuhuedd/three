@@ -22,10 +22,20 @@
     "expo-app-loading": "^2.1.1",
     "expo-av": "~13.2.1",
     "expo-barcode-scanner": "^12.3.2",
+<<<<<<< HEAD
+    "expo-device": "^5.4.0",
+    "expo-font": "^11.1.1",
+    "expo-image-picker": "^14.1.1",
+    "expo-linear-gradient": "~12.1.2",
+    "expo-linking": "^5.0.2",
+    "expo-location": "^15.1.1",
+    "expo-notifications": "^0.20.1",
+=======
     "expo-font": "^11.1.1",
     "expo-image-picker": "^14.1.1",
     "expo-linear-gradient": "~12.1.2",
     "expo-location": "^15.1.1",
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     "expo-permissions": "^14.1.1",
     "expo-secure-store": "^12.1.1",
     "expo-speech": "~11.1.1",
@@ -45,6 +55,10 @@
     "react-native-linear-gradient": "^2.7.3",
     "react-native-maps": "1.3.2",
     "react-native-maps-directions": "^1.9.0",
+<<<<<<< HEAD
+    "react-native-modal": "^13.0.1",
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     "react-native-paper": "^5.8.0",
     "react-native-qrcode-svg": "^6.2.0",
     "react-native-raw-bottom-sheet": "^2.2.0",

@@ -6,6 +6,21 @@ import TextAtom from '../Atoms/TextAtom';
 import { COLORS, SIZES } from '../../constants/theme';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
 import CardAtom from '../Atoms/CardAtom';
+<<<<<<< HEAD
+import NetworkItemSkeleton from './NetworkItemSkeleton';
+
+export default Networks = ({ navigation ,arr}) => {
+
+    return (
+        <>
+         {arr.length === 0 ?
+         
+         <>
+          <NetworkItemSkeleton />
+        
+         </>:(
+   arr.map((network)=>{
+=======
 
 export default Networks = ({ navigation }) => {
  const NetworksArr = [
@@ -96,14 +111,21 @@ export default Networks = ({ navigation }) => {
     return (
         <>
   {  NetworksArr.map((network)=>{
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     return(
 <TouchableOpacity onPress={()=>{navigation.navigate("Events",{event:network})}}>
 
    <ViewAtom fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
       <ViewAtom fd="row" jc="flex-start" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
+<<<<<<< HEAD
+      <CardAtom fd="row"  jc="space-between" ai="flex-start" pv={0} ph={0}  br={0} mv={0} mh={0}   el={3} sh='#525252' >
+
+      <Image source={network.img!==''?{ uri: network.img }:require("../../assets/events.png")} style={styles.Icon}  resizeMode="contain"/>
+=======
       <CardAtom fd="row"  jc="space-between" ai="flex-start" pv={0} ph={0} bg={COLORS.black} br={15} mv={0} mh={0}   el={3} sh='#525252' >
 
       <Image source={{ uri: network.img }} style={styles.Icon}  resizeMode="contain"/>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
         </CardAtom>
@@ -111,7 +133,11 @@ export default Networks = ({ navigation }) => {
      <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={5}>
    
                  <TextAtom text={`${network.title}`} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
+<<<<<<< HEAD
+                 <TextAtom text={` ${network.date} `} c={COLORS.gray4} f="Roboto" s={SIZES.base} w="500" />
+=======
                  <TextAtom text={` ${network.date.date}th ${network.date.month}`} c={COLORS.gray4} f="Roboto" s={SIZES.base} w="500" />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
                  {/* <TextAtom text={` Two Rivers`} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" /> */}
 
                  <ViewAtom  ai="center" ph={3}pv={2}  bg={COLORS.black}  br={5} mv={2} mh={0}>
@@ -129,7 +155,12 @@ export default Networks = ({ navigation }) => {
     )
 
   }) 
+<<<<<<< HEAD
+         
+         )}
+=======
          }
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       
         </>
    
@@ -139,7 +170,11 @@ export default Networks = ({ navigation }) => {
     Icon:{
       width:60,
       height: 60,
+<<<<<<< HEAD
+      borderRadius:2,
+=======
       borderRadius:5,
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
       
     },

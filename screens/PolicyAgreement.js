@@ -38,6 +38,16 @@ const handleBackPress = () => {
   const handleCheckboxToggle = () => {
     setChecked(!checked);
   };
+<<<<<<< HEAD
+  const showAlert = (type, title, msg) => {
+    Toast.show({
+      type: type,
+      title: title,
+      textBody: msg,
+    });
+  };
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   return (
     <View style={styles.container}>
         
@@ -85,7 +95,11 @@ const handleBackPress = () => {
 
  
   </ScrollView>
+<<<<<<< HEAD
+  <Button text={"Continue"}width={"90%"}bg={checked ? COLORS.green : COLORS.gray2}  screen={''} onMethodSelected={()=>{navigation.replace(checked ? "Walkthrough" : "PolicyAgreement");  showAlert(ALERT_TYPE.WARNING, "", 'Accept terms to proceed!');}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />
+=======
   <Button text={"Continue"}width={"90%"}bg={checked ? COLORS.green : COLORS.gray2}  screen={''} onMethodSelected={()=>{navigation.replace(checked ? "Walkthrough" : "PolicyAgreement")}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       
       
   {/* {checking?             

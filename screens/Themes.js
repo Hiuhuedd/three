@@ -11,6 +11,11 @@ import { ActivityIndicator } from 'react-native-paper';
 import LinearAtom from '../components/Atoms/LinearAtom';
 import BottomTabs from '../components/Molecules/BottomTabs';
 import CardAtom from '../components/Atoms/CardAtom';
+<<<<<<< HEAD
+import { BackHandler } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 const Themes = ({navigation}) => {
      //=================backpress====================
@@ -38,7 +43,11 @@ const handleBackPress = () => {
     {color:COLORS.amber,name:"Amber"},
     // {color:COLORS.black,name:"Charcoal"},
     {color:COLORS.chocolate,name:"Chocolate"},
+<<<<<<< HEAD
+    // {color:COLORS.dark,name:"Dark"},
+=======
     {color:COLORS.dark,name:"Dark"},
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     {color:COLORS.gold,name:"Gold"},
     {color:COLORS.green,name:"Jungle"},
     {color:COLORS.green2,name:"Lime"},
@@ -52,7 +61,11 @@ const handleBackPress = () => {
     {color:COLORS.pink,name:"Barbie"},
     {color:COLORS.primary,name:"Atlantic"},
     {color:COLORS.rose,name:"Rose"},
+<<<<<<< HEAD
+    // {color:COLORS.white,name:"Paper"},
+=======
     {color:COLORS.white,name:"Paper"},
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     {color:COLORS.fuschia,name:"Fuschia"},
    
    ]
@@ -62,7 +75,13 @@ const handleBackPress = () => {
         type: "MY_THEME",
         payload:item
       });
+<<<<<<< HEAD
+    AsyncStorage.setItem('theme', JSON.stringify(item)).then(res => {
+      navigation.navigate("Me")
+    });
+=======
     navigation.navigate("Me")
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
    }
    useEffect(() => {
 
@@ -73,12 +92,20 @@ const handleBackPress = () => {
         style={[styles.themeItem, {  }]}
         onPress={() => {handleSetTheme(item)}}
       >
+<<<<<<< HEAD
+        <CardAtom fd="row"  jc="space-between" ai="flex-start" pv={15} ph={15} bg={COLORS.black} br={15} mv={0} mh={0}   el={3} sh='#525252' >
+=======
         <CardAtom fd="row"  jc="space-between" ai="flex-start" pv={15} ph={15} bg={COLORS.black} br={15} mv={2} mh={0}   el={3} sh='#525252' >
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
           
           <Icon name='color-palette' type="ionicon" color={item.color} size={SIZES.h2} onPress={() => {handleSetTheme(item)}} />
     
             </CardAtom>
+<<<<<<< HEAD
+            <TextAtom text={item.name} f="Poppins"s={SIZES.h6} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
+=======
             <TextAtom text={item.name} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
       </TouchableOpacity>
     );
@@ -91,9 +118,15 @@ const handleBackPress = () => {
       </ViewAtom>
   <ViewAtom fd="row" width="100%" ph={10} pv={10} jc="space-between" >
         <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Me')}} />
+<<<<<<< HEAD
+      <ViewAtom fd="row"  ph={7} pv={5}  br={15} >
+        <TouchableOpacity onPress={()=>{}}>
+          <TextAtom text={""} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
+=======
       <ViewAtom fd="row"  ph={7} pv={5} bg={COLORS.dark} br={15} >
         <TouchableOpacity onPress={()=>{}}>
           <TextAtom text={"Create"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         </TouchableOpacity>
       </ViewAtom>
 </ViewAtom>

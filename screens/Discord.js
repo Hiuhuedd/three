@@ -1,10 +1,10 @@
 import React, { useState,useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, ScrollView ,TextInput,Image} from 'react-native';
-import { COLORS, SIZES } from '../constants/theme';
+import { COLORS, SIZES } from '../constants/theme'
 import TextAtom from '../components/Atoms/TextAtom';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
 import ViewAtom from '../components/Atoms/ViewAtom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { Button } from '../components/Atoms/Button';
 import { ActivityIndicator } from 'react-native-paper';
@@ -15,12 +15,11 @@ import Slider from '@react-native-community/slider';
 import moment from 'moment';
 import { Audio } from 'expo-av';
 import { BackHandler } from 'react-native';
-<<<<<<< HEAD
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import V2Modal from '../components/Molecules/V2Modal';
 import Modal from "react-native-modal";
-=======
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
-const Chat = ({navigation}) => {
+const Discord = ({navigation}) => {
   //=================backpress====================
 const handleBackPress = () => {
  navigation.navigate("Home")
@@ -36,62 +35,74 @@ useEffect(() => {
 //=================backpress====================
     const user=useSelector(state => state.userReducer.user);
     const theme=useSelector(state => state.userReducer.theme);
+    const discord=useSelector(state => state.userReducer.discord);
    const [checking,setchecking]=useState(true)
    const [isPlaying, setIsPlaying] = useState(false);
 
+
+ 
    useEffect(() => {
-  setTimeout(() => {
+    if(discord.length>3){
+      setChatMessages(discord);
+    }
     setchecking(false)
-  }, 5000);
+
   }, []);
+  const dispatch = useDispatch();
+
   const handleSend = () => {
     if (inputText.trim() !== '') {
       const newMessage = {
-        userId: 'user1',
-        name: 'John',
+        userId: user.StudentId,
+        name: user.firstName,
         message: inputText,
-        imageUrl: 'https://example.com/user1.jpg',
+        imageUrl: require('../assets/usericon.jpg'),
         time: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }),
       };
+      const msgArr=[...chatMessages, newMessage]
+      dispatch({
+        type: "DISCORD",
+        payload: msgArr
+      });
+
+      AsyncStorage.setItem('Discord', JSON.stringify(msgArr)).then(res => {
+alert("Your message was saved but not sent. Student discord feature is available starting September 9th 2023")      });
 
       setChatMessages([...chatMessages, newMessage]);
+
       setInputText('');
     }
   };
 
   const [inputText, setInputText] = useState('');
   const [chatMessages, setChatMessages] = useState([
+   
     {
       userId: 'user2',
-      name: 'John',
-      message: `Hi ${user.firstName}, ${text}`,
-      imageUrl: 'https://example.com/user1.jpg',
+      name: '360',
+      message: `Hi ${user.firstName}, the -360 student discord- allows you to share your experiences as a student while learning from others in the campus community  `,
+      imageUrl: require('../assets/360.png'),
       time: '12:01 PM',
     },
-<<<<<<< HEAD
-
-=======
     {
       userId: 'user2',
-      name: 'Jane',
-      message: `Hi ${user.firstName}!`,
-      imageUrl: 'https://example.com/user2.jpg',
+      name: 'Michael',
+      message: `Hi everyone, how can i make passive income as a student? `,
+      imageUrl: require('../assets/user.jpg'),
       time: '12:03 PM',
     },
     {
       userId: 'user2',
       name: 'Jane',
-      message: 'How are you?',
-      imageUrl: 'https://example.com/user2.jpg',
+      message: 'Hi Michael, there are several ways you can earn money in school without compromising your studies, try peer-aid or the invites program from 360 or start online jobs like writing, copywriting or design. these are easy to learn skills that will pay you ',
+      imageUrl: require('../assets/bella.jpg'),
       time: '12:04 PM',
     },
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
-    
     // Add more messages as needed
   ])
   const styles = StyleSheet.create({
     container: {
-      flexGrow: 1,
+      // flexGrow: 1,
       paddingVertical: 16,
       paddingHorizontal: 12,
     },
@@ -104,11 +115,11 @@ useEffect(() => {
     },
     sentMessageContainer: {
       alignSelf: 'flex-end',
-      backgroundColor: COLORS.gray4,
+      backgroundColor: COLORS.black,
     },
     receivedMessageContainer: {
       alignSelf: 'flex-start',
-      backgroundColor: '#F3F3F3',
+      backgroundColor: COLORS.black,
     },
     messageText: {
       fontSize: 16,
@@ -120,7 +131,7 @@ useEffect(() => {
       // borderColor: '#DADADA',
       paddingHorizontal: 12,
       paddingVertical: 8,
-      marginBottom:5
+      marginBottom:5,
     },
     input: {
       flex: 1,
@@ -173,68 +184,64 @@ useEffect(() => {
 
   useEffect(() => {
     // Load the audio file
-    async function loadAudio() {
-      try {
-        const { sound } = await Audio.Sound.createAsync(
-          require('../assets/audio.mp3')
-        );
-        setAudioObject(sound);
-      } catch (error) {
-        console.error('Error loading audio:', error);
-      }
-    }
-    loadAudio();
+    // async function loadAudio() {
+    //   try {
+    //     const { sound } = await Audio.Sound.createAsync(
+    //       require('../assets/audio.mp3')
+    //     );
+    //     setAudioObject(sound);
+    //   } catch (error) {
+    //     console.error('Error loading audio:', error);
+    //   }
+    // }
+    // loadAudio();
   }, []);
 
   
 
-const handlePlayPause = async () => {
-    try {
-      if (!audioObject) return;
+// const handlePlayPause = async () => {
+//     try {
+//       if (!audioObject) return;
 
-      if (isPlaying) {
-        await audioObject.pauseAsync();
-      } else {
-        await audioObject.playAsync();
-      }
-      setIsPlaying(!isPlaying);
-    } catch (error) {
-      console.error('Error handling play/pause:', error);
-    }
-  };
+//       if (isPlaying) {
+//         await audioObject.pauseAsync();
+//       } else {
+//         await audioObject.playAsync();
+//       }
+//       setIsPlaying(!isPlaying);
+//     } catch (error) {
+//       console.error('Error handling play/pause:', error);
+//     }
+//   };
 //=======================================================end slider======================
 
 
   return (
-    <View style={{ flexGrow: 1,}}>
-                <LinearAtom    pv={5}  ph={10} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.black,COLORS.dark]} >
+    <View style={{marginBottom:10, flexGrow: 1, }}>
+    <LinearAtom    pv={0}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.gray2,COLORS.dark]} >
+
+  <ViewAtom fd="column" jc="flex-start" ai="center" w="100%" bg="transparent" ph={10} br={0} mh={0}>
   <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
      
 </ViewAtom>
-<<<<<<< HEAD
-  <ViewAtom fd="column" jc="center" ai="center" w="100%" bg="transparent" ph={10} br={0} mh={0}>
+  <TextAtom text={"Kenyatta University"} f="Poppins"s={SIZES.h4} w={"500"} ta="left" ls={-1}c={COLORS.white} />
+  <TextAtom text={"Student Discord"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
+  <TextAtom text={'v-1.1.02'} f="Poppins"s={SIZES.base} w={"500"} ta="left" ls={0}c={COLORS.white} />
      
-  <TextAtom text={"Chat 360"} f="Poppins"s={SIZES.h1} w={"500"} ta="center" ls={-2}c={COLORS.white} />
-  <TextAtom text={"360 assistant"} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={-2}c={COLORS.white} />
-=======
-  <ViewAtom fd="row" jc="flex-start" ai="center" w="100%" bg="transparent" ph={10} br={0} mh={0}>
-     
-  <TextAtom text={"360.ai"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 </ViewAtom>
   <ScrollView contentContainerStyle={styles.container}>
 
 {chatMessages.map((message, index) => (
   <>
-  <ViewAtom fd="row" jc={message.userId === 'user1' ? "flex-end":"flex-start"} ai="center" w="100%" bg="transparent" pv={0} br={0} mh={0}>
+  <ViewAtom fd="row" jc={message.userId === user.StudentId ? "flex-end":"flex-start"} ai="center" w="100%" bg="transparent" pv={0} br={0} mh={0}>
   <View style={{position:"relative"}}>
-  <Image source={message.userId === 'user2' ?require('../assets/bella.jpg'):require('../assets/user.jpg')} style={[styles.Icon]} />
+  <Image source={message.imageUrl} style={[styles.Icon]} />
   <View style={{position:"absolute",right:13,bottom:15}}>
   <ViewAtom jc="center" ai="center"  bg={COLORS.rose} pv={3} ph={3} br={50} mh={0}></ViewAtom>
   </View>
   </View>
   <ViewAtom jc="flex-start" ai="flex-start" mh={10}> 
-     <TextAtom text={message.userId === 'user2' ?"Bella   ":"You  "} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={-1}c={COLORS.white} />
+     <TextAtom text={message.userId === user.StudentId ?message.name:message.name} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={-1}c={COLORS.white} />
      <TextAtom text={moment(new Date()).format('h:mm a, DD-MM-YYYY ')} f="Poppins"s={SIZES.base} w={"500"} ta="left" ls={0}c={COLORS.white} />
   
    </ViewAtom>
@@ -243,37 +250,14 @@ const handlePlayPause = async () => {
     key={index}
     style={[
       styles.messageContainer,
-      message.userId === 'user1' ? styles.sentMessageContainer : styles.receivedMessageContainer,
+      message.userId === user.StudentId ? styles.sentMessageContainer : styles.receivedMessageContainer,
     ]}
   >
-<<<<<<< HEAD
-      <TextAtom text={message.message}f="Poppins"s={SIZES.h6+1} w={"500"} ta={message.userId === 'user1' ?"right":"left"} c={COLORS.black} />
-=======
-      <TextAtom text={message.message}f="Poppins"s={SIZES.h5} w={"500"} ta={message.userId === 'user1' ?"right":"left"} c={COLORS.black} />
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
+      <TextAtom text={message.message}f="Poppins"s={SIZES.h6} w={"500"} ta={message.userId === 'user1' ?"right":"left"} c={COLORS.white} />
 
       <View style={styles.slider_view}>
-      {message.userId === 'user1' ?<></> :  <TouchableOpacity onPress={handlePlayPause}>
-        <Icon
-          name={isPlaying ? 'pause' : 'play'}
-          type="ionicon"
-          color={theme.color}
-          size={SIZES.h2}
-        />
-      </TouchableOpacity>}
-      {message.userId === 'user1' ?<></> :  
-                <Slider
-                style={styles.slider_style}
-                minimumValue={0}
-                maximumValue={7}
-                minimumTrackTintColor={theme.color}
-                maximumTrackTintColor={theme.color}
-                thumbTintColor={theme.color}
-                value={sliderValue}
-                onValueChange={{}}
-                onSlidingComplete={{}}
-              />}
-      
+    
+     
 
            
       <TextAtom text={moment(new Date()).format('h:mm a')} f="Poppins"s={SIZES.base} w={"500"} ta="right" ls={0}c={theme.color} />
@@ -282,11 +266,10 @@ const handlePlayPause = async () => {
   </>
 ))}
 
-</ScrollView>
 <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Type your prompt/response..."
+          placeholder="Type your question/response..."
           value={inputText}
           onChangeText={setInputText}
         />
@@ -297,19 +280,17 @@ const handlePlayPause = async () => {
         <Icon name="mic" type="ionicon" color={COLORS.white} size={SIZES.h2}  />
         </TouchableOpacity> */}
       </View>
-<<<<<<< HEAD
-        <Modal isVisible={true}>
+</ScrollView>
+<Modal isVisible={true}>
         <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
-           <V2Modal navigation={navigation} screen={"Home"} feature={'360 assistant'} date={'28th September 2023.'} text='360 assistant feature is scheduled for release on '/>
+           <V2Modal navigation={navigation} date={'28th September 2023.'} screen={"Me"} feature={"Student Discord"} text='Student Discord feature is scheduled for release on '/>
    
               
          </ViewAtom>
       </Modal>
-=======
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
-</LinearAtom>  
+</LinearAtom>
             
-  <BottomTabs navigation={navigation} theme={COLORS.primary} />
+<BottomTabs navigation={navigation} theme={COLORS.primary} />
 
     </View>
   );
@@ -317,5 +298,5 @@ const handlePlayPause = async () => {
 
 
 
-export default Chat;
+export default Discord;
 

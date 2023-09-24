@@ -12,6 +12,11 @@ import CardAtom from '../components/Atoms/CardAtom';
 import { myUnitsInfo } from '../constants/content/unitDetails';
 import { BackHandler } from 'react-native';
 
+<<<<<<< HEAD
+import V2Modal from '../components/Molecules/V2Modal';
+import Modal from "react-native-modal";
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 const UnitDetails = ({navigation,route}) => {
       //=================backpress====================
 const handleBackPress = () => {
@@ -26,7 +31,11 @@ const handleBackPress = () => {
     };
   }, []);
   //=================backpress====================
+<<<<<<< HEAD
+    const { slot,day,del,handleAdd } = route.params;
+=======
     const { slot,day } = route.params;
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     const user=useSelector(state => state.userReducer.user);
     const theme=useSelector(state => state.userReducer.theme);
    const [unitObj,setunitObj]=useState({})
@@ -42,6 +51,29 @@ const handleBackPress = () => {
     return null; // Unit not found
   }
   
+<<<<<<< HEAD
+  const handleDeleteClass=async()=>{
+    const slotObj={
+      unitCode:null,
+      unitName:null,
+      start:slot.start,
+      end: slot.end,
+      professor: null,
+      index:slot.index,
+      location:null,
+      broadcast:false
+    }
+    const slotDay=slot.day
+    const slotHr=slot.index
+  const updated=await del(slotDay,slotHr,slotObj)
+   if (updated) {
+     setTimeout(() => {
+      navigation.navigate("Timetable")
+    }, 2000);
+   }
+  }
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   
   useEffect(() => {
     findUnitInfo(slot.unitName)
@@ -58,10 +90,18 @@ const handleBackPress = () => {
      
 </ViewAtom> */}
   <ViewAtom fd="row"  jc="space-between" ai="center" bg="transparent"  pv={5} br={0} mv={0} mh={0}>
+<<<<<<< HEAD
+        <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {  navigation.navigate("Timetable")
+}} />
+      <ViewAtom fd="row"  ph={7} pv={5} bg={theme.color} br={15} >
+        <TouchableOpacity onPress={()=>{handleDeleteClass()}}>
+          <TextAtom text={"Remove Class"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
+=======
         <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {}} />
       <ViewAtom fd="row"  ph={7} pv={5} bg={theme.color} br={15} >
         <TouchableOpacity onPress={()=>{}}>
           <TextAtom text={"Edit"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         </TouchableOpacity>
       </ViewAtom>
       </ViewAtom>
@@ -85,13 +125,24 @@ const handleBackPress = () => {
 
 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={15} br={0} mv={0} mh={0}>
 
+<<<<<<< HEAD
+<TextAtom text={`About ${slot.unitName}`} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
+<ActivityIndicator size={10} color={COLORS.amber} />
+
+<TextAtom text={unitObj.about?unitObj.about:"Waiting for 360 ai.."} c={COLORS.gray2} f="Poppins" s={SIZES.h5} w="500" />
+=======
 <TextAtom text={`About`} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <TextAtom text={`${unitObj.about}`} c={COLORS.gray2} f="Poppins" s={SIZES.h5} w="500" />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 </ViewAtom>
 <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={10} br={0} mv={0} mh={0}>
 
 <TextAtom text={`Relevance`} c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
+<<<<<<< HEAD
+<TextAtom text={unitObj.about?unitObj.about:"Waiting for 360 ai.."} c={COLORS.gray2} ta={"center"} f="Poppins" s={SIZES.h5} w="500" />
+=======
 <TextAtom text={`${unitObj.why}`} c={COLORS.gray2} f="Poppins" s={SIZES.h5} w="500" />
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 </ViewAtom>
 <ViewAtom fd="column" jc="flex-start" ai="flex-start" w={"100%"} bg="transparent" pv={10} br={0} mv={0} mh={0}>
 
@@ -130,7 +181,11 @@ const handleBackPress = () => {
 
 </ViewAtom>
 </ViewAtom>
+<<<<<<< HEAD
+<ViewAtom fd="column" jc="center" ai="center" w={"100%"} bg="transparent" pv={10} br={0} mv={0} mh={0}>
+=======
 <ViewAtom fd="column" jc="flex-start" ai="flex-start" w={"100%"} bg="transparent" pv={10} br={0} mv={0} mh={0}>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 <TextAtom text={`Peer Aid Community`}  c={COLORS.white} f="Poppins" s={SIZES.h3} w="500" />
 <ViewAtom fd="column" jc="center" ai="center"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
@@ -141,6 +196,16 @@ const handleBackPress = () => {
 
 </ViewAtom>
 </ViewAtom>
+<<<<<<< HEAD
+<Modal isVisible={false}>
+        <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
+           <V2Modal navigation={navigation} feature={'360 assistant'} screen={"Timetable"} date={'28th September 2023'} text='Class descriptions & Peer aid community  features are scheduled for release on '/>
+   
+              
+         </ViewAtom>
+      </Modal>
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     </View>
   );
 };

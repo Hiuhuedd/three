@@ -25,6 +25,10 @@ import AiModels from "./screens/AiModels";
 import PolicyAgreement from "./screens/PolicyAgreement";
 import Walkthrough from "./screens/Walkthrough";
 import SignIn from "./screens/SignIn";
+<<<<<<< HEAD
+import Discord from "./screens/Discord";
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
 //Screens
@@ -62,6 +66,10 @@ export default function RootNavigation() {
           <Stack.Screen name="PolicyAgreement" component={PolicyAgreement} /> 
           <Stack.Screen name="Walkthrough" component={Walkthrough} /> 
           <Stack.Screen name="SignIn" component={SignIn} /> 
+<<<<<<< HEAD
+          <Stack.Screen name="Discord" component={Discord} /> 
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
           
         </Stack.Navigator>
       

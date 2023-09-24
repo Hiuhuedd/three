@@ -18,7 +18,23 @@ const LATITUDE_DELTA = 0.007;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const Navigate = ({ navigation}) => {
+<<<<<<< HEAD
+    useEffect(() => {
+        getUserLocation().then((res)=>{
+            if(res){
+             console.log(res);
+              dispatch({
+                type: "ON_UPDATE_LOCATION",
+                payload: {
+                    location: res.item,
+                    coords:res.coords,
+                },
+              });
+              }});
+      }, []);
+=======
     
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     const dispatch = useDispatch();
     //==============================BOTTOM SHEET============================
     const closeSheet = (t) => {
@@ -65,6 +81,14 @@ useEffect(() => {
         
     }
 }, [])
+<<<<<<< HEAD
+//==============================Search============================
+
+const [searchQuery, setSearchQuery] = useState('');
+
+
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 //==============================MAP STATE============================
 
         const { latitude, longitude} = location.coords;
@@ -136,7 +160,11 @@ useEffect(() => {
 
           
             <View style={{ flex: 1 }}>
+<<<<<<< HEAD
+                {latitude&&longitude?<MapView
+=======
                 <MapView
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
                     ref={mapRef}
                     customMapStyle={mapStyle}
                     style={StyleSheet.absoluteFill}
@@ -187,7 +215,12 @@ useEffect(() => {
                     }}
                 />
                 )}
+<<<<<<< HEAD
+                </MapView>:<>
+                </>}
+=======
                 </MapView>
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
                 <TouchableOpacity
                     style={{
                         position: 'absolute',
@@ -202,7 +235,35 @@ useEffect(() => {
                
              
             </View> 
+<<<<<<< HEAD
+
+            <View style={styles.containern}>
+      {/* ... (previous code) */}
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search Venue..."
+          value={searchQuery}
+          onChangeText={(text) => setSearchQuery(text)}
+        />
+        <TouchableOpacity
+          style={styles.searchButton}
+          onPress={() => {
+            // Implement your search functionality here
+            // You can use the 'searchQuery' state to perform the search
+            // Update the map markers or take other actions based on search results
+          }}
+        >
+          <Text style={styles.searchButtonText}>Search</Text>
+        </TouchableOpacity>
+      </View>
+      {/* ... (other code) */}
+    </View>
+
+            {/* <SearchVenue onMethodSelected={closeSheet} ref={sheetRef} navigation={navigation}  state={state}/>  */}
+=======
             <SearchVenue onMethodSelected={closeSheet} ref={sheetRef} navigation={navigation}  state={state}/> 
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         </View>
     );  
 };
@@ -211,6 +272,33 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+<<<<<<< HEAD
+    searchContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+      },
+      searchInput: {
+        flex: 1,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 5,
+        padding: 10,
+        marginRight: 10,
+      },
+      searchButton: {
+        backgroundColor: '#007AFF',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+      },
+      searchButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+      },
+=======
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   text:{
 fontWeight:"500",
 color:"#008873",
@@ -235,6 +323,211 @@ fontSize:13
 });
 
 export default Navigate;
+<<<<<<< HEAD
+// const mapStyle = [
+//     {
+//       elementType: 'geometry',
+//       stylers: [
+//         {
+//           color: '#123', // Dark background color
+//         },
+//       ],
+//     },
+//     {
+//       elementType: 'labels.text.fill',
+//       stylers: [
+//         {
+//           color: '#8ec3b9', // Text color
+//         },
+//       ],
+//     },
+//     {
+//       elementType: 'labels.text.stroke',
+//       stylers: [
+//         {
+//           color: '#1a3646', // Text stroke color
+//         },
+//       ],
+//     },
+//     // Add more style rules for other map elements as needed
+//   ];
+  
+const mapStyle = [
+    {
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#000000', // Dark background color
+        },
+        {
+          lightness: 20,
+        },
+      ],
+    },
+    {
+      elementType: 'labels.text.stroke',
+      stylers: [
+        {
+          color: '#000000', // Text stroke color
+        },
+        {
+          weight: 2,
+        },
+      ],
+    },
+    {
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#ffffff', // Text color
+        },
+      ],
+    },
+    {
+      elementType: 'labels.icon',
+      stylers: [
+        {
+          visibility: 'off', // Hide icons
+        },
+      ],
+    },
+    {
+      featureType: 'administrative',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#ffffff', // Administrative text color
+        },
+      ],
+    },
+    {
+      featureType: 'administrative.land_parcel',
+      stylers: [
+        {
+          visibility: 'off', // Hide land parcels
+        },
+      ],
+    },
+    {
+      featureType: 'administrative.neighborhood',
+      stylers: [
+        {
+          visibility: 'off', // Hide neighborhood labels
+        },
+      ],
+    },
+    {
+      featureType: 'poi',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#ffffff', // Points of Interest text color
+        },
+      ],
+    },
+    {
+      featureType: 'poi.park',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#121212', // Parks geometry color
+        },
+      ],
+    },
+    {
+      featureType: 'poi.park',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#ffffff', // Parks text color
+        },
+      ],
+    },
+    {
+      featureType: 'road',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#121212', // Roads geometry color
+        },
+      ],
+    },
+    {
+      featureType: 'road',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#ffffff', // Roads text color
+        },
+      ],
+    },
+    {
+      featureType: 'road.highway',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#121212', // Highways geometry color
+        },
+      ],
+    },
+    {
+      featureType: 'road.highway',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#ffffff', // Highways text color
+        },
+      ],
+    },
+    {
+      featureType: 'road.highway.controlled_access',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#121212', // Controlled access roads geometry color
+        },
+      ],
+    },
+    {
+      featureType: 'road.local',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#ffffff', // Local roads text color
+        },
+      ],
+    },
+    {
+      featureType: 'transit',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#ffffff', // Transit text color
+        },
+      ],
+    },
+    {
+      featureType: 'water',
+      elementType: 'geometry',
+      stylers: [
+        {
+          color: '#000000', // Water geometry color
+        },
+      ],
+    },
+    {
+      featureType: 'water',
+      elementType: 'labels.text.fill',
+      stylers: [
+        {
+          color: '#ffffff', // Water text color
+        },
+      ],
+    },
+  ];
+  
+  
+=======
 
 const mapStyle = [
 {
@@ -409,3 +702,4 @@ color: '#3D3D3D'
 ]
 }
 ];
+>>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4

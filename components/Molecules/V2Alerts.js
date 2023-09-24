@@ -4,38 +4,30 @@ import UserAvatar from 'react-native-user-avatar';
 import ViewAtom from '../Atoms/ViewAtom';
 import TextAtom from '../Atoms/TextAtom';
 import { COLORS, SIZES } from '../../constants/theme';
-<<<<<<< HEAD
 import CardAtom from '../Atoms/CardAtom';
 import { useSelector } from 'react-redux';
+import { Icon } from 'react-native-elements';
 
-export default UpcomingAvatar = ({ event }) => {
-    
+export default V2Alerts = ({text  }) => {
+    const prop={}
   const theme=useSelector(state => state.userReducer.theme);
 
     return (
         <>
-      <CardAtom fd="row" jc="space-between" ai="center" w="100%" pv={5} ph={2} br={0} mv={0} mh={0}  el={1} sh={theme.color}>
-=======
-
-export default UpcomingAvatar = ({ event }) => {
-    
-  console.log(event);
-    return (
-        <>
-      <ViewAtom fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
+      <CardAtom fd="row" jc="space-between" ai="center" w="100%" bg={COLORS.white} pv={5} ph={2} br={5} mv={0} mh={0}  el={3} sh={theme.color}>
       <ViewAtom fd="row" jc="flex-start" ai="center"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
    
        
-     <UserAvatar size={40} style={{width:40,height:40, borderRadius:50}} name={event.unitName?event.unitName.slice(0,1): `P`} bgColor="#000" />
+      <Icon name={"information"} type="ionicon" color={COLORS.rose} size={SIZES.h3} />
+
      <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" ph={5} br={0} mv={0} mh={0}>
    
-                 <TextAtom text={event.unitName?event.unitName: ` Physics for engineers`} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
-                 <TextAtom text={event.unitCode?event.unitCode.toUpperCase():` ETT100`} c={COLORS.gray} f="Roboto" s={SIZES.base} w="500" />
+                 <TextAtom text={ text} c={COLORS.black} f="Roboto" s={SIZES.base} w="500" />
+                 <TextAtom text={ ` V1.1.02 `} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" />
                 
         </ViewAtom>         
          </ViewAtom>
-      <ViewAtom fd="row" jc="flex-start" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
+      {/* <ViewAtom fd="row" jc="flex-start" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
    
        
      <ViewAtom fd="column" jc="flex-start" ai="flex-end"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
@@ -45,12 +37,8 @@ export default UpcomingAvatar = ({ event }) => {
                  <TextAtom text={`  From timetable`} c={COLORS.gray2} f="Roboto" s={SIZES.base} w="500" />
                 </ViewAtom>
                         </ViewAtom>         
-         </ViewAtom>
-<<<<<<< HEAD
+         </ViewAtom> */}
          </CardAtom>
-=======
-         </ViewAtom>
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
      
         </>
    
