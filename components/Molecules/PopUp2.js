@@ -30,10 +30,6 @@ export default PopUp2
 const styles = StyleSheet.create({
     input: {
       // height: 0,
-<<<<<<< HEAD
       width: '10%',
-=======
-      width: '25%',
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     },
   });

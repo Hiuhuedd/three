@@ -1,28 +1,16 @@
 {
   "expo": {
-<<<<<<< HEAD
     "name": "360",
     "slug": "student",
     "version": "2.0.0",
     "scheme": "com.threesixty.student",
-=======
-    "name": "360 student",
-    "slug": "360Student",
-    "version": "1.0.0",
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     "orientation": "portrait",
     "icon": "./assets/360.png",
     "userInterfaceStyle": "light",
     "splash": {
-<<<<<<< HEAD
-      "image": "",
+      "image": "./assets/360splash2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
-=======
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#000000"
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     },
     "assetBundlePatterns": [
       "**/*"
@@ -31,7 +19,6 @@
       "supportsTablet": true
     },
     "android": {
-<<<<<<< HEAD
       "versionCode":2,
       "package": "com.threesixty.student",
       "adaptiveIcon": {
@@ -44,24 +31,12 @@
       "color": "#111111" 
     },
     
-=======
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/360png.png",
-        "backgroundColor": "#000000"
-      },
-      "package": "hiuhu.netlify.app"
-    },
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     "web": {
       "favicon": "./assets/360.png"
     },
     "extra": {
       "eas": {
-<<<<<<< HEAD
         "projectId": "060a032f-4700-451b-9f8a-4c57b926e7ab"
-=======
-        "projectId": "c988e7c0-68c9-46a1-abfb-d4ea82ee665c"
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
       }
     }
   }

@@ -17,10 +17,7 @@ import InputCarousel from '../components/Molecules/InputCarousel';
 import { AUTH } from '../firebase';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, setDoc, doc } from 'firebase/firestore';
-<<<<<<< HEAD
 import { ProgramsArray } from '../constants/content/programs';
-=======
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
 
 const AuthScreen = ({navigation}) => {
@@ -106,7 +103,6 @@ const AuthScreen = ({navigation}) => {
       showAlert(ALERT_TYPE.WARNING, 'Oops!', error);
     }
   }, [error]);
-<<<<<<< HEAD
   useEffect(() => {
     const getprgs=async()=>{
       const programs= await ProgramsArray()
@@ -120,8 +116,6 @@ const AuthScreen = ({navigation}) => {
     }
 getprgs()
   }, []);
-=======
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
   const handleBackPress = () => {
     navigation.navigate('AuthScreen');
@@ -151,17 +145,11 @@ const isSlideDataValid = (slideIndex, userData) => {
     case 1: // Student Contact slide
       return userData.email && userData.phone.trim() !== '';
     case 2: // Student Bio slide
-<<<<<<< HEAD
       // return  userData.DOB.trim() !== '';
       return  true;
     case 3: // Student Program slide
     console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhh",userData);
       return userData.ProgramId.length>=3 && userData.StudentProgram!==null;
-=======
-      return  userData.DOB.trim() !== '';
-    case 3: // Student Program slide
-      return userData.ProgramId.length===3 && userData.StudentProgram!==null;
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     case 4: // Kenyatta University slide
       return userData.Year && userData.Sem.trim() !== '';
     case 5: // Kenyatta University slide
@@ -182,11 +170,7 @@ const handleNext = () => {
       }
       return;
     }
-<<<<<<< HEAD
 // console.log(UserData.StudentProgram);
-=======
-console.log(UserData.StudentProgram);
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     // Proceed to the next slide
     settxt("next");
     setActiveIndex(activeIndex + 1);
@@ -227,7 +211,7 @@ console.log(UserData.StudentProgram);
 
       <ViewAtom fd="column" ai="center" pv={10} >
           <Text style={styles.policyText}>By signing up, you agree to our </Text>
-          <TouchableOpacity style={styles.policyLinks}>
+          <TouchableOpacity style={styles.policyLinks} onPress={()=>navigation.navigate("PScreen")}>
               <Text style={styles.policyLink}>Terms of Service</Text>
               <Text style={styles.policyText}> and </Text>
               <Text style={styles.policyLink}>Privacy</Text><Text style={styles.policyLink}>Policy</Text>

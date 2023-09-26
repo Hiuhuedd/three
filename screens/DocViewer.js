@@ -10,21 +10,18 @@ import { Button } from '../components/Atoms/Button';
 import { ActivityIndicator } from 'react-native-paper';
 import LinearAtom from '../components/Atoms/LinearAtom';
 import BottomTabs from '../components/Molecules/BottomTabs';
-import { ProgramsArray } from '../constants/content/programs';
-import Carousel from 'react-native-reanimated-carousel';
-import { useRef } from 'react';
 import { BackHandler } from 'react-native';
-import Discord from './Discord';
 import Resources from '../components/Molecules/Resources';
 import { ScrollView } from 'react-native';
 
 import V2Modal from '../components/Molecules/V2Modal';
 import Modal from "react-native-modal";
-import Contribute from '../components/Molecules/ContributeR';  
-const Program = ({navigation}) => {
+import Contribute from '../components/Molecules/ContributeN';  
+const DocViewer = ({navigation,route}) => {
+    const { resource } = route.params;
            //=================backpress====================
 const handleBackPress = () => {
-  navigation.navigate("Home")
+  navigation.navigate("Program")
     return true;
   };
   
@@ -34,35 +31,16 @@ const handleBackPress = () => {
       BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
     };
   }, []);
-  //=================backpress====================
-  const programItems=[ <Resources navigation={navigation}/>  , <Discord navigation={navigation} />]
-  const [program,setProgramName]=useState("")
+  //=================backpress=============
 
     const theme=useSelector(state => state.userReducer.theme);
     const user=useSelector(state => state.userReducer.user);
-   const [checking,setchecking]=useState(true)
    useEffect(() => {
-    setProgramName(user.StudentProgram)
-    setTimeout(() => {
-    setchecking(false)
-  }, 5000);
+  
   }, []);
-    // const ProgramView=({item, navigation})=>{
-    //   return(
-    //     <View style={{ flex: 1,}}>
-
-    //     {/* <TextAtom text={item} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} /> */}
-    //     {/* <TextAtom text={program.programName} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-2}c={COLORS.white} /> */}
-    //     </View>
-
-    //   )
-    // }
-    const ref = useRef(null);
+   
     const [isContribute,setContribute]=useState(false)
-    const [activeIndex,setActiveIndex]=useState(0)
-    useEffect(() => {
-      ref.current?.scrollTo({ index: activeIndex });
-    }, [activeIndex]);
+   
   return (
     <View style={styles.container}>
                  <LinearAtom   pv={5}  ph={5} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
@@ -79,8 +57,8 @@ const handleBackPress = () => {
 
 
           <ScrollView contentContainerStyle={styles.scrollViewContent}>
-  {isContribute?<Contribute navigation={navigation}/>:   <Resources navigation={navigation}/> 
-}
+
+  <Contribute navigation={navigation} resource={resource}/>
 
         <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={20} ph={10} br={0} mv={40} mh={0}>
          
@@ -138,6 +116,6 @@ const styles = StyleSheet.create({
  
 });
 
-export default Program;
+export default DocViewer;
 
 

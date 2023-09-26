@@ -1,10 +1,11 @@
-import React,{ useEffect } from 'react';  
+import React, { useEffect, useState } from 'react';
 import "react-native-url-polyfill/auto"      
 import RootNavigation from './navigation';
 import { AlertNotificationRoot, Toast } from 'react-native-alert-notification';
 import { COLORS } from './constants/theme';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen'; // Import the splash screen package
+
 
 const IColors = {
   label: COLORS.white,
@@ -20,8 +21,9 @@ const defaultProps = {
   theme: 'dark',
   colors: [IColors, IColors],
 };
-
 const App = ({ dialogConfig, toastConfig, theme, colors }) => {
+
+ 
   useEffect(() => {
     // Hide the splash screen when the component mounts
     SplashScreen.hideAsync();

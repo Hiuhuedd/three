@@ -68,9 +68,5 @@ export function getTimeSpans() {
   export const currentTime = moment().format('h:mm A');
   // Example usage:
   const timeSpans = getTimeSpans();
-<<<<<<< HEAD
   // console.log(timeSpans);
-=======
-  console.log(timeSpans);
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   

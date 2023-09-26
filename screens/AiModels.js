@@ -13,19 +13,12 @@ import BottomTabs from '../components/Molecules/BottomTabs';
 import CardAtom from '../components/Atoms/CardAtom';
 import { ScrollView } from 'react-native-gesture-handler';
 
-<<<<<<< HEAD
 import V2Modal from '../components/Molecules/V2Modal';
 import Modal from "react-native-modal";
 const  AiModels = ({navigation}) => {
 //=================backpress====================
 const handleBackPress = () => {
   navigation.navigate("Me")
-=======
-const  AiModels = ({navigation}) => {
-//=================backpress====================
-const handleBackPress = () => {
-  BackHandler.exitApp();
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   return true;
 };
 
@@ -220,17 +213,13 @@ useEffect(() => {
      </ViewAtom>
   </ScrollView>
 
-<<<<<<< HEAD
-  <Modal isVisible={true}>
+  <Modal isVisible={false}>
         <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
            <V2Modal navigation={navigation} screen={"Me"} feature={'360 assistant'} date={'28th September 2023.'} text='360 assistant feature is scheduled for release on '/>
    
               
          </ViewAtom>
       </Modal>
-=======
-  
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 </LinearAtom> 
 
             

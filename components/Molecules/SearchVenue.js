@@ -5,7 +5,6 @@ import Axios from 'axios';
 import { Button } from '../Atoms/Button';
 import Feather from 'react-native-vector-icons/Feather';
 import appTheme from '../../constants/theme';
-<<<<<<< HEAD
 import ViewAtom from '../Atoms/ViewAtom';
 import TextAtom from '../Atoms/TextAtom';
 import CardAtom from '../Atoms/CardAtom';
@@ -14,11 +13,6 @@ const {COLORS, SIZES, FONTS}=appTheme
 const SearchVenue = React.forwardRef(({onMethodSelected,navigation,nearestclinic,photoUrl,state}, ref) => {
 
   const theme=useSelector(state => state.userReducer.theme);
-=======
-const {COLORS, SIZES, FONTS}=appTheme
-const SearchVenue = React.forwardRef(({onMethodSelected,navigation,nearestclinic,photoUrl,state}, ref) => {
-
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
   return (
     <RBSheet
@@ -38,7 +32,6 @@ const SearchVenue = React.forwardRef(({onMethodSelected,navigation,nearestclinic
       }}
       >
           <View style={styles.bottomCard}>
-<<<<<<< HEAD
           <ViewAtom  fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
           <ViewAtom  fd="flex" jc="flex-start" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
 
@@ -51,11 +44,6 @@ const SearchVenue = React.forwardRef(({onMethodSelected,navigation,nearestclinic
             
                
                   
-=======
-           
-               
-                <Text style={styles.text_}><Feather name="navigation" size={SIZES.icon}     color={COLORS.primary}/> {Math.round(state.distance)} km away </Text>
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
             
                 <View style={styles.pickerOption} >
                 <View  style={styles.Option} >

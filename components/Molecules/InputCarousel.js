@@ -79,7 +79,6 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
         maxLength: 40,
         secureTextEntry: true,
       },
-<<<<<<< HEAD
       // {
       //   label: 'Date of Birth',
       //   placeholder: 'DoB',
@@ -89,17 +88,6 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
       //   maxLength: 40,
       //   secureTextEntry: true,
       // },
-=======
-      {
-        label: 'Date of Birth',
-        placeholder: 'DoB',
-        value: DOB,
-        setValue: setDOB,
-        keyboardType: 'default',
-        maxLength: 40,
-        secureTextEntry: true,
-      },
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     ],
     [
       {
@@ -108,11 +96,7 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
         value: ProgramId,
         setValue: setProgramId,
         keyboardType: 'defaut',
-<<<<<<< HEAD
         maxLength: 5,
-=======
-        maxLength: 4,
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         secureTextEntry: false,
       },
     ],
@@ -143,13 +127,8 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
         placeholder: '2121/2019',
         value: StudentId,
         setValue: setStudentId,
-<<<<<<< HEAD
         keyboardType: 'default',
         maxLength: 12,
-=======
-        keyboardType: 'numeric',
-        maxLength: 9,
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         secureTextEntry: false,
       },
       {
@@ -176,10 +155,7 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
   }, [activeIndex]);
   useEffect(() => {
 setUserData({firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram})
-<<<<<<< HEAD
 console.log(firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram);
-=======
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   }, [firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram]);
 
   const width = Dimensions.get('window').width;
@@ -210,6 +186,9 @@ console.log(firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,Stu
               {/* Your InputComponent code here */}
               <ViewAtom key={input.label} fd="row" jc="flex-start" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
             <TextAtom text={`${input.label}  `} c={COLORS.white} f="Roboto" s={SIZES.h5} w="500" />
+            
+            {input.label==='Course ID'&&            <TextAtom text={`First 3 or 4 characters of your registration number `} c={COLORS.white} f="Roboto" s={SIZES.base} w="500" />
+}
           </ViewAtom>
               <MyInput
                 editable={true}

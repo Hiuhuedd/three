@@ -6,23 +6,21 @@ import { CheckBox, Divider, Icon } from 'react-native-elements';
 import ViewAtom from '../components/Atoms/ViewAtom';
 import { useSelector } from 'react-redux';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
-<<<<<<< HEAD
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ActivityIndicator } from 'react-native';
 import { ProgramsArray } from '../constants/content/programs';
-=======
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 
+import { getFirestore, collection, setDoc, doc } from 'firebase/firestore';
+import { AppState } from 'react-native';
+import { currentTime } from '../utils/timeFunction';
+import moment from 'moment';
 const PinScreen = ({navigation}) => {
         //=================backpress====================
 const handleBackPress = () => {
  BackHandler.exitApp()
    return true;
  };
-<<<<<<< HEAD
  const [Tv, setTv] = useState(false);
-=======
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
  
  useEffect(() => {
    BackHandler.addEventListener('hardwareBackPress', handleBackPress);
@@ -30,7 +28,6 @@ const handleBackPress = () => {
      BackHandler.removeEventListener('hardwareBackPress', handleBackPress);
    };
  }, []);
-<<<<<<< HEAD
  useEffect(() => {
   ProgramsArray()
   AsyncStorage.getItem('myTimetable').then(value => {
@@ -43,10 +40,72 @@ const handleBackPress = () => {
     }
   })
  }, []);
-=======
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
  //=================backpress====================
     const user=useSelector(state => state.userReducer.user);
+
+ ////////////////last seen//////////////////////
+ const [lastSeen, setLastSeen] = useState(null);
+ const [timeSpent, setTimeSpent] = useState(0);
+ 
+ const handleAppStateChange = (nextAppState) => {
+   if (nextAppState === 'active') {
+     const now = moment().format('DD MMM YYYY h:mm A');
+     const lastSeenTime = parseInt(lastSeen, 10) || now;
+     const elapsedTime = now - lastSeenTime;
+ 
+     // Update total time spent
+     setTimeSpent((prevTimeSpent) => prevTimeSpent + elapsedTime);
+ 
+     // Update last seen time
+     
+     
+     console.log(now,timeSpent)
+    //  alert(now,timeSpent)
+     sendToFirestore(now, timeSpent);
+     // Save last seen time to local storage
+     AsyncStorage.setItem('lastSeen', now.toString()).then(()=>{
+       setLastSeen(now);
+     })
+     // Send data to Firestore
+
+   }
+ };
+ 
+ useEffect(() => {
+   // Load last seen time from local storage on app startup
+   AsyncStorage.getItem('lastSeen').then((value) => {
+     setLastSeen(value);
+   });
+   handleAppStateChange("active")
+   // Add app state change listener
+  //  AppState.addEventListener('change', handleAppStateChange);
+ 
+  //  return () => {
+  //    // Remove app state change listener
+  //    AppState.removeEventListener('change', handleAppStateChange);
+  //  };
+ }, []);
+ 
+ const sendToFirestore =async (lastSeenTime, elapsedTime) => {
+ 
+   try {
+     const db = getFirestore();
+     const collectionRef = collection(db, 'activity'); // Collection reference
+     const documentRef = doc(collectionRef, user.id); // Document reference
+   await setDoc(documentRef, {
+     lastSeen: lastSeenTime,
+     totalTimeSpent: elapsedTime,
+   });
+ 
+ 
+ 
+ } catch (error) {
+     console.error('Error sending data to Firestore:', error);
+    
+   }
+ };
+ ////////////////last seen//////////////////////
+    
     const showAlert = (type, title, msg) => {
         Toast.show({
           type: type,
@@ -69,7 +128,6 @@ const handleBackPress = () => {
      
       ]
   const [pin, setPin] = useState('');
-<<<<<<< HEAD
   const [Loading, setLoading] = useState(false);
  
   const handleKeyPress = (digit) => {
@@ -93,22 +151,6 @@ const handleBackPress = () => {
     }
   };
   
-=======
-
-  const handleKeyPress = (digit) => {
-    if (pin.length < 3) {
-      setPin(pin + digit);
-    }else if(pin.length===3){
-        if (user.pin===pin+ digit) {
-          navigation.replace("THook")
-          // navigation.navigate("AnimatedHeader")
-        }else{
-            showAlert(ALERT_TYPE.WARNING,"", 'Incorrect pin!');
-        }
-    }
-  };
-
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   const handleDeletePress = () => {
     setPin(pin.slice(0, -1));
   };
@@ -135,16 +177,11 @@ const handleBackPress = () => {
   <TextAtom text={"Enter your pin code"} f="Poppins"s={SIZES.h1} w={"500"} ta="center" ls={-2}c={COLORS.white} />
   <TextAtom text={"Lets you encrypt your account to ensure privacy of your academic data"} f="Poppins"s={SIZES.h5} w={"500"} ta="center" ls={0}c={COLORS.gray2} />
   <ViewAtom  fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
-<<<<<<< HEAD
   <Icon name={Loading?"lock-open":"lock"} type="ioniconv4" ios="ios-lock" md="ios-lock" color={Loading?COLORS.amber:COLORS.white} size={SIZES.largeTitle} />
   </ViewAtom>
  {Loading&& 
                      <ActivityIndicator size="small" color={COLORS.amber} />
                     }
-=======
-  <Icon name="lock" type="ioniconv4" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.largeTitle} />
-  </ViewAtom>
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   <ViewAtom  fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
         {[...Array(4)].map((_, index) => (
           <View key={index} style={[styles.pinDot, index < pin.length && styles.pinDotFilled]} />

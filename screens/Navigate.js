@@ -18,7 +18,6 @@ const LATITUDE_DELTA = 0.007;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 const Navigate = ({ navigation}) => {
-<<<<<<< HEAD
     useEffect(() => {
         getUserLocation().then((res)=>{
             if(res){
@@ -32,9 +31,6 @@ const Navigate = ({ navigation}) => {
               });
               }});
       }, []);
-=======
-    
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
     const dispatch = useDispatch();
     //==============================BOTTOM SHEET============================
     const closeSheet = (t) => {
@@ -81,14 +77,11 @@ useEffect(() => {
         
     }
 }, [])
-<<<<<<< HEAD
 //==============================Search============================
 
 const [searchQuery, setSearchQuery] = useState('');
 
 
-=======
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
 //==============================MAP STATE============================
 
         const { latitude, longitude} = location.coords;
@@ -160,11 +153,7 @@ const [searchQuery, setSearchQuery] = useState('');
 
           
             <View style={{ flex: 1 }}>
-<<<<<<< HEAD
                 {latitude&&longitude?<MapView
-=======
-                <MapView
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
                     ref={mapRef}
                     customMapStyle={mapStyle}
                     style={StyleSheet.absoluteFill}
@@ -215,12 +204,8 @@ const [searchQuery, setSearchQuery] = useState('');
                     }}
                 />
                 )}
-<<<<<<< HEAD
                 </MapView>:<>
                 </>}
-=======
-                </MapView>
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
                 <TouchableOpacity
                     style={{
                         position: 'absolute',
@@ -235,7 +220,6 @@ const [searchQuery, setSearchQuery] = useState('');
                
              
             </View> 
-<<<<<<< HEAD
 
             <View style={styles.containern}>
       {/* ... (previous code) */}
@@ -261,9 +245,6 @@ const [searchQuery, setSearchQuery] = useState('');
     </View>
 
             {/* <SearchVenue onMethodSelected={closeSheet} ref={sheetRef} navigation={navigation}  state={state}/>  */}
-=======
-            <SearchVenue onMethodSelected={closeSheet} ref={sheetRef} navigation={navigation}  state={state}/> 
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
         </View>
     );  
 };
@@ -272,7 +253,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-<<<<<<< HEAD
     searchContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
@@ -297,8 +277,6 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: 'bold',
       },
-=======
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4
   text:{
 fontWeight:"500",
 color:"#008873",
@@ -323,7 +301,6 @@ fontSize:13
 });
 
 export default Navigate;
-<<<<<<< HEAD
 // const mapStyle = [
 //     {
 //       elementType: 'geometry',
@@ -527,179 +504,3 @@ const mapStyle = [
   ];
   
   
-=======
-
-const mapStyle = [
-{
-elementType: 'geometry',
-stylers: [
-{
-color: '#f5f5f5'
-},
-{
-lightness: 20
-}
-]
-},
-{
-elementType: 'labels.text.stroke',
-stylers: [
-{
-color: '#f5f5f5'
-},
-{
-weight: 2
-}
-]
-},
-{
-elementType: 'labels.text.fill',
-stylers: [
-{
-color: '#616161'
-}
-]
-},
-{
-elementType: 'labels.icon',
-stylers: [
-{
-visibility: 'on'
-}
-]
-},
-{
-featureType: 'administrative',
-elementType: 'labels.text.fill',
-stylers: [
-{
-color: '#757575'
-}
-]
-},
-{
-featureType: 'administrative.land_parcel',
-stylers: [
-{
-visibility: 'off'
-}
-]
-},
-{
-featureType: 'administrative.neighborhood',
-stylers: [
-{
-visibility: 'off'
-}
-]
-},
-{
-featureType: 'poi',
-elementType: 'labels.text.fill',
-stylers: [
-{
-color: '#757575'
-}
-]
-},
-{
-featureType: 'poi.park',
-elementType: 'geometry',
-stylers: [
-{
-color: '#e5e5e5'
-}
-]
-},
-{
-featureType: 'poi.park',
-elementType: 'labels.text.fill',
-stylers: [
-{
-color: '#9e9e9e'
-}
-]
-},
-{
-featureType: 'road',
-elementType: 'geometry',
-stylers: [
-{
-color: '#ffffff'
-}
-]
-},
-{
-featureType: 'road',
-elementType: 'labels.text.fill',
-stylers: [
-{
-color: '#757575'
-}
-]
-},
-{
-featureType: 'road.highway',
-elementType: 'geometry',
-stylers: [
-{
-color: '#dadada'
-}
-]
-},
-{
-featureType: 'road.highway',
-elementType: 'labels.text.fill',
-stylers: [
-{
-color: '#616161'
-}
-]
-},
-{
-featureType: 'road.highway.controlled_access',
-elementType: 'geometry',
-stylers: [
-{
-color: '#4E4E4E'
-}
-]
-},
-{
-featureType: 'road.local',
-elementType: 'labels.text.fill',
-stylers: [
-{
-color: '#616161'
-}
-]
-},
-{
-featureType: 'transit',
-elementType: 'labels.text.fill',
-stylers: [
-{
-color: '#757575'
-}
-]
-},
-{
-featureType: 'water',
-elementType: 'geometry',
-stylers: [
-{
-color: '#000000'
-}
-]
-},
-{
-featureType: 'water',
-elementType: 'labels.text.fill',
-stylers: [
-{
-color: '#3D3D3D'
-}
-]
-}
-];
->>>>>>> 609b2e1e1d7abf10666e93cdddd011cef40cd2f4

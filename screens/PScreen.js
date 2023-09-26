@@ -12,10 +12,10 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Checkbox } from 'react-native-paper';
 import { BackHandler } from 'react-native';
 
-const PolicyAgreement = ({navigation}) => {
+const PScreen = ({navigation}) => {
           //=================backpress====================
 const handleBackPress = () => {
-  BackHandler.exitApp()
+navigation.navigate("AuthScreen")
     return true;
   };
   
@@ -80,11 +80,11 @@ const handleBackPress = () => {
  
   <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
      
-   <Checkbox.Android
+   {/* <Checkbox.Android
         status={checked ? 'checked' : 'unchecked'}
         onPress={handleCheckboxToggle}
         color={checked ? COLORS.green : COLORS.chocolate}
-      />
+      /> */}
   <TextAtom text={"I Agree to Terms"} f="Poppins"s={SIZES.h6} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
      </ViewAtom>
 
@@ -92,7 +92,7 @@ const handleBackPress = () => {
 
  
   </ScrollView>
-  <Button text={"Continue"}width={"90%"}bg={checked ? COLORS.green : COLORS.gray2}  screen={''} onMethodSelected={()=>{navigation.replace(checked ? "Walkthrough" : "PolicyAgreement");  showAlert(ALERT_TYPE.WARNING, "", 'Accept terms to proceed!');}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />
+  <Button text={"Continue to Signup"}width={"90%"}bg={ COLORS.green }  screen={''} onMethodSelected={()=>{navigation.replace("AuthScreen");}}borderRadius={10}s={SIZES.h5}pv={0}ph={0} tc={COLORS.white} />
       
       
   {/* {checking?             
@@ -164,5 +164,4 @@ const styles = StyleSheet.create({
  
 });
 
-export default PolicyAgreement;
-
+export default PScreen
