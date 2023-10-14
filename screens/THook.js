@@ -16,6 +16,7 @@ import { getTimetableFromFirestore } from '../constants/content/programs';
 
 const THook = ({navigation}) => {
   const dispatch = useDispatch();
+  const user=useSelector(state => state.userReducer.user);
 
       //=================backpress====================
 const handleBackPress = () => {
@@ -32,28 +33,29 @@ const handleBackPress = () => {
   //=================backpress====================
 
 const gettimetable=async()=>
-{  const timetableValue = await getTimetableFromFirestore(userData);
+{  const timetableValue = await getTimetableFromFirestore(user);
   if (timetableValue) {
-
+    setTimeout(() => {
+      setchecking(false)
+     }, 1000);
     setisAvailable(timetableValue)
     
 
   } else {
+    setTimeout(() => {
+      setchecking(false)
+     }, 1000);
     setisAvailable(null)
   
   }}
 
 
-    const user=useSelector(state => state.userReducer.user);
     const theme=useSelector(state => state.userReducer.theme);
     const tUpdate=useSelector(state => state.userReducer.timetable);
    const [checking,setchecking]=useState(true)
-   const [isAvailable,setisAvailable]=useState(true)
+   const [isAvailable,setisAvailable]=useState(false)
    useEffect(() => {
-   setTimeout(() => {
-    setchecking(false)
-    gettimetable(user)
-   }, 1000);
+     gettimetable()
    
   }, []);
  

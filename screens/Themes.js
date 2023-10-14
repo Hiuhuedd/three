@@ -37,25 +37,25 @@ const handleBackPress = () => {
    const [checking,setchecking]=useState(true)
    const [mytheme,setmyTheme]=useState()
    const themesArr=[
-    {color:COLORS.amber,name:"Amber"},
+    {color:COLORS.amber,name:"A1"},
     // {color:COLORS.black,name:"Charcoal"},
-    {color:COLORS.chocolate,name:"Chocolate"},
-    // {color:COLORS.dark,name:"Dark"},
-    {color:COLORS.gold,name:"Gold"},
-    {color:COLORS.green,name:"Jungle"},
-    {color:COLORS.green2,name:"Lime"},
-    {color:COLORS.pink,name:"Barbie"},
-    {color:COLORS.primary,name:"Atlantic"},
-    {color:COLORS.rose,name:"Rose"},
+    {color:COLORS.chocolate,name:"A2"},
+    {color:COLORS.primary2,name:"A3"},
+    {color:COLORS.gold,name:"A4"},
+    {color:COLORS.green,name:"A5"},
+    {color:COLORS.green2,name:"A6"},
+    {color:COLORS.pink,name:"A7"},
+    {color:COLORS.primary,name:"A8"},
+    {color:COLORS.rose,name:"A9"},
     // {color:COLORS.white,name:"Paper"},
-    // {color:COLORS.gray2,name:"Stone"},
-    {color:COLORS.green,name:"Jungle"},
-    {color:COLORS.green2,name:"Lime"},
-    {color:COLORS.pink,name:"Barbie"},
-    {color:COLORS.primary,name:"Atlantic"},
-    {color:COLORS.rose,name:"Rose"},
+    {color:COLORS.gray2,name:"A10"},
+    {color:COLORS.green,name:"A11"},
+    {color:COLORS.green2,name:"A12"},
+    {color:COLORS.pink,name:"A7"},
+    {color:COLORS.primary,name:"A8"},
+    {color:COLORS.rose,name:"A9"},
     // {color:COLORS.white,name:"Paper"},
-    {color:COLORS.fuschia,name:"Fuschia"},
+    {color:COLORS.fuschia,name:"A13"},
    
    ]
    const handleSetTheme=(item)=>{
@@ -77,7 +77,7 @@ const handleBackPress = () => {
         style={[styles.themeItem, {  }]}
         onPress={() => {handleSetTheme(item)}}
       >
-        <CardAtom fd="row"  jc="space-between" ai="flex-start" pv={15} ph={15} bg={COLORS.black} br={15} mv={0} mh={0}   el={3} sh='#525252' >
+        <CardAtom fd="row"  jc="space-between" ai="flex-start" pv={10} ph={10} bg={COLORS.black} br={3} mv={2} mh={0}   el={3} sh='#525252' >
           
           <Icon name='color-palette' type="ionicon" color={item.color} size={SIZES.h2} onPress={() => {handleSetTheme(item)}} />
     
@@ -102,7 +102,7 @@ const handleBackPress = () => {
       </ViewAtom>
 </ViewAtom>
   <TextAtom text={"Themes"} f="Poppins"s={SIZES.h1} w={"500"} ta="left" ls={-2}c={COLORS.white} />
-  <TextAtom text={"Lets you keep track of your campus activities and much more.."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
+  <TextAtom text={"Customize your app theme.."} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={0}c={COLORS.gray2} />
   <TextAtom text={"Select theme"} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={0}c={COLORS.gray} />
   <ViewAtom  fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={20} mh={0}>
      
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 100,
     borderRadius: 8,
-    margin: 5,
+    margin: -5,
     justifyContent: 'center',
     alignItems: 'center',
   },

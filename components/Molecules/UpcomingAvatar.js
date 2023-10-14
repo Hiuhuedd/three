@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import UserAvatar from 'react-native-user-avatar';
 import ViewAtom from '../Atoms/ViewAtom';
 import TextAtom from '../Atoms/TextAtom';
@@ -7,12 +7,12 @@ import { COLORS, SIZES } from '../../constants/theme';
 import CardAtom from '../Atoms/CardAtom';
 import { useSelector } from 'react-redux';
 
-export default UpcomingAvatar = ({ event }) => {
+export default UpcomingAvatar = ({ event, navigation}) => {
     
   const theme=useSelector(state => state.userReducer.theme);
 
     return (
-        <>
+        <TouchableOpacity onPress={()=>{navigation.navigate("Timetable")}}>
       <CardAtom fd="row" jc="space-between" ai="center" w="100%" pv={5} ph={2} br={0} mv={0} mh={0}  el={1} sh={theme.color}>
       <ViewAtom fd="row" jc="flex-start" ai="center"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
    
@@ -38,7 +38,7 @@ export default UpcomingAvatar = ({ event }) => {
          </ViewAtom>
          </CardAtom>
      
-        </>
+        </TouchableOpacity>
    
     );
   };

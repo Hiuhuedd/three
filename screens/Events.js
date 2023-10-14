@@ -159,11 +159,11 @@ useEffect(() => {
      <ViewAtom  fd="column" jc="center"  w="100%" bg={getShade(theme.color,0.8)} pv={25} ph={20} br={0} mv={0} mh={0}>
      <ViewAtom fd="row" width="100%" ph={0} pv={10} jc="space-between" ai="center" >
         <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => {navigation.navigate('Home')}} />
-      <ViewAtom fd="row"  ph={7} pv={5}  bg={att?theme.color:COLORS.white} br={15} >
+      {/* <ViewAtom fd="row"  ph={7} pv={5}  bg={att?theme.color:COLORS.white} br={15} >
        {att?          <TextAtom text={"Attending"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />: <TouchableOpacity onPress={()=>{handleUpdateEvent()}}>
           <TextAtom text={"Attend"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={theme.color} />
         </TouchableOpacity>}
-      </ViewAtom>
+      </ViewAtom> */}
 </ViewAtom>
 <TextAtom text={event.title} f="Poppins"s={SIZES.h1} w={"700"} ta="left" ls={-1}c={COLORS.white} />
      
@@ -253,9 +253,14 @@ useEffect(() => {
 </ViewAtom>  
 <TextAtom text={"Peers attending"} f="Poppins"s={SIZES.h3} w={"500"} ta="left" ls={-1}c={COLORS.white} />
 <ViewAtom fd="row"   ai="flex-start"  pv={0} br={0} mv={10} mh={10}>
-<Icon name={"people"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {navigation.navigate('Home')}} />{Loading?<ActivityIndicator size={10} color={COLORS.amber} />:
+    <Icon name={"people"} type="ionicon" color={COLORS.white} size={SIZES.h3} onPress={() => {navigation.navigate('Home')}} />
+    
+    {Loading?<
+      ActivityIndicator size={10} color={COLORS.amber} />
+    :
+    <></>
 
-<TextAtom text={att?`   you and ${Math.floor(Math.random()*100)} others`:`   ${Math.floor(Math.random()*100)} students`} f="Poppins"s={SIZES.h4} w={"500"} ta="left" ls={-1}c={COLORS.white} />}
+    }
 
      </ViewAtom>
      </ViewAtom>

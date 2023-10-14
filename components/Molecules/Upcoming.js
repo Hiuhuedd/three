@@ -8,11 +8,11 @@ import { COLORS, SIZES } from '../../constants/theme';
 import moment from 'moment';
 import { currentTime } from '../../utils/timeFunction';
 
-export default Upcoming = ({ UpcomingArr}) => {
+export default Upcoming = ({ UpcomingArr,navigation}) => {
   const [items,setitems]=useState(false)
   useEffect(() => {
     
-    if (UpcomingArr.length<1) {
+    if (UpcomingArr.length===0) {
       setitems(true)
     }
  }, []);
@@ -47,7 +47,7 @@ export default Upcoming = ({ UpcomingArr}) => {
     </>}
     { UpcomingArr.map((upcoming)=>{
       return(
-        <UpcomingAvatar event={upcoming} />
+        <UpcomingAvatar event={upcoming} navigation={navigation}/>
       )
      })}
     </>

@@ -50,7 +50,6 @@ const SignIn = ({navigation}) => {
       // Check if the user document exists
       if (userDocSnapshot.exists()) {
         const userData = userDocSnapshot.data();
-  
         // Now you have the user data as an object
         console.log('User Data:', userData.user);
         dispatch({
@@ -128,8 +127,8 @@ const SignIn = ({navigation}) => {
       <ViewAtom fd="row" width="100%" ph={10} pv={10} jc="space-between" >
         <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => navigation.navigate("AuthScreen")} />
       <ViewAtom fd="row"  ph={7} pv={5} bg={COLORS.amber} br={15} >
-        <TouchableOpacity onPress={()=>{}}>
-          <TextAtom text={"Sign in"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
+        <TouchableOpacity onPress={()=>{navigation.goBack()}}>
+          <TextAtom text={"Sign up"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
         </TouchableOpacity>
       </ViewAtom>
       </ViewAtom>

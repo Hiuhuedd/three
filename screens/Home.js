@@ -35,7 +35,17 @@ const Home = ({navigation}) => {
   const [bodyText,setbodyText]=useState(`You're done for the day! `)
      const [checking,setchecking]=useState(true)
   const [UpcomingArr,setUpcomingArr]=useState([])
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+  
+   
+    setTimeout(() => {
+      // After refreshing logic is done, set isRefreshing to false
+      setIsRefreshing(false);
+    }, 2000); // Replace this with your actual refreshing logic
+  };
   const returnTTDay=(day)=>{
     for (const dayObject of timetable) {
       if (dayObject.day ===day) {
@@ -65,46 +75,46 @@ const Home = ({navigation}) => {
     setTimeout(() => {
       setchecking(false)
     }, 5000);
-    }, []);
+    }, [isRefreshing]);
  //======== ============================================================
  const { registerForPushNotificationsAsync, handleNotificationResponse } =
  NotificationsHandler();
 
-useEffect(() => {
+// useEffect(() => {
   
- registerForPushNotificationsAsync();
- Notifications.setNotificationHandler({
-   handleNotification: async () => ({
-     shouldShowAlert: true,
-     shouldPlaySound: true,
-     shouldSetBadge: true,
-   }),
- });
+//  registerForPushNotificationsAsync();
+//  Notifications.setNotificationHandler({
+//    handleNotification: async () => ({
+//      shouldShowAlert: true,
+//      shouldPlaySound: true,
+//      shouldSetBadge: true,
+//    }),
+//  });
 
- const responseListener =
-   Notifications.addNotificationResponseReceivedListener(
-     handleNotificationResponse
-   );
-console.log(UpcomingArr);
-   const schedulingOptions = {
-     content: {
-       title: "360 student",
-       body: bodyText ,
-     },
-     trigger: {
-       seconds: 20,
-     },
-   };
+//  const responseListener =
+//    Notifications.addNotificationResponseReceivedListener(
+//      handleNotificationResponse
+//    );
+// console.log(UpcomingArr);
+//    const schedulingOptions = {
+//      content: {
+//        title: "360 student",
+//        body: bodyText ,
+//      },
+//      trigger: {
+//        seconds: 20,
+//      },
+//    };
    
-   // Schedule the notification
-   Notifications.scheduleNotificationAsync(schedulingOptions);
- return () => {
-   if (responseListener)
-     Notifications.removeNotificationSubscription(responseListener);
- };
+//    // Schedule the notification
+//    Notifications.scheduleNotificationAsync(schedulingOptions);
+//  return () => {
+//    if (responseListener)
+//      Notifications.removeNotificationSubscription(responseListener);
+//  };
  
 
-}, []);
+// }, []);
 
 //======================================================
   const handleBackPress = () => {
@@ -125,7 +135,6 @@ console.log(UpcomingArr);
 
 
   const user=useSelector(state => state.userReducer.user);
-  console.log(user);
   const networks=useSelector(state => state.userReducer.networks);
   useEffect(() => {
     AsyncStorage.getItem('mynetworks').then(value => {
@@ -138,7 +147,7 @@ console.log(UpcomingArr);
   
       }
     })
-   }, []);
+   }, [checking,isRefreshing]);
   const theme=useSelector(state => state.userReducer.theme);
   //==============SCROLL ANIMATION===========
   const animatedValue = useRef(new Animated.Value(0)).current;
@@ -278,19 +287,7 @@ console.log(UpcomingArr);
 
   const [Filter, setFilter] = React.useState("");
 
-  const [isRefreshing, setIsRefreshing] = useState(false);
-
-  const handleRefresh = () => {
-    setIsRefreshing(true);
-  
-    returnTTDay(getTimeSpans().today.day.trim().replace(",", ""))
-
-    setTimeout(() => {
-      // After refreshing logic is done, set isRefreshing to false
-      setIsRefreshing(false);
-    }, 2000); // Replace this with your actual refreshing logic
-  };
-  
+ 
   const [isV2AlertVisible, setV2AlertVisibility] = useState(true);
   const [NetArr, setnetArr] = useState(networks);
 
@@ -299,7 +296,7 @@ console.log(UpcomingArr);
       const timer = setTimeout(() => {
         // Hide the component after 5 seconds
         setV2AlertVisibility(false);
-      }, 20000); // 5 seconds
+      }, 5000); // 5 seconds
 
       return () => {
         clearTimeout(timer);
@@ -432,7 +429,7 @@ const sheetRef = useRef(null);
                       </AnimatedCard >
 
                   {isV2AlertVisible&&    <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
-                      <V2Alerts text='360ai assistant feature is scheduled for release on 28th September 2023.'/>
+                      <V2Alerts text='360ai assistant feature is scheduled for release on 4th December 2023.'/>
    
               
          </ViewAtom>}
@@ -477,7 +474,7 @@ const sheetRef = useRef(null);
 </ViewAtom>
 </ViewAtom>
 <ViewAtom   bg="transparent" pv={0} br={0} mv={0} mh={10}>
-<Upcoming UpcomingArr={UpcomingArr.slice(0,3)}/>
+<Upcoming UpcomingArr={UpcomingArr.slice(0,2)} navigation={navigation}/>
 </ViewAtom>
 
 <ViewAtom fd="row" jc="space-between" ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
@@ -500,7 +497,7 @@ const sheetRef = useRef(null);
 </ViewAtom>
 </ViewAtom>
 <ViewAtom fd="column" jc="space-between"  ai="flex-start"  bg="transparent" pv={0} br={0} mv={0} mh={10}>
-<Networks navigation={navigation} arr={NetArr} />
+<Networks navigation={navigation} arr={NetArr} isRefreshing={isRefreshing} />
 {/* <Networks navigation={navigation} arr={NetArr} /> */}
 
 

@@ -15,9 +15,9 @@ export default function BottomTabs({ navigation }) {
 
   const tabs = [
     { icon: 'home-outline', text: 'Home', screen: 'Home' },
-    { icon: 'chatbox-ellipses-outline', text: 'Chat', screen: 'Chat' },
+    { icon: 'chatbox-ellipses-outline', text: '360ai', screen: 'Chat' },
     { icon: 'calendar-outline', text: '', screen: 'Timetable' },
-    { icon: 'school-outline', text: 'Program', screen: 'Program' },
+    { icon: 'school-outline', text: 'Resources', screen: 'Program' },
     { icon: 'person-outline', text: 'Me', screen: 'Me' },
   ];
 

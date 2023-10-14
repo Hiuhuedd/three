@@ -28,6 +28,8 @@ import SignIn from "./screens/SignIn";
 import Discord from "./screens/Discord";
 import PScreen from "./screens/PScreen";
 import DocViewer from "./screens/DocViewer";
+import Contributions from "./screens/Contributions";
+import FeedBack from "./screens/FeedBack";
 
 
 //Screens
@@ -66,8 +68,10 @@ export default function RootNavigation() {
           <Stack.Screen name="Walkthrough" component={Walkthrough} /> 
           <Stack.Screen name="SignIn" component={SignIn} /> 
           <Stack.Screen name="DocViewer" component={DocViewer} /> 
+          <Stack.Screen name="Contributions" component={Contributions} /> 
           
           <Stack.Screen name="PScreen" component={PScreen} /> 
+          <Stack.Screen name="FeedBack" component={FeedBack} /> 
           <Stack.Screen name="Discord" component={Discord} /> 
         </Stack.Navigator>
       

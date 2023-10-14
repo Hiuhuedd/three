@@ -10,13 +10,14 @@ import { Icon } from 'react-native-elements';
 import { getShade } from '../../utils/colorShade';
 import { useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
+import { ResourcesArray } from '../../constants/content/ResourcesArray';
 
 
 const samplePapers = [
   { 
     id: '1',
     unitCode: 'UCU100',
-    pdfUrl: 'link_to_pdf_1',
+    docUrl: 'link_to_pdf_1',
     attribution: { userName: "Beth", userId: "qweoj238u293u92hd", profile: "url_to_image" },
     description: "past paper for year 2020",
     title: "Communication Skills",
@@ -27,7 +28,7 @@ const samplePapers = [
   { 
     id: '2',
     unitCode: 'ECU200',
-    pdfUrl: 'link_to_pdf_2',
+    docUrl: 'link_to_pdf_2',
     attribution: { userName: "John", userId: "aslkdf23jlkjsdf", profile: "url_to_image" },
     description: "sample document",
     title: "Introduction to Economics",
@@ -38,7 +39,7 @@ const samplePapers = [
   { 
     id: '3',
     unitCode: 'MTH300',
-    pdfUrl: 'link_to_pdf_3',
+    docUrl: 'link_to_pdf_3',
     attribution: { userName: "Alice", userId: "a0923lkjasdf", profile: "url_to_image" },
     description: "practice problems",
     title: "Advanced Mathematics",
@@ -49,7 +50,7 @@ const samplePapers = [
   { 
     id: '4',
     unitCode: 'PHY400',
-    pdfUrl: 'link_to_pdf_4',
+    docUrl: 'link_to_pdf_4',
     attribution: { userName: "David", userId: "qweio2304jsdf", profile: "url_to_image" },
     description: "physics notes",
     title: "Physics Fundamentals",
@@ -60,7 +61,7 @@ const samplePapers = [
   { 
     id: '5',
     unitCode: 'CHM500',
-    pdfUrl: 'link_to_pdf_5',
+    docUrl: 'link_to_pdf_5',
     attribution: { userName: "Emily", userId: "o238uf0239lj", profile: "url_to_image" },
     description: "chemistry review",
     title: "Chemistry Basics",
@@ -71,7 +72,7 @@ const samplePapers = [
   { 
     id: '6',
     unitCode: 'BIO600',
-    pdfUrl: 'link_to_pdf_6',
+    docUrl: 'link_to_pdf_6',
     attribution: { userName: "Frank", userId: "lkj23o4i0sdf", profile: "url_to_image" },
     description: "biology study guide",
     title: "Biology Essentials",
@@ -82,7 +83,7 @@ const samplePapers = [
   { 
     id: '7',
     unitCode: 'ENG700',
-    pdfUrl: 'link_to_pdf_7',
+    docUrl: 'link_to_pdf_7',
     attribution: { userName: "Grace", userId: "asd2340l23sdf", profile: "url_to_image" },
     description: "literature notes",
     title: "English Literature",
@@ -93,7 +94,7 @@ const samplePapers = [
   { 
     id: '8',
     unitCode: 'HIS800',
-    pdfUrl: 'link_to_pdf_8',
+    docUrl: 'link_to_pdf_8',
     attribution: { userName: "Henry", userId: "lkjwer2390sdf", profile: "url_to_image" },
     description: "history review",
     title: "World History",
@@ -104,7 +105,7 @@ const samplePapers = [
   { 
     id: '9',
     unitCode: 'GEO900',
-    pdfUrl: 'link_to_pdf_9',
+    docUrl: 'link_to_pdf_9',
     attribution: { userName: "Ivy", userId: "asd9023oj0sdf", profile: "url_to_image" },
     description: "geography study material",
     title: "Geography Fundamentals",
@@ -115,7 +116,7 @@ const samplePapers = [
   { 
     id: '10',
     unitCode: 'ART1000',
-    pdfUrl: 'link_to_pdf_10',
+    docUrl: 'link_to_pdf_10',
     attribution: { userName: "Jack", userId: "lkjwer9023sdf", profile: "url_to_image" },
     description: "art history notes",
     title: "Art History",
@@ -126,7 +127,7 @@ const samplePapers = [
   { 
     id: '11',
     unitCode: 'GEO900',
-    pdfUrl: 'link_to_pdf_9',
+    docUrl: 'link_to_pdf_9',
     attribution: { userName: "Ivy", userId: "asd9023oj0sdf", profile: "url_to_image" },
     description: "geography study material",
     title: "Geography Fundamentals",
@@ -137,7 +138,7 @@ const samplePapers = [
   { 
     id: '12',
     unitCode: 'ART1000',
-    pdfUrl: 'link_to_pdf_10',
+    docUrl: 'link_to_pdf_10',
     attribution: { userName: "Jack", userId: "lkjwer9023sdf", profile: "url_to_image" },
     description: "art history notes",
     title: "Art History",
@@ -148,7 +149,7 @@ const samplePapers = [
   { 
     id: '13',
     unitCode: 'GEO900',
-    pdfUrl: 'link_to_pdf_9',
+    docUrl: 'link_to_pdf_9',
     attribution: { userName: "Ivy", userId: "asd9023oj0sdf", profile: "url_to_image" },
     description: "geography study material",
     title: "Geography Fundamentals",
@@ -159,7 +160,7 @@ const samplePapers = [
   { 
     id: '14',
     unitCode: 'ART1000',
-    pdfUrl: 'link_to_pdf_10',
+    docUrl: 'link_to_pdf_10',
     attribution: { userName: "Jack", userId: "lkjwer9023sdf", profile: "url_to_image" },
     description: "art history notes",
     title: "Art History",
@@ -172,12 +173,14 @@ const samplePapers = [
 
 
 
-const Resources = ({navigation}) => {
+const Resources = ({navigation,isRefreshing}) => {
     
   const user=useSelector(state => state.userReducer.user);
+  const units=useSelector(state => state.userReducer.units);
   const theme=useSelector(state => state.userReducer.theme);
 
   const renderPaperItem = ({ item }) => {
+    console.log("render item",item);
     return (
       
       <ViewAtom fd="column"  ai="center" w="100%"  pv={2} ph={2} br={0} mv={0} mh={0}>
@@ -185,7 +188,7 @@ const Resources = ({navigation}) => {
         alignItems: 'center',
         justifyContent: 'center',
         width:"100%",
-        height: 60,
+        height: 70,
         margin: 5,
         marginVertical:10,
         backgroundColor: COLORS.white,
@@ -195,15 +198,15 @@ const Resources = ({navigation}) => {
        <View style={{position:"relative",}}>
        <Image source={require('../../assets/360.png')} style={[styles.Icon]} />
        
-       <View style={{position:"absolute",top:0,left:0,  width: 70, zIndex:2,   height: 60,backgroundColor:"#008aaaa0", alignItems:"center",justifyContent:"center",   borderTopLeftRadius: 5,padding:1}}>
+       <View style={{position:"absolute",top:0,left:0,  width: 70, zIndex:2,   height: 70,backgroundColor:"#008aaaa0", alignItems:"center",justifyContent:"center",   borderTopLeftRadius: 5,padding:1}}>
       {
       item.type==="PDF"?
-      <Icon name={"book"} type="ionicon" style={{}} color={COLORS.white} size={SIZES.h2} onPress={() => {}} />
+      <Icon name={"book"} type="ionicon" style={{}} color={COLORS.white} size={SIZES.h2} onPress={() => {handlePaperPress(item)}} />
       :
    ( <>
  {  item.type==="Video"?
-      <Icon name={"videocam"} type="ionicon" style={{}} color={COLORS.white} size={SIZES.h2} onPress={() => {}} />
-    :  <Icon name={"headset"} type="ionicon" style={{}} color={COLORS.white} size={SIZES.h2} onPress={() => {}} />
+      <Icon name={"videocam"} type="ionicon" style={{}} color={COLORS.white} size={SIZES.h2} onPress={() => {handlePaperPress(item)}} />
+    :  <Icon name={"headset"} type="ionicon" style={{}} color={COLORS.white} size={SIZES.h2} onPress={() => {handlePaperPress(item)}} />
    }
     </>
 )
@@ -214,9 +217,9 @@ const Resources = ({navigation}) => {
 
           <TextAtom text={item.unitCode} f="Poppins"s={SIZES.h4} w={"500"}  ls={-1}c={theme.color} />
           <TextAtom text={item.type} f="Poppins"s={SIZES.base} w={"500"}  ls={0}c={COLORS.gray2} />
-          <TextAtom text={item.description.toUpperCase()} f="Poppins"s={SIZES.base} w={"500"}  ls={0}c={COLORS.gray2} />
+          <TextAtom text={item.description?.toUpperCase()} f="Poppins"s={SIZES.base} w={"500"}  ls={0}c={COLORS.gray2} />
           <ViewAtom fd="row"  ai="flex-start"  pv={0} ph={0} br={0} mv={0} mh={0}>
-          <TextAtom text={`${Math.round(Math.random()*10)*parseInt(item.id)} `} f="Poppins"s={SIZES.base} w={"500"}  ls={0}c={COLORS.gray2} />
+          <TextAtom text={`${item.hearts} `} f="Poppins"s={SIZES.base} w={"500"}  ls={0}c={COLORS.gray2} />
           <Icon name={"heart"} type="ionicon" style={{}} color={theme.color} size={SIZES.base-1} onPress={() => {}} />
 
         </ViewAtom>
@@ -251,16 +254,29 @@ const Resources = ({navigation}) => {
   };
   const [searching, setSearching] = useState(false);
   const [searchText, setSearchText] = useState('');
-  const [renderResources, setrenderResources] = useState(samplePapers);
+  const [renderResources, setrenderResources] = useState([]);
 
   useEffect(()=>{
     setSearching(true)
-    const filteredResources = samplePapers.filter((pdf) =>
+
+    const getD=async()=>{
+    
+        const d= await ResourcesArray(units) 
+       const n =d.map(i=>i.itemsData).flat(1);
+      setrenderResources(n)
+      if(n.length>1){
+        setSearching(false)
+      }
+    };
+    getD()
+ 
+  },[isRefreshing])
+  useEffect(()=>{
+    const filteredResources = renderResources.filter((pdf) =>
     pdf.unitCode.toLowerCase().includes(searchText.toLowerCase())
   );
   if (filteredResources) {
     setrenderResources(filteredResources)
-    setSearching(false)
   }
   },[searchText])
 const styles = StyleSheet.create({
@@ -280,7 +296,7 @@ const styles = StyleSheet.create({
   },
   Icon: {
     width: 70,
-    height: 60,
+    height: 70,
     borderTopLeftRadius: 5,
     opacity:.35,
     backgroundColor:"#000"
@@ -323,7 +339,7 @@ const styles = StyleSheet.create({
     style={styles.searchInput}
     placeholder="Find by unit Code"
     value={searchText}
-    onChangeText={setSearchText}
+    onChangeText={(v)=>setSearchText(v)}
   />
     <View style={{position:"absolute",top:6,left:10}}>
   <Icon name={"search"} type="ionicon" style={{}} color={COLORS.white} size={SIZES.h2} onPress={() => {}} />
@@ -363,14 +379,14 @@ const styles = StyleSheet.create({
             numColumns={1}
             contentContainerStyle={styles.paperList}
           />
-          <TextAtom text={"PDF resources"} f="Poppins"s={SIZES.h3} w={"500"}  ls={-2}c={COLORS.white} />
+          {/* <TextAtom text={"PDF resources"} f="Poppins"s={SIZES.h3} w={"500"}  ls={-2}c={COLORS.white} />
           <FlatList
             data={renderResources.slice(8,16)}
             renderItem={renderPaperItem}
             keyExtractor={(item) => item.id}
             numColumns={1}
             contentContainerStyle={styles.paperList}
-          />
+          /> */}
         </View>
     </View>
   );

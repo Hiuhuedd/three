@@ -4,7 +4,7 @@ import { COLORS, SIZES } from '../constants/theme';
 import TextAtom from '../components/Atoms/TextAtom';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
 import ViewAtom from '../components/Atoms/ViewAtom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 import { Button } from '../components/Atoms/Button';
 import { ActivityIndicator } from 'react-native-paper';
@@ -17,10 +17,13 @@ import { Audio } from 'expo-av';
 import { BackHandler } from 'react-native';
 import V2Modal from '../components/Molecules/V2Modal';
 import Modal from "react-native-modal";
-const Chat = ({navigation}) => {
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getFirestore, collection, setDoc,getDoc, doc } from 'firebase/firestore';
+
+const FeedBack = ({navigation}) => {
   //=================backpress====================
 const handleBackPress = () => {
- navigation.navigate("Home")
+navigation.navigate("Me")
   return true;
 };
 
@@ -34,36 +37,94 @@ useEffect(() => {
     const user=useSelector(state => state.userReducer.user);
     const theme=useSelector(state => state.userReducer.theme);
    const [checking,setchecking]=useState(true)
+   const [Loading,setLoading]=useState(true)
    const [isPlaying, setIsPlaying] = useState(false);
+   const dispatch = useDispatch();
+
+   const fetchMsg=async()=>{
+    setLoading(true)
+    try {
+      const db = getFirestore();
+      const usersCollection = collection(db, 'feedback');
+      const userDocRef = doc(usersCollection, user.id);
+  
+      // Get the user document using the userDocRef
+      const userDocSnapshot = await getDoc(userDocRef);
+  
+      // Check if the user document exists
+      if (userDocSnapshot.exists()) {
+        const userFeedback = userDocSnapshot.data();
+  const fomat=Object.values(userFeedback)
+        // Now you have the user data as an object
+        console.log(fomat);
+        setChatMessages(fomat)
+        dispatch({
+          type: "FEEDBACK",
+          payload: fomat
+        });
+  
+        AsyncStorage.setItem('Feedback', JSON.stringify(fomat)).then(res => {
+          setLoading(false);
+        });
+  
+        return fomat
+      } else {
+        setLoading(false)
+
+        setError('User not found in 360.');
+        return []
+      }
+    } catch (error) {
+      // Handle any errors that may occur during the retrieval process
+      console.error('Error retrieving user data:', error);
+      return []
+    }
+   }
 
    useEffect(() => {
   setTimeout(() => {
     setchecking(false)
   }, 5000);
+fetchMsg()
   }, []);
-  const handleSend = () => {
+  const handleSend = async() => {
     if (inputText.trim() !== '') {
       const newMessage = {
-        userId: 'user1',
-        name: 'John',
+        userId: user.id,
+        name: user.firstName +" "+ user.lastName,
         message: inputText,
-        imageUrl: 'https://example.com/user1.jpg',
-        time: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' }),
+        imageUrl: user.profile,
+        time: Date.now()
       };
 
       setChatMessages([...chatMessages, newMessage]);
       setInputText('');
+      setTimeout(async() => {
+        try {
+          const db = getFirestore();
+          const collectionRef = collection(db, 'feedback'); // Collection reference
+          const documentRef = doc(collectionRef, user.id); // Document reference
+           await setDoc(documentRef,  {...chatMessages,newMessage} );
+            // alert("Message sent successfully")
+    
+           setLoading(false)
+        } catch (error) {
+          setLoading(false)
+      console.error('Error uploading user data:', error);
+        }
+     
+      }, 1000);
     }
   };
 
   const [inputText, setInputText] = useState('');
   const [chatMessages, setChatMessages] = useState([
     {
-      userId: 'user2',
-      name: 'John',
-      message: `Hi ${user.firstName}, ${text}`,
+      userId: '360',
+      name: '360',
+      message: `Hi ${user.firstName}, You deserve a whole-some student experience. The 360 team is dedicated to get you there. We continually improve our software and services to assist you achieve this. Speak to us. We value your feedback.  `,
       imageUrl: 'https://example.com/user1.jpg',
-      time: '12:01 PM',
+      time: Date.now(),
     },
     
     // Add more messages as needed
@@ -77,17 +138,19 @@ useEffect(() => {
     messageContainer: {
       marginVertical: 4,
       padding: 5,
-      borderRadius: 8,
+      borderRadius: 10,
       maxWidth: '80%',
       
     },
     sentMessageContainer: {
       alignSelf: 'flex-end',
-      backgroundColor: COLORS.gray4,
+      backgroundColor: COLORS.black,
+      borderTopRightRadius:0
     },
     receivedMessageContainer: {
       alignSelf: 'flex-start',
       backgroundColor: '#F3F3F3',
+      borderTopLeftRadius:0
     },
     messageText: {
       fontSize: 16,
@@ -186,29 +249,40 @@ const handlePlayPause = async () => {
 
   return (
     <View style={{ flexGrow: 1,}}>
-                <LinearAtom    pv={5}  ph={10} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[COLORS.black,COLORS.dark]} >
+                <LinearAtom    pv={5}  ph={10} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
   <ViewAtom fw="wrap" fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
      
 </ViewAtom>
   <ViewAtom fd="column" jc="center" ai="center" w="100%" bg="transparent" ph={10} br={0} mh={0}>
      
-  <TextAtom text={"Chat 360"} f="Poppins"s={SIZES.h1} w={"500"} ta="center" ls={-2}c={COLORS.white} />
-  <TextAtom text={"360 assistant"} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={-2}c={COLORS.white} />
+  <TextAtom text={"Speak-To-Us"} f="Poppins"s={SIZES.h2} w={"500"} ta="center" ls={-2}c={COLORS.white} />
+  <TextAtom text={"360 team"} f="Poppins"s={SIZES.base} w={"500"} ta="center" ls={0}c={COLORS.white} />
 </ViewAtom>
   <ScrollView contentContainerStyle={styles.container}>
 
 {chatMessages.map((message, index) => (
   <>
-  <ViewAtom fd="row" jc={message.userId === 'user1' ? "flex-end":"flex-start"} ai="center" w="100%" bg="transparent" pv={0} br={0} mh={0}>
+  <ViewAtom fd="row" jc={message.userId === '360' ? "flex-start":"flex-end"} ai="center" w="100%" bg="transparent" pv={0} br={0} mh={0}>
   <View style={{position:"relative"}}>
-  <Image source={message.userId === 'user2' ?require('../assets/ai.png'):require('../assets/user.jpg')} style={[styles.Icon]} />
-  <View style={{position:"absolute",right:13,bottom:15}}>
+  {message.userId === '360' ?  <Image source={require('../assets/360.png')} style={[styles.Icon]} />
+  :
+  <>
+  {user.profile?  
+ <Image source={{uri:user.profile}} style={[styles.Icon]} />
+:
+ <Image source={require('../assets/usericon.jpg')} style={[styles.Icon]} />
+ }        
+  </>
+  }
+  
+
+  <View style={{position:"absolute",left:-2,bottom:13}}>
   <ViewAtom jc="center" ai="center"  bg={COLORS.rose} pv={3} ph={3} br={50} mh={0}></ViewAtom>
   </View>
   </View>
-  <ViewAtom jc="flex-start" ai="flex-start" mh={10}> 
-     <TextAtom text={message.userId === 'user2' ?"Bella   ":"You  "} f="Poppins"s={SIZES.h5} w={"500"} ta="left" ls={-1}c={COLORS.white} />
-     <TextAtom text={moment(new Date()).format('h:mm a, DD-MM-YYYY ')} f="Poppins"s={SIZES.base} w={"500"} ta="left" ls={0}c={COLORS.white} />
+  <ViewAtom jc="flex-start" ai="flex-start" mh={5}> 
+     <TextAtom text={message.userId === '360' ?"360 team   ":"You  "} f="Poppins"s={SIZES.base} w={"500"} ta="left" ls={0}c={COLORS.white} />
+     <TextAtom text={moment(message.time).format('h:mm A')} f="Poppins"s={SIZES.base} w={"500"} ta="left" ls={0}c={COLORS.white} />
   
    </ViewAtom>
    </ViewAtom>
@@ -216,46 +290,25 @@ const handlePlayPause = async () => {
     key={index}
     style={[
       styles.messageContainer,
-      message.userId === 'user1' ? styles.sentMessageContainer : styles.receivedMessageContainer,
+      message.userId === '360' ? styles.receivedMessageContainer: styles.sentMessageContainer ,
     ]}
   >
-      <TextAtom text={message.message}f="Poppins"s={SIZES.h6+3} w={"500"} ta={message.userId === 'user1' ?"right":"left"} c={COLORS.black} />
+      <TextAtom text={message.message}f="Poppins"s={SIZES.h6+1} w={"500"}  c={message.userId === '360' ?COLORS.black:COLORS.white} />
 
-      <View style={styles.slider_view}>
-      {message.userId === 'user1' ?<></> :  <TouchableOpacity onPress={handlePlayPause}>
-        <Icon
-          name={isPlaying ? 'pause' : 'play'}
-          type="ionicon"
-          color={theme.color}
-          size={SIZES.h2}
-        />
-      </TouchableOpacity>}
-      {message.userId === 'user1' ?<></> :  
-                <Slider
-                style={styles.slider_style}
-                minimumValue={0}
-                maximumValue={7}
-                minimumTrackTintColor={theme.color}
-                maximumTrackTintColor={theme.color}
-                thumbTintColor={theme.color}
-                value={sliderValue}
-                onValueChange={{}}
-                onSlidingComplete={{}}
-              />}
-      
-
-           
-      <TextAtom text={moment(new Date()).format('h:mm a')} f="Poppins"s={SIZES.base} w={"500"} ta="right" ls={0}c={theme.color} />
-        </View>
+     
   </View>
   </>
 ))}
+<ViewAtom fd="row" jc="center" ai="center" w="100%" bg="transparent" pv={5} br={0} mv={10} mh={0}>
+{Loading&&<ActivityIndicator size={SIZES.h5} color="#fff" />}
+     
+     </ViewAtom>
 
 </ScrollView>
 <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Type your prompt/response..."
+          placeholder="message us..."
           value={inputText}
           onChangeText={setInputText}
         />
@@ -266,7 +319,7 @@ const handlePlayPause = async () => {
         <Icon name="mic" type="ionicon" color={COLORS.white} size={SIZES.h2}  />
         </TouchableOpacity> */}
       </View>
-        <Modal isVisible={true}>
+        <Modal isVisible={false}>
         <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={0} ph={10} br={0} mv={0} mh={0}>
            <V2Modal navigation={navigation} screen={"Home"} feature={'360 assistant'} date={'28th September 2023.'} text='360 assistant feature is scheduled for release on '/>
    
@@ -283,5 +336,5 @@ const handlePlayPause = async () => {
 
 
 
-export default Chat;
+export default FeedBack;
 

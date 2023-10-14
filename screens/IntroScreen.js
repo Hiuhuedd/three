@@ -1,4 +1,4 @@
-import * as Updates from 'expo-updates';
+import * as Updates from 'expo-updates'; 
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Image, View, StyleSheet,Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -6,6 +6,11 @@ import { useDispatch } from 'react-redux';
 import { getUserLocation } from '../utils/helper';
 import { UnitsArray, getTimetableFromFirestore } from '../constants/content/programs';
 import { NetworksArray } from '../constants/content/networksArr';
+import Modal from 'react-native-modal';
+import ViewAtom from '../components/Atoms/ViewAtom';
+import V2Modal from '../components/Molecules/V2Modal';
+import TextAtom from '../components/Atoms/TextAtom';
+import { COLORS, SIZES } from '../constants/theme';
 
 function IntroScreen({ navigation }) {
 
@@ -24,9 +29,15 @@ function IntroScreen({ navigation }) {
     checkForUpdate();
   }, []);
 
+  const [isvisible, setisvisible] = useState(false);
+  const [isfinished, setisfinished] = useState(false);
   const handleUpdate = async () => {
+    setisvisible(true)
     try {
-      await Updates.fetchUpdateAsync();
+     const finished= await Updates.fetchUpdateAsync();
+        if (finished) {
+          setisfinished(true)
+        }
       // After fetching the update, you can display a message and prompt the user to reload the app.
     } catch (error) {
       console.error('Error fetching update:', error);
@@ -60,6 +71,7 @@ function IntroScreen({ navigation }) {
         }
         const net = await NetworksArray();
         if (net) {
+        
           const str=JSON.stringify(net)
           dispatch({ type: 'NETWORKS', payload: net });
           await AsyncStorage.setItem('mynetworks',str)
@@ -71,18 +83,21 @@ function IntroScreen({ navigation }) {
           dispatch({ type: 'MY_TIMETABLE', payload: timetableUpdate });
           dispatch({ type: 'MY_TIMETABLE_UPD', payload: timetableValue });
       await AsyncStorage.setItem('myTimetable',JSON.stringify(timetableUpdate)).then(()=>{
+        // navigation.navigate('PinScreen');
         navigation.navigate('PinScreen');
         setLoading(false);
-
+        
       })
-     
-        } else {
-          const cachedTimetableValue = await AsyncStorage.getItem('myTimetable');
-          if (cachedTimetableValue !== null) {
-            dispatch({ type: 'MY_TIMETABLE', payload: JSON.parse(cachedTimetableValue) });
-            navigation.navigate('PinScreen');
-          }else{
-            navigation.navigate('PinScreen');
+      
+    } else {
+      const cachedTimetableValue = await AsyncStorage.getItem('myTimetable');
+      if (cachedTimetableValue !== null) {
+        dispatch({ type: 'MY_TIMETABLE', payload: JSON.parse(cachedTimetableValue) });
+        // navigation.navigate('PinScreen');
+        navigation.navigate('FeedBack');
+      }else{
+        navigation.navigate('PinScreen');
+            // navigation.navigate('PinScreen');
 
           }
         }
@@ -120,6 +135,25 @@ function IntroScreen({ navigation }) {
           ],
           { cancelable: false }
         )}
+           <Modal isVisible={isvisible}>
+        <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg={isfinished ?COLORS.green:COLORS.chocolate} pv={20} ph={10} br={0} mv={0} mh={0}>
+   
+        {!isfinished ? 
+        <ViewAtom fd="column" w='100%' jc="center" ai="center"  pv={0} ph={0} br={0} mv={0} mh={0}>
+          <TextAtom text={"Fetching updates"} f="Poppins"s={SIZES.base} w={"500"}  ls={0}c={COLORS.white} />
+          <ActivityIndicator size={SIZES.h5} color={COLORS.white} /> 
+         </ViewAtom> 
+        :  
+        <ViewAtom fd="column" w='100%' jc="center" ai="center"  pv={0} ph={0} br={0} mv={0} mh={0}>
+
+           <TextAtom text={"Update successful"} f="Poppins"s={SIZES.h6} w={"500"}  ls={0}c={COLORS.white} />
+          <TextAtom text={"Please reload app to effect updates"} f="Poppins"s={SIZES.base} w={"500"}  ls={0}c={COLORS.white} />
+         </ViewAtom> 
+}
+
+         </ViewAtom> 
+      </Modal>
+     
     </View>
   );
 }

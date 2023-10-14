@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 const {width, height} = Dimensions.get('window');
 
 export const COLORS = 
-  { primary: '#3b82f6', //blue
+  { 
+    primary: '#3b82f6', //blue
+    primary2: '#1d82f6', //blue
     rose: '#be123c', //rose
     green: '#15803d', 
     green2: '#65a30d', 

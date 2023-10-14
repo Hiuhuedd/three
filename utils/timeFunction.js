@@ -62,11 +62,11 @@ export function getTimeSpans() {
         day:  new Date(nextMonthStart).toLocaleDateString("en-US", { weekday: "long" }).split(",")[0].trim()
       },
     };
-  
+              
     return timeSpans;
-  }
-  export const currentTime = moment().format('h:mm A');
-  // Example usage:
-  const timeSpans = getTimeSpans();
-  // console.log(timeSpans);
+  };
+  export const currentTime = moment().format('h:mm A');   
+  // Example usage:   
+  const timeSpans = getTimeSpans();    
+  // console.log(timeSpans);     
   

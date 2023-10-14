@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet,RefreshControl } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { COLORS, SIZES } from '../constants/theme';
 import TextAtom from '../components/Atoms/TextAtom';
 import { CheckBox, Divider, Icon } from 'react-native-elements';
@@ -10,21 +10,16 @@ import { Button } from '../components/Atoms/Button';
 import { ActivityIndicator } from 'react-native-paper';
 import LinearAtom from '../components/Atoms/LinearAtom';
 import BottomTabs from '../components/Molecules/BottomTabs';
-import { ProgramsArray } from '../constants/content/programs';
-import Carousel from 'react-native-reanimated-carousel';
-import { useRef } from 'react';
 import { BackHandler } from 'react-native';
-import Discord from './Discord';
-import Resources from '../components/Molecules/Resources';
 import { ScrollView } from 'react-native';
 
 import V2Modal from '../components/Molecules/V2Modal';
 import Modal from "react-native-modal";
 import Contribute from '../components/Molecules/ContributeR';  
-const Program = ({navigation}) => {
+const Contributions = ({navigation}) => {
            //=================backpress====================
 const handleBackPress = () => {
-  navigation.navigate("Home")
+  navigation.navigate("Program")
     return true;
   };
   
@@ -46,43 +41,25 @@ const handleBackPress = () => {
     setchecking(false)
   }, 5000);
   }, []);
-   
-  const [isRefreshing, setIsRefreshing] = useState(false);
-
-  const handleRefresh = () => {
-    setIsRefreshing(true);
-  
-   
-    setTimeout(() => {
-      // After refreshing logic is done, set isRefreshing to false
-      setIsRefreshing(false);
-    }, 2000); // Replace this with your actual refreshing logic
-  };
-  
+ 
+ 
   return (
     <View style={styles.container}>
                  <LinearAtom   pv={5}  ph={5} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
             
                  <ViewAtom fd="row" width="100%" ph={10} pv={10} mv={20} jc="space-between" >
-        <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => navigation.navigate("Home")} />
+        <Icon name={"arrow-back-outline"} type="ionicon" color={COLORS.white} size={SIZES.h2} onPress={() => navigation.goBack()} />
       <ViewAtom fd="row"  ph={7} pv={5} bg={theme.color} br={15} >
-        <TouchableOpacity onPress={()=>{navigation.navigate("Contributions")}}>
-          <TextAtom text={"Contribute"} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
+        <TouchableOpacity onPress={()=>{}}>
+          <TextAtom text={" LETS' REBUILD CAMPUS TOGETHER  "} f="Poppins"s={SIZES.h5} w={"500"} ls={0}c={COLORS.white} />
         </TouchableOpacity>
       </ViewAtom>
       </ViewAtom>
 
 
 
-          <ScrollView contentContainerStyle={styles.scrollViewContent}  refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={handleRefresh}
-            tintColor={theme.color} // Customize the loading indicator color
-          />
-        }>
-    <Resources navigation={navigation} isRefreshing={isRefreshing}/> 
-
+          <ScrollView contentContainerStyle={styles.scrollViewContent}>
+  <Contribute navigation={navigation}/>   
 
         <ViewAtom fd="row" w='100%' jc="center" ai="center"  bg="transparent" pv={20} ph={10} br={0} mv={40} mh={0}>
          
@@ -140,6 +117,6 @@ const styles = StyleSheet.create({
  
 });
 
-export default Program;
+export default Contributions;
 
 

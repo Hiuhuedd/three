@@ -42,7 +42,7 @@ const ProgressMic = ({ theme,isMsg, setisMsg }) => {
 
     colorAnimation.start();
 
-    return () => colorAnimation.stop();
+    // return () => colorAnimation.stop();
   }, [colorValue]);
   useEffect(() => {
    if(playbackStatus && playbackStatus?.didJustFinish){
@@ -190,7 +190,7 @@ const ProgressMic = ({ theme,isMsg, setisMsg }) => {
       </Animated.View>}
       <Animated.View style={isPlaying?animatedStyles:{}}>
       <AnimatedCircularProgress
-        size={55}
+        size={45}
         width={3}
         fill={progress}
         padding={0}
@@ -206,7 +206,7 @@ const ProgressMic = ({ theme,isMsg, setisMsg }) => {
                 
                 <Animated.View style={{flexDirection:"row",alignItems:"center",justifyContent:"center",padding:8,borderRadius:50,backgroundColor:COLORS.dark2}}>
        
-                  <Icon name={ isPlaying?"pause":"mic"} type="ioniconv4" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h3} />
+                  <Icon name={ isPlaying?"pause":"mic"} type="ioniconv4" ios="ios-lock" md="ios-lock" color={COLORS.white} size={SIZES.h4} />
       </Animated.View>
                
               </ViewAtom>

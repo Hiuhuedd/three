@@ -17,6 +17,7 @@ import CardAtom from '../components/Atoms/CardAtom';
 import { greet } from '../utils/helper';
 import Settings from '../components/Molecules/settings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import BottomSheetMe from '../components/Molecules/BottomSheetMe';
 
 
 const AnimatedCard = Animated.createAnimatedComponent(View);
@@ -53,7 +54,6 @@ const handleBackPress = () => {
  //=================backpress====================
   const user=useSelector(state => state.userReducer.user);
   const theme=useSelector(state => state.userReducer.theme);
-
   //==============SCROLL ANIMATION===========
   const animatedValue = useRef(new Animated.Value(0)).current;
   const scrollViewRef = useRef(null);
@@ -109,14 +109,14 @@ const handleBackPress = () => {
   const featureIconAnimation = {
     opacity: animatedValue.interpolate({
       inputRange: [0, 15],
-      outputRange: [1,0],
+      outputRange: [1,1],
       extrapolate: 'clamp',
     }),
     transform: [
       {
         translateY: animatedValue.interpolate({
           inputRange: [0, 20],
-          outputRange: [0, -150],
+          outputRange: [0, 0],
           extrapolate: 'clamp',
         }),
       },
@@ -126,7 +126,7 @@ const handleBackPress = () => {
   const aiAnimation3 = {
     opacity: animatedValue.interpolate({
        inputRange: [0, 25],
-       outputRange: [0,1],
+       outputRange: [0,0],
        extrapolate: 'clamp',
      }),
      transform: [
@@ -150,9 +150,31 @@ const handleBackPress = () => {
   
   //==============SCROLL ANIMATION===========
 
+  //==============================BOTTOM SHEET============================
+  const closeSheet = (t) => {
+
+
+    if (sheetRef.current) {
+      sheetRef.current.close();
+    }
+  };
+  const openSheet = () => {
+    if (sheetRef.current) {
+      sheetRef.current.open();
+    }
+  
+};
+const onMethodSelected = (f) => {
+  if(f===""){
+    openSheet();
+  }else{
+    navigation.navigate(f)
+  }
+};
+const sheetRef = useRef(null); 
   return (
     <View style={styles.container}>
-<LinearAtom  ai="center"  pv={0}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
+<LinearAtom  ai="center"  pv={10}  ph={0} bg={COLORS.white} br={0} mv={0} mh={0}   el={0} sh='#000' colors={[theme.color,COLORS.dark]} >
       
                 <AnimatedCard 
                     style={[{
@@ -163,8 +185,9 @@ const handleBackPress = () => {
                     justifyContent: "space-between",
                     paddingVertical:10,
                     paddingHorizontal:10,
+                    paddingLeft:20,
                     zIndex:4,
-                   backgroundColor:COLORS.gray3,
+                   backgroundColor:COLORS.black,
                      elevation:3,
                     shadowColor:'#525252'
                     },featureNameAnimation]}>
@@ -175,18 +198,26 @@ const handleBackPress = () => {
 
                 <AnimatedCard style={[{               
                     },featureIconAnimation]}> 
+   <ViewAtom  fd="row" jc="space-between" w={"100%"} ai="flex-start"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
+             
 
-         <ViewAtom  fd="row" jc="space-between" ai="center" w="80%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
-          <TextAtom text={greet()} f="Poppins"s={SIZES.h2} w={"500"}  ls={-2}c={COLORS.gray2} />
-              <ViewAtom  fd="row" jc="space-around" ai="center" w="40%" bg="transparent" pv={5} br={0} mv={0} mh={0}>
-             
-             
      
-               </ViewAtom>
+         <ViewAtom  fd="column" jc="flex-start" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
+         {user.profile?  
+ <Image source={{uri:user.profile}} style={[styles.Icon]} />
+:
+ <Image source={require('../assets/usericon.jpg')} style={[styles.Icon]} />
+ }           
+             
           </ViewAtom>
-               <TextAtom text={`${user.firstName} `} f="Poppins"s={SIZES.h5} w={"500"}  c={theme.color} />
+         <ViewAtom  fd="column" jc="flex-start" ai="flex-end"  bg="transparent" pv={0} br={0} mv={0} mh={0}>
+          <TextAtom text={greet()} f="Poppins"s={SIZES.h2} w={"500"}  ls={-2}c={COLORS.gray2} />
+          <TextAtom text={`${user.firstName} `} f="Poppins"s={SIZES.h5} w={"500"}  c={COLORS.gray2} />
+
                <TextAtom text={`${user.StudentProgram} `} f="Poppins"s={SIZES.base} w={"500"}  c={COLORS.gray2} />
              
+          </ViewAtom>
+             </ViewAtom>
          
           </AnimatedCard>
      
@@ -196,7 +227,11 @@ const handleBackPress = () => {
             <AnimatedCard style={[{               
             },aiAnimation3 ]}>
                <ViewAtom  fd="row" jc="space-between" ai="center"  bg="transparent" pv={5} br={0} mv={0} mh={0}>
-                <Image source={require('../assets/usericon.jpg')} style={[styles.Icon]} />
+{user.profile?  
+ <Image source={{uri:user.profile}} style={[styles.Icon]} />
+:
+ <Image source={require('../assets/usericon.jpg')} style={[styles.Icon]} />
+ }
               <ViewAtom  fd="column" jc="space-between" ai="flex-start" w="70%" bg="transparent" pv={1} br={0} mv={0} mh={0}>
               <TextAtom text={`${user.firstName} ${user.lastName}`} f="Poppins"s={SIZES.h3} w={"500"}  ls={-1}c={COLORS.gray2} />
               <ViewAtom  fd="row" jc="space-between" ai="center" w="100%" bg="transparent" pv={1} br={0} mv={0} mh={0}>
@@ -243,13 +278,13 @@ const handleBackPress = () => {
       >
     
     <ViewAtom fd="column" jc="flex-start" ai="flex-start"  bg="transparent" pv={0} br={0}ph={15} mv={0} mh={0}>
-    <TextAtom text={`Utilities &  Preferences`} c={COLORS.white} f="Roboto" s={SIZES.h3} w="500"  ls={-1}/>
+    <TextAtom text={`Utilities &  Preferences`} c={COLORS.gray4} f="Roboto" s={SIZES.h3} w="500"  ls={-1}/>
   </ViewAtom>
 
 
 
 <ViewAtom   bg="transparent" pv={0} br={0} mv={0} mh={5}>
-   <Settings navigation={navigation} />
+   <Settings navigation={navigation} handleAction={onMethodSelected} />
    {/* <Settings navigation={navigation} /> */}
 
 
@@ -257,6 +292,7 @@ const handleBackPress = () => {
 </ViewAtom>
 
  </ScrollView>
+ <BottomSheetMe onMethodSelected={closeSheet} navigation={navigation} ref={sheetRef} tData={{}} />
 
 
 
@@ -278,10 +314,11 @@ const styles = StyleSheet.create({
     // alignItems:"center"
   },
   Icon: {
-    width: 80,
-    height: 80,
+    width: 65,
+    height:65,
     borderRadius: 50,
-    margin:-10
+    marginTop:-5,
+    marginBottom:5
   },
 
  

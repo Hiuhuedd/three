@@ -82,3 +82,42 @@ export const getProgramByCode=(programCode)=> {
   }
   return(null)
 }
+
+
+const downloadFromUrl = async () => {
+  console.log(resource);
+const filename = "small.m4a";
+const result = await FileSystem.downloadAsync(
+  `${resource.docUrl}`,FileSystem.documentDirectory + filename
+);
+console.log(result);
+
+save(result.uri, filename,"audio/m4a");
+};
+
+
+
+const save = async (uri, filename, mimetype) => {
+setLoading(true)
+console.log(mimetype);
+if (Platform.OS === "android") {
+  const permissions = await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
+  if (permissions.granted) {
+    const base64 = await FileSystem.readAsStringAsync(uri, { encoding: FileSystem.EncodingType.Base64 });
+    await FileSystem.StorageAccessFramework.createFileAsync(permissions.directoryUri, filename, mimetype)
+      .then(async (uri) => {
+        await FileSystem.writeAsStringAsync(uri, base64, { encoding: FileSystem.EncodingType.Base64 });
+        setLoading(false)
+        
+      })
+      .catch(e => console.log(e));
+      setLoading(false)
+  } else {
+    shareAsync(uri);
+    setLoading(false)
+  }
+} else {
+  shareAsync(uri);
+  setLoading(false)
+}
+};

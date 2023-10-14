@@ -19,8 +19,9 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [pin, setPin] = useState('');
   const [Gender, setGender] = useState('');
+  const [profile, setProfile] = useState(null);
+  const [pin, setPin] = useState('');
   const [DOB, setDOB] = useState('');
   const [ProgramId, setProgramId] = useState('');
   const [Year, setYear] = useState('');
@@ -154,8 +155,7 @@ function InputCarousel({ activeIndex, setActiveIndex, setUserData }) {
     ref.current?.scrollTo({ index: activeIndex });
   }, [activeIndex]);
   useEffect(() => {
-setUserData({firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram})
-console.log(firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram);
+setUserData({firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram,profile})
   }, [firstName,lastName,email,phone,pin,Gender,DOB,ProgramId,Year,Sem,StudentId,StudentProgram]);
 
   const width = Dimensions.get('window').width;
